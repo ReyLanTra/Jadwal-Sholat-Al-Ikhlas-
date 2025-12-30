@@ -19,3 +19,15 @@
   text-shadow: none !important;
   filter: none !important;
 }
+
+/* ===============================
+   RAMADHAN EXPORT MODE
+================================ */
+.export-mode.ramadhan th {
+  background: linear-gradient(135deg, #064e3b, #0f766e) !important;
+  color: #fef3c7 !important;
+}
+
+.export-mode.ramadhan td {
+  color: #000000 !important;
+}
