@@ -39,7 +39,7 @@ function drawCanvasHeaderFooter(ctx, width, height) {
   ctx.fillText("Mushola Al-Ikhlas Pekunden", 40, 45);
 
   ctx.font = "18px Arial";
-  ctx.fillText("Pakulaut, Kec. Margasari, Kab. Tegal", 40, 70);
+  ctx.fillText("Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah", 40, 70);
 
   ctx.font = "16px Arial";
   ctx.fillStyle = "#555";
