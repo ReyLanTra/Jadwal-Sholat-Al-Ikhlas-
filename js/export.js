@@ -42,27 +42,44 @@ function getExportTable() {
 /* ===============================
    EXPORT PDF (A4 LANDSCAPE)
 ================================ */
-function exportPDF() {
+async function exportPDF() {
   withExportMode(async () => {
     const table = getExportTable();
 
     const canvas = await html2canvas(table, {
       scale: 2,
-      backgroundColor: "#ffffff"
+      backgroundColor: "#ffffff",
+      useCORS: true
     });
 
     const ctx = canvas.getContext("2d");
     drawWatermark(ctx, canvas.width, canvas.height);
 
     const imgData = canvas.toDataURL("image/png");
+
     const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF("l", "mm", "a4");
+    const pdf = new jsPDF("p", "mm", "a4");
 
-    const w = 297;
-    const h = canvas.height * w / canvas.width;
+    const pageWidth = 210;
+    const pageHeight = 297;
 
-    pdf.addImage(imgData, "PNG", 0, 10, w, h);
-    pdf.save("jadwal-sholat-al-ikhlas.pdf");
+    const imgWidth = pageWidth;
+    const imgHeight = canvas.height * imgWidth / canvas.width;
+
+    let heightLeft = imgHeight;
+    let position = 0;
+
+    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+    heightLeft -= pageHeight;
+
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+    }
+
+    pdf.save("jadwal-sholat-al-ikhlas-1-bulan.pdf");
   });
 }
 
