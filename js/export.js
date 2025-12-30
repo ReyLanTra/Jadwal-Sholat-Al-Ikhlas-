@@ -39,7 +39,7 @@ function drawCanvasHeaderFooter(ctx, width, height) {
   ctx.fillText("Mushola Al-Ikhlas Pekunden", 40, 45);
 
   ctx.font = "18px Arial";
-  ctx.fillText("Pekunden, Kec. Dukuhturi, Kab. Tegal", 40, 70);
+  ctx.fillText("Tegal, Kec. Margasari, Kab. Tegal", 40, 70);
 
   ctx.font = "16px Arial";
   ctx.fillStyle = "#555";
@@ -127,37 +127,76 @@ function exportPDF() {
    EXPORT PNG
 ================================ */
 function exportPNG() {
+  document.body.classList.add("export-mode");
+  if (isRamadhan()) document.body.classList.add("ramadhan");
+
   const table = getExportTable();
 
-  html2canvas(table, { scale: 2 }).then(canvas => {
-    const ctx = canvas.getContext("2d");
-    drawCanvasHeaderFooter(ctx, canvas.width, canvas.height);
-    drawWatermark(ctx, canvas.width, canvas.height);
+  html2canvas(table, {
+    scale: 2,
+    backgroundColor: "#ffffff",
+    useCORS: true
+  }).then(canvas => {
+
+    const finalCanvas = document.createElement("canvas");
+    finalCanvas.width = canvas.width;
+    finalCanvas.height = canvas.height + 190;
+
+    const ctx = finalCanvas.getContext("2d");
+
+    drawCanvasHeader(ctx, finalCanvas.width);
+
+    ctx.drawImage(canvas, 0, 120);
+
+    drawCanvasFooter(ctx, finalCanvas.width, finalCanvas.height);
+
+    drawWatermark(ctx, finalCanvas.width, finalCanvas.height);
 
     const a = document.createElement("a");
-    a.href = canvas.toDataURL("image/png");
-    a.download = "jadwal-sholat.png";
+    a.href = finalCanvas.toDataURL("image/png");
+    a.download = "jadwal-sholat-al-ikhlas.png";
     a.click();
+
+    document.body.classList.remove("export-mode", "ramadhan");
   });
 }
+
 
 /* ===============================
    EXPORT JPG
 ================================ */
 function exportJPG() {
+  document.body.classList.add("export-mode");
+  if (isRamadhan()) document.body.classList.add("ramadhan");
+
   const table = getExportTable();
 
-  html2canvas(table, { scale: 2 }).then(canvas => {
-    const ctx = canvas.getContext("2d");
-    drawCanvasHeaderFooter(ctx, canvas.width, canvas.height);
-    drawWatermark(ctx, canvas.width, canvas.height);
+  html2canvas(table, {
+    scale: 2,
+    backgroundColor: "#ffffff",
+    useCORS: true
+  }).then(canvas => {
+
+    const finalCanvas = document.createElement("canvas");
+    finalCanvas.width = canvas.width;
+    finalCanvas.height = canvas.height + 190;
+
+    const ctx = finalCanvas.getContext("2d");
+
+    drawCanvasHeader(ctx, finalCanvas.width);
+    ctx.drawImage(canvas, 0, 120);
+    drawCanvasFooter(ctx, finalCanvas.width, finalCanvas.height);
+    drawWatermark(ctx, finalCanvas.width, finalCanvas.height);
 
     const a = document.createElement("a");
-    a.href = canvas.toDataURL("image/jpeg", 0.95);
-    a.download = "jadwal-sholat.jpg";
+    a.href = finalCanvas.toDataURL("image/jpeg", 0.95);
+    a.download = "jadwal-sholat-al-ikhlas.jpg";
     a.click();
+
+    document.body.classList.remove("export-mode", "ramadhan");
   });
 }
+
 
 /* ===============================
    EXPORT EXCEL
