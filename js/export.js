@@ -91,7 +91,7 @@ function exportPDF() {
       pdf.setFontSize(14);
       pdf.text("Mushola Al-Ikhlas Pekunden", margin, 18);
       pdf.setFontSize(10);
-      pdf.text("Pekunden, Kab. Tegal", margin, 25);
+      pdf.text("Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah", margin, 25);
 
       pdf.addImage(
         canvas,
