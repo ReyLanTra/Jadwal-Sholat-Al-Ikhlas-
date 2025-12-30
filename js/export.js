@@ -39,50 +39,100 @@ function getExportTable() {
   return table;
 }
 
+function drawPDFHeader(pdf, pageWidth) {
+  pdf.addImage(
+    "assets/logo.png",
+    "PNG",
+    10,
+    8,
+    18,
+    18
+  );
+
+  pdf.setFontSize(14);
+  pdf.setFont("helvetica", "bold");
+  pdf.text("Mushola Al-Ikhlas Pekunden", 35, 15);
+
+  pdf.setFontSize(10);
+  pdf.setFont("helvetica", "normal");
+  pdf.text("Pekunden, Kec. Dukuhturi, Kab. Tegal, Jawa Tengah", 35, 21);
+
+  pdf.setDrawColor(15, 118, 110);
+  pdf.line(10, 26, pageWidth - 10, 26);
+}
+
+function drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, total) {
+  const now = new Date();
+  const time = now.toLocaleString("id-ID", {
+    timeZone: "Asia/Jakarta"
+  });
+
+  pdf.setFontSize(9);
+  pdf.text(`Dicetak pada ${time} WIB`, 10, pageHeight - 10);
+  pdf.text(
+    `Halaman ${pageNum} / ${total}`,
+    pageWidth - 50,
+    pageHeight - 10
+  );
+}
+
 /* ===============================
    EXPORT PDF (A4 LANDSCAPE)
 ================================ */
 async function exportPDF() {
-  withExportMode(async () => {
-    const table = getExportTable();
+  document.body.classList.add("export-mode");
+  if (isRamadhan()) document.body.classList.add("ramadhan");
 
-    const canvas = await html2canvas(table, {
-      scale: 2,
-      backgroundColor: "#ffffff",
-      useCORS: true
-    });
+  const table = getExportTable();
 
-    const ctx = canvas.getContext("2d");
-    drawWatermark(ctx, canvas.width, canvas.height);
-
-    const imgData = canvas.toDataURL("image/png");
-
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF("p", "mm", "a4");
-
-    const pageWidth = 210;
-    const pageHeight = 297;
-
-    const imgWidth = pageWidth;
-    const imgHeight = canvas.height * imgWidth / canvas.width;
-
-    let heightLeft = imgHeight;
-    let position = 0;
-
-    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-
-    while (heightLeft > 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
-
-    pdf.save("jadwal-sholat-al-ikhlas-1-bulan.pdf");
+  const canvas = await html2canvas(table, {
+    scale: 2,
+    backgroundColor: "#ffffff",
+    useCORS: true
   });
-}
 
+  const ctx = canvas.getContext("2d");
+  drawWatermark(ctx, canvas.width, canvas.height);
+
+  const imgData = canvas.toDataURL("image/png");
+
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF("p", "mm", "a4");
+
+  const pageWidth = 210;
+  const pageHeight = 297;
+
+  const imgWidth = pageWidth - 20;
+  const imgHeight = canvas.height * imgWidth / canvas.width;
+
+  let heightLeft = imgHeight;
+  let position = 30;
+  let pageNum = 1;
+
+  const totalPages = Math.ceil(imgHeight / (pageHeight - 50));
+
+  drawPDFHeader(pdf, pageWidth);
+  pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+  drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, totalPages);
+
+  heightLeft -= (pageHeight - 50);
+
+  while (heightLeft > 0) {
+    pageNum++;
+    pdf.addPage();
+    drawPDFHeader(pdf, pageWidth);
+
+    position = heightLeft - imgHeight + 30;
+    pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+
+    drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, totalPages);
+    heightLeft -= (pageHeight - 50);
+  }
+
+  pdf.save("jadwal-sholat-al-ikhlas-1-bulan.pdf");
+
+  document.body.classList.remove("export-mode", "ramadhan");
+}
 
 /* ===============================
    EXPORT PNG
