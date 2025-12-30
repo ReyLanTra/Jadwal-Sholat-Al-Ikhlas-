@@ -11,8 +11,19 @@ function notify(title, body) {
 }
 
 function requestNotifPermission() {
-  if (Notification.permission !== "granted") {
-    Notification.requestPermission();
+  if (!("Notification" in window)) {
+    alert("Browser ini tidak mendukung notifikasi desktop.");
+  } 
+  else if (Notification.permission !== "denied") {
+    Notification.requestPermission().then(permission => {
+      if (permission === "granted") {
+        console.log("Izin diberikan!");
+        new Notification("Terima kasih!", {
+          body: "Notifikasi berhasil diaktifkan.",
+          icon: "../assets/logo.png"
+        });
+      }
+    });
   }
 }
 
