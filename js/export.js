@@ -78,16 +78,15 @@ function exportPDF() {
     useCORS: true,
     backgroundColor: "#ffffff"
   }).then(canvas => {
-
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF("p", "mm", "a4");
 
     const pageWidth = 210;
     const pageHeight = 297;
 
+    const margin = 10;
     const headerHeight = 35;
     const footerHeight = 20;
-    const margin = 10;
 
     const usableHeight =
       pageHeight - headerHeight - footerHeight - margin * 2;
@@ -95,58 +94,77 @@ function exportPDF() {
     const imgWidth = pageWidth - margin * 2;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    let positionY = 0;
+    let renderedHeight = 0;
     let page = 1;
     const totalPages = Math.ceil(imgHeight / usableHeight);
 
-    while (positionY < imgHeight) {
+    while (renderedHeight < imgHeight) {
       if (page > 1) pdf.addPage();
 
       // HEADER
+      pdf.setFont("helvetica", "bold");
       pdf.setFontSize(14);
       pdf.text("Mushola Al-Ikhlas Pekunden", margin, 18);
+
+      pdf.setFont("helvetica", "normal");
       pdf.setFontSize(10);
       pdf.text(
-        "Pekunden, Kec. Dukuhturi, Kab. Tegal",
+        "Pekunden, Kec. Dukuhturi, Kab. Tegal, Jawa Tengah",
         margin,
         25
       );
 
-      // POTONG GAMBAR
-      pdf.addImage(
+      // HITUNG TINGGI POTONGAN
+      const sliceHeight = Math.min(
+        usableHeight,
+        imgHeight - renderedHeight
+      );
+
+      // BUAT CANVAS POTONGAN
+      const pageCanvas = document.createElement("canvas");
+      pageCanvas.width = canvas.width;
+      pageCanvas.height =
+        (sliceHeight * canvas.width) / imgWidth;
+
+      const pageCtx = pageCanvas.getContext("2d");
+      pageCtx.drawImage(
         canvas,
+        0,
+        (renderedHeight * canvas.width) / imgWidth,
+        canvas.width,
+        pageCanvas.height,
+        0,
+        0,
+        canvas.width,
+        pageCanvas.height
+      );
+
+      pdf.addImage(
+        pageCanvas,
         "PNG",
         margin,
         headerHeight,
         imgWidth,
-        imgHeight,
-        undefined,
-        "FAST",
-        0,
-        positionY,
-        canvas.width,
-        (usableHeight * canvas.width) / imgWidth
+        sliceHeight
       );
 
       // FOOTER
-      const now = new Date().toLocaleString("id-ID", {
-        timeZone: "Asia/Jakarta"
-      });
-
       pdf.setFontSize(9);
       pdf.text(
-        `Dicetak pada ${now} WIB`,
+        `Dicetak pada ${new Date().toLocaleString("id-ID", {
+          timeZone: "Asia/Jakarta"
+        })} WIB`,
         margin,
         pageHeight - 10
       );
 
       pdf.text(
         `Halaman ${page} / ${totalPages}`,
-        pageWidth - margin - 30,
+        pageWidth - margin - 35,
         pageHeight - 10
       );
 
-      positionY += usableHeight;
+      renderedHeight += sliceHeight;
       page++;
     }
 
@@ -277,8 +295,20 @@ function exportJPG() {
 ================================ */
 function exportExcel() {
   const table = getExportTable();
-  const wb = XLSX.utils.table_to_book(table);
-  XLSX.writeFile(wb, "jadwal-sholat.xlsx");
+  const rows = Array.from(table.querySelectorAll("tr"));
+
+  const data = rows.map(row =>
+    Array.from(row.querySelectorAll("th, td")).map(
+      cell => cell.innerText.trim()
+    )
+  );
+
+  const ws = XLSX.utils.aoa_to_sheet(data);
+  const wb = XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(wb, ws, "Jadwal Sholat");
+
+  XLSX.writeFile(wb, "jadwal-sholat-al-ikhlas.xlsx");
 }
 
 /* ===============================
