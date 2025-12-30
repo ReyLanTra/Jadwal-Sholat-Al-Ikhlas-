@@ -1,0 +1,21 @@
+{
+  "name": "Jadwal Sholat Mushola Al-Ikhlas",
+  "short_name": "Jadwal Sholat",
+  "description": "Jadwal sholat, adzan, dan Ramadhan Mushola Al-Ikhlas Pekunden",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#0f766e",
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
