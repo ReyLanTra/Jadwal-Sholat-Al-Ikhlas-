@@ -151,7 +151,7 @@ function drawCanvasHeader(ctx, width) {
 
   ctx.font = "20px Arial";
   ctx.fillText(
-    "Pekunden, Kec. Dukuhturi, Kab. Tegal, Jawa Tengah",
+    "Pekunden, Kec. Margasari, Kab. Tegal, Jawa Tengah",
     120,
     85
   );
