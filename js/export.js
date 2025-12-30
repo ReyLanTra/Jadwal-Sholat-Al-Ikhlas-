@@ -136,7 +136,7 @@ async function exportPDF() {
 
 function drawCanvasHeader(ctx, width) {
   const logo = new Image();
-  logo.src = "assets/logo.png";
+  logo.src = "https://i.ibb.co/HDmsXRW5/Al-Ikhlas-Pekunden.jpg";
 
   ctx.fillStyle = "#ffffff";
   ctx.fillRect(0, 0, width, 110);
