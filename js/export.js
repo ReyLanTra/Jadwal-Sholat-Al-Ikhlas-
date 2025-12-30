@@ -75,18 +75,19 @@ function exportPDF() {
 
   html2canvas(table, {
     scale: 2,
-    backgroundColor: "#ffffff",
-    useCORS: true
+    useCORS: true,
+    backgroundColor: "#ffffff"
   }).then(canvas => {
+
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF("p", "mm", "a4");
 
     const pageWidth = 210;
     const pageHeight = 297;
 
-    const margin = 10;
     const headerHeight = 35;
     const footerHeight = 20;
+    const margin = 10;
 
     const usableHeight =
       pageHeight - headerHeight - footerHeight - margin * 2;
@@ -94,18 +95,24 @@ function exportPDF() {
     const imgWidth = pageWidth - margin * 2;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    let y = 0;
+    let positionY = 0;
     let page = 1;
-    const totalPage = Math.ceil(imgHeight / usableHeight);
+    const totalPages = Math.ceil(imgHeight / usableHeight);
 
-    while (y < imgHeight) {
+    while (positionY < imgHeight) {
       if (page > 1) pdf.addPage();
 
+      // HEADER
       pdf.setFontSize(14);
       pdf.text("Mushola Al-Ikhlas Pekunden", margin, 18);
       pdf.setFontSize(10);
-      pdf.text("Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah", margin, 25);
+      pdf.text(
+        "Pekunden, Kec. Dukuhturi, Kab. Tegal",
+        margin,
+        25
+      );
 
+      // POTONG GAMBAR
       pdf.addImage(
         canvas,
         "PNG",
@@ -116,19 +123,30 @@ function exportPDF() {
         undefined,
         "FAST",
         0,
-        y,
+        positionY,
         canvas.width,
         (usableHeight * canvas.width) / imgWidth
       );
 
+      // FOOTER
+      const now = new Date().toLocaleString("id-ID", {
+        timeZone: "Asia/Jakarta"
+      });
+
       pdf.setFontSize(9);
       pdf.text(
-        `Halaman ${page} / ${totalPage}`,
+        `Dicetak pada ${now} WIB`,
+        margin,
+        pageHeight - 10
+      );
+
+      pdf.text(
+        `Halaman ${page} / ${totalPages}`,
         pageWidth - margin - 30,
         pageHeight - 10
       );
 
-      y += usableHeight;
+      positionY += usableHeight;
       page++;
     }
 
