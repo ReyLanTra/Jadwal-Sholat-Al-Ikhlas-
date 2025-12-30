@@ -18,6 +18,15 @@ function drawWatermark(ctx, width, height) {
   };
 }
 
+function withExportMode(fn) {
+  document.body.classList.add("export-mode");
+
+  setTimeout(async () => {
+    await fn();
+    document.body.classList.remove("export-mode");
+  }, 100);
+}
+
 /* ===============================
    TABLE GETTER (WAJIB)
 ================================ */
@@ -33,59 +42,65 @@ function getExportTable() {
 /* ===============================
    EXPORT PDF (A4 LANDSCAPE)
 ================================ */
-async function exportPDF() {
-  const table = getExportTable();
+function exportPDF() {
+  withExportMode(async () => {
+    const table = getExportTable();
 
-  const canvas = await html2canvas(table, {
-    scale: 2,
-    useCORS: true,
-    backgroundColor: "#ffffff"
+    const canvas = await html2canvas(table, {
+      scale: 2,
+      backgroundColor: "#ffffff"
+    });
+
+    const ctx = canvas.getContext("2d");
+    drawWatermark(ctx, canvas.width, canvas.height);
+
+    const imgData = canvas.toDataURL("image/png");
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("l", "mm", "a4");
+
+    const w = 297;
+    const h = canvas.height * w / canvas.width;
+
+    pdf.addImage(imgData, "PNG", 0, 10, w, h);
+    pdf.save("jadwal-sholat-al-ikhlas.pdf");
   });
-
-  const ctx = canvas.getContext("2d");
-  drawWatermark(ctx, canvas.width, canvas.height);
-
-  const imgData = canvas.toDataURL("image/png");
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF("l", "mm", "a4");
-
-  const pdfWidth = 297;
-  const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-  pdf.addImage(imgData, "PNG", 0, 10, pdfWidth, pdfHeight);
-  pdf.save("jadwal-sholat-al-ikhlas.pdf");
 }
+
 
 /* ===============================
    EXPORT PNG
 ================================ */
-async function exportPNG() {
-  const table = getExportTable();
+function exportPNG() {
+  withExportMode(async () => {
+    const table = getExportTable();
+    const canvas = await html2canvas(table, { scale: 2 });
 
-  const canvas = await html2canvas(table, { scale: 2 });
-  const ctx = canvas.getContext("2d");
-  drawWatermark(ctx, canvas.width, canvas.height);
+    const ctx = canvas.getContext("2d");
+    drawWatermark(ctx, canvas.width, canvas.height);
 
-  const link = document.createElement("a");
-  link.download = "jadwal-sholat-al-ikhlas.png";
-  link.href = canvas.toDataURL("image/png");
-  link.click();
+    const a = document.createElement("a");
+    a.href = canvas.toDataURL("image/png");
+    a.download = "jadwal-sholat-al-ikhlas.png";
+    a.click();
+  });
 }
 
 /* ===============================
    EXPORT JPG
 ================================ */
-async function exportJPG() {
-  const table = getExportTable();
+function exportJPG() {
+  withExportMode(async () => {
+    const table = getExportTable();
+    const canvas = await html2canvas(table, { scale: 2 });
 
-  const canvas = await html2canvas(table, { scale: 2 });
-  const ctx = canvas.getContext("2d");
-  drawWatermark(ctx, canvas.width, canvas.height);
+    const ctx = canvas.getContext("2d");
+    drawWatermark(ctx, canvas.width, canvas.height);
 
-  const link = document.createElement("a");
-  link.download = "jadwal-sholat-al-ikhlas.jpg";
-  link.href = canvas.toDataURL("image/jpeg", 0.95);
-  link.click();
+    const a = document.createElement("a");
+    a.href = canvas.toDataURL("image/jpeg", 0.95);
+    a.download = "jadwal-sholat-al-ikhlas.jpg";
+    a.click();
+  });
 }
 
 /* ===============================
