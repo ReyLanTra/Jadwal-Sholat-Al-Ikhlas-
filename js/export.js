@@ -1,4 +1,4 @@
-function drawWatermark(ctx, width, height) {
+functionn drawWatermark(ctx, width, height) {
   const img = new Image();
   img.src = "assets/watermark.png";
 
@@ -11,6 +11,15 @@ function drawWatermark(ctx, width, height) {
     ctx.translate(-width / 2, -height / 2);
     ctx.globalAlpha = 1;
   };
+}
+
+function getExportTable() {
+  const table = document.getElementById("exportTable");
+  if (!table) {
+    alert("Tabel jadwal belum ditampilkan");
+    throw new Error("exportTable tidak ditemukan");
+  }
+  return table;
 }
 
 function exportPDF() {
