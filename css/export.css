@@ -1,0 +1,21 @@
+/* MODE EXPORT (PDF / IMAGE) */
+.export-mode table {
+  background: #ffffff !important;
+}
+
+.export-mode th {
+  background: #0f766e !important;
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+.export-mode td {
+  color: #000000 !important;
+  background: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.export-mode * {
+  text-shadow: none !important;
+  filter: none !important;
+}
