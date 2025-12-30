@@ -55,7 +55,7 @@ function drawPDFHeader(pdf, pageWidth) {
 
   pdf.setFontSize(10);
   pdf.setFont("helvetica", "normal");
-  pdf.text("Pekunden, Kec. Margasari, Kab. Tegal, Jawa Tengah", 35, 21);
+  pdf.text("Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah", 35, 21);
 
   pdf.setDrawColor(15, 118, 110);
   pdf.line(10, 26, pageWidth - 10, 26);
@@ -136,7 +136,7 @@ async function exportPDF() {
 
 function drawCanvasHeader(ctx, width) {
   const logo = new Image();
-  logo.src = "https://i.ibb.co/HDmsXRW5/Al-Ikhlas-Pekunden.jpg";
+  logo.src = "../assets/logo.png";
 
   ctx.fillStyle = "#ffffff";
   ctx.fillRect(0, 0, width, 110);
@@ -151,7 +151,7 @@ function drawCanvasHeader(ctx, width) {
 
   ctx.font = "20px Arial";
   ctx.fillText(
-    "Pekunden, Kec. Margasari, Kab. Tegal, Jawa Tengah",
+    "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah",
     120,
     85
   );
