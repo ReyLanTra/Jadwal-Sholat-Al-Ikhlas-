@@ -67,17 +67,29 @@ function drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, total) {
   );
 }
 
+function forceExportStyle() {
+  document.body.classList.add("export-force");
+}
+
+function restoreExportStyle() {
+  document.body.classList.remove("export-force");
+}
+
 /* ===============================
    EXPORT PDF (MULTI PAGE)
 ================================ */
 function exportPDF() {
+  forceExportStyle();
+
   const table = getExportTable();
 
   html2canvas(table, {
     scale: 2,
-    useCORS: true,
-    backgroundColor: "#ffffff"
+    backgroundColor: "#ffffff",
+    useCORS: true
   }).then(canvas => {
+    restoreExportStyle();
+
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF("p", "mm", "a4");
 
@@ -85,7 +97,7 @@ function exportPDF() {
     const pageHeight = 297;
 
     const margin = 10;
-    const headerHeight = 35;
+    const headerHeight = 40;
     const footerHeight = 20;
 
     const usableHeight =
@@ -98,81 +110,86 @@ function exportPDF() {
     let page = 1;
     const totalPages = Math.ceil(imgHeight / usableHeight);
 
-    while (renderedHeight < imgHeight) {
-      if (page > 1) pdf.addPage();
+    // LOAD LOGO DENGAN BENAR
+    const logo = new Image();
+    logo.src = "assets/logo.png";
+    logo.crossOrigin = "anonymous";
 
-      // HEADER
-      pdf.setFont("helvetica", "bold");
-      pdf.setFontSize(14);
-      pdf.text("Mushola Al-Ikhlas Pekunden", margin, 18);
+    logo.onload = () => {
+      while (renderedHeight < imgHeight) {
+        if (page > 1) pdf.addPage();
 
-      pdf.setFont("helvetica", "normal");
-      pdf.setFontSize(10);
-      pdf.text(
-        "Pekunden, Kec. Dukuhturi, Kab. Tegal, Jawa Tengah",
-        margin,
-        25
-      );
+        // HEADER
+        pdf.addImage(logo, "PNG", margin, 10, 18, 18);
 
-      // HITUNG TINGGI POTONGAN
-      const sliceHeight = Math.min(
-        usableHeight,
-        imgHeight - renderedHeight
-      );
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(14);
+        pdf.text("Mushola Al-Ikhlas Pekunden", margin + 25, 18);
 
-      // BUAT CANVAS POTONGAN
-      const pageCanvas = document.createElement("canvas");
-      pageCanvas.width = canvas.width;
-      pageCanvas.height =
-        (sliceHeight * canvas.width) / imgWidth;
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(10);
+        pdf.text(
+          "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah",
+          margin + 25,
+          25
+        );
 
-      const pageCtx = pageCanvas.getContext("2d");
-      pageCtx.drawImage(
-        canvas,
-        0,
-        (renderedHeight * canvas.width) / imgWidth,
-        canvas.width,
-        pageCanvas.height,
-        0,
-        0,
-        canvas.width,
-        pageCanvas.height
-      );
+        // POTONG CANVAS
+        const sliceHeight = Math.min(
+          usableHeight,
+          imgHeight - renderedHeight
+        );
 
-      pdf.addImage(
-        pageCanvas,
-        "PNG",
-        margin,
-        headerHeight,
-        imgWidth,
-        sliceHeight
-      );
+        const pageCanvas = document.createElement("canvas");
+        pageCanvas.width = canvas.width;
+        pageCanvas.height =
+          (sliceHeight * canvas.width) / imgWidth;
 
-      // FOOTER
-      pdf.setFontSize(9);
-      pdf.text(
-        `Dicetak pada ${new Date().toLocaleString("id-ID", {
-          timeZone: "Asia/Jakarta"
-        })} WIB`,
-        margin,
-        pageHeight - 10
-      );
+        const ctx = pageCanvas.getContext("2d");
+        ctx.drawImage(
+          canvas,
+          0,
+          (renderedHeight * canvas.width) / imgWidth,
+          canvas.width,
+          pageCanvas.height,
+          0,
+          0,
+          canvas.width,
+          pageCanvas.height
+        );
 
-      pdf.text(
-        `Halaman ${page} / ${totalPages}`,
-        pageWidth - margin - 35,
-        pageHeight - 10
-      );
+        pdf.addImage(
+          pageCanvas,
+          "PNG",
+          margin,
+          headerHeight,
+          imgWidth,
+          sliceHeight
+        );
 
-      renderedHeight += sliceHeight;
-      page++;
-    }
+        // FOOTER
+        pdf.setFontSize(9);
+        pdf.text(
+          `Dicetak pada ${new Date().toLocaleString("id-ID", {
+            timeZone: "Asia/Jakarta"
+          })} WIB`,
+          margin,
+          pageHeight - 10
+        );
 
-    pdf.save("jadwal-sholat-al-ikhlas.pdf");
-  });
-}
+        pdf.text(
+          `Halaman ${page} / ${totalPages}`,
+          pageWidth - margin - 35,
+          pageHeight - 10
+        );
 
-function drawCanvasHeader(ctx, width) {
+        renderedHeight += sliceHeight;
+        page++;
+      }
+
+      pdf.save("jadwal-sholat-al-ikhlas.pdf");
+    };
+  Pekundenunction drawCanvasHeader(ctx, width) {
   const logo = new Image();
   logo.src = "assets/logo.png";
 
