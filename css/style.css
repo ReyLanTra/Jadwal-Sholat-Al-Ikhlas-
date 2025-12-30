@@ -929,6 +929,22 @@ tr:last-child td {
   }
 }
 
+.export-force table,
+.export-force th,
+.export-force td {
+  color: #000 !important;
+  opacity: 1 !important;
+}
+
+.export-force th {
+  background: #0f766e !important;
+  color: #ffffff !important;
+}
+
+.export-force tr {
+  background: #ffffff !important;
+}
+
 /* ============================================
    RESPONSIVE DESIGN
 ============================================ */
