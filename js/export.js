@@ -30,27 +30,40 @@ function drawWatermark(ctx, width, height) {
 /* ===============================
    HEADER + FOOTER CANVAS
 ================================ */
-function drawCanvasHeaderFooter(ctx, width, height) {
-  ctx.fillStyle = "#0f766e";
-  ctx.fillRect(0, 0, width, 90);
+function drawPDFHeader(pdf, pageWidth) {
+  pdf.addImage(
+    "assets/logo.png",
+    "PNG",
+    10,
+    8,
+    18,
+    18
+  );
 
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "bold 28px Arial";
-  ctx.fillText("Mushola Al-Ikhlas Pekunden", 40, 45);
+  pdf.setFontSize(14);
+  pdf.setFont("helvetica", "bold");
+  pdf.text("Mushola Al-Ikhlas Pekunden", 35, 15);
 
-  ctx.font = "18px Arial";
-  ctx.fillText("Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah", 40, 70);
+  pdf.setFontSize(10);
+  pdf.setFont("helvetica", "normal");
+  pdf.text("Pekunden, Kec. Dukuhturi, Kab. Tegal, Jawa Tengah", 35, 21);
 
-  ctx.font = "16px Arial";
-  ctx.fillStyle = "#555";
-  ctx.fillText(
-    "Dicetak pada " +
-      new Date().toLocaleString("id-ID", {
-        timeZone: "Asia/Jakarta"
-      }) +
-      " WIB",
-    40,
-    height - 30
+  pdf.setDrawColor(15, 118, 110);
+  pdf.line(10, 26, pageWidth - 10, 26);
+}
+
+function drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, total) {
+  const now = new Date();
+  const time = now.toLocaleString("id-ID", {
+    timeZone: "Asia/Jakarta"
+  });
+
+  pdf.setFontSize(9);
+  pdf.text(`Dicetak pada ${time} WIB`, 10, pageHeight - 10);
+  pdf.text(
+    `Halaman ${pageNum} / ${total}`,
+    pageWidth - 50,
+    pageHeight - 10
   );
 }
 
@@ -121,6 +134,49 @@ function exportPDF() {
 
     pdf.save("jadwal-sholat-al-ikhlas.pdf");
   });
+}
+
+function drawCanvasHeader(ctx, width) {
+  const logo = new Image();
+  logo.src = "assets/logo.png";
+
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, width, 110);
+
+  logo.onload = () => {
+    ctx.drawImage(logo, 30, 20, 70, 70);
+  };
+
+  ctx.fillStyle = "#065f46";
+  ctx.font = "bold 32px Arial";
+  ctx.fillText("Mushola Al-Ikhlas Pekunden", 120, 55);
+
+  ctx.font = "20px Arial";
+  ctx.fillText(
+    "Pekunden, Kec. Dukuhturi, Kab. Tegal, Jawa Tengah",
+    120,
+    85
+  );
+
+  ctx.strokeStyle = "#0f766e";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(30, 110);
+  ctx.lineTo(width - 30, 110);
+  ctx.stroke();
+}
+
+function drawCanvasFooter(ctx, width, height) {
+  const now = new Date().toLocaleString("id-ID", {
+    timeZone: "Asia/Jakarta"
+  });
+
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, height - 80, width, 80);
+
+  ctx.fillStyle = "#000000";
+  ctx.font = "18px Arial";
+  ctx.fillText(`Dicetak pada ${now} WIB`, 30, height - 30);
 }
 
 /* ===============================
