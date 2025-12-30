@@ -39,7 +39,7 @@ function getExportTable() {
   return table;
 }
 
-function drawPDFHeader(pdf, pageWidth) {
+/* function drawPDFHeader(pdf, pageWidth) {
   pdf.addImage(
     "assets/logo.png",
     "PNG",
@@ -74,67 +74,94 @@ function drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, total) {
     pageWidth - 50,
     pageHeight - 10
   );
-}
+} */
 
 /* ===============================
    EXPORT PDF (A4 LANDSCAPE)
 ================================ */
-async function exportPDF() {
-  document.body.classList.add("export-mode");
-  if (isRamadhan()) document.body.classList.add("ramadhan");
-
+function exportPDF() {
   const table = getExportTable();
 
-  const canvas = await html2canvas(table, {
+  html2canvas(table, {
     scale: 2,
-    backgroundColor: "#ffffff",
-    useCORS: true
+    useCORS: true,
+    backgroundColor: "#ffffff"
+  }).then(canvas => {
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("p", "mm", "a4");
+
+    const pageWidth = 210;
+    const pageHeight = 297;
+
+    const headerHeight = 35;
+    const footerHeight = 20;
+    const margin = 10;
+
+    const usableHeight =
+      pageHeight - headerHeight - footerHeight - margin * 2;
+
+    const imgWidth = pageWidth - margin * 2;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    let positionY = 0;
+    let page = 1;
+    const totalPages = Math.ceil(imgHeight / usableHeight);
+
+    while (positionY < imgHeight) {
+      if (page > 1) pdf.addPage();
+
+      // HEADER
+      pdf.setFontSize(14);
+      pdf.text("Mushola Al-Ikhlas Pekunden", margin, 18);
+      pdf.setFontSize(10);
+      pdf.text(
+        "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah",
+        margin,
+        25
+      );
+
+      // POTONG GAMBAR
+      pdf.addImage(
+        canvas,
+        "PNG",
+        margin,
+        headerHeight,
+        imgWidth,
+        imgHeight,
+        undefined,
+        "FAST",
+        0,
+        positionY,
+        canvas.width,
+        (usableHeight * canvas.width) / imgWidth
+      );
+
+      // FOOTER
+      const now = new Date().toLocaleString("id-ID", {
+        timeZone: "Asia/Jakarta"
+      });
+
+      pdf.setFontSize(9);
+      pdf.text(
+        `Dicetak pada ${now} WIB`,
+        margin,
+        pageHeight - 10
+      );
+
+      pdf.text(
+        `Halaman ${page} / ${totalPages}`,
+        pageWidth - margin - 30,
+        pageHeight - 10
+      );
+
+      positionY += usableHeight;
+      page++;
+    }
+
+    pdf.save("jadwal-sholat-al-ikhlas.pdf");
   });
-
-  const ctx = canvas.getContext("2d");
-  drawWatermark(ctx, canvas.width, canvas.height);
-
-  const imgData = canvas.toDataURL("image/png");
-
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF("p", "mm", "a4");
-
-  const pageWidth = 210;
-  const pageHeight = 297;
-
-  const imgWidth = pageWidth - 20;
-  const imgHeight = canvas.height * imgWidth / canvas.width;
-
-  let heightLeft = imgHeight;
-  let position = 30;
-  let pageNum = 1;
-
-  const totalPages = Math.ceil(imgHeight / (pageHeight - 50));
-
-  drawPDFHeader(pdf, pageWidth);
-  pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
-  drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, totalPages);
-
-  heightLeft -= (pageHeight - 50);
-
-  while (heightLeft > 0) {
-    pageNum++;
-    pdf.addPage();
-    drawPDFHeader(pdf, pageWidth);
-
-    position = heightLeft - imgHeight + 30;
-    pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
-
-    drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, totalPages);
-    heightLeft -= (pageHeight - 50);
-  }
-
-  pdf.save("jadwal-sholat-al-ikhlas-1-bulan.pdf");
-
-  document.body.classList.remove("export-mode", "ramadhan");
-}
-
-function drawCanvasHeader(ctx, width) {
+}Kecunction drawCanvasHeader(ctx, width) {
   const logo = new Image();
   logo.src = "../assets/logo.png";
 
