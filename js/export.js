@@ -39,7 +39,7 @@ function getExportTable() {
   return table;
 }
 
-/* function drawPDFHeader(pdf, pageWidth) {
+function drawPDFHeader(pdf, pageWidth) {
   pdf.addImage(
     "assets/logo.png",
     "PNG",
@@ -74,7 +74,7 @@ function drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, total) {
     pageWidth - 50,
     pageHeight - 10
   );
-} */
+} 
 
 /* ===============================
    EXPORT PDF (A4 LANDSCAPE)
