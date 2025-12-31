@@ -74,7 +74,7 @@ function showLoading() {
   let rows = "";
 
   // 10 baris skeleton (estetis)
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 31; i++) {
     rows += `
       <tr>
         <td><div class="skeleton"></div></td>
