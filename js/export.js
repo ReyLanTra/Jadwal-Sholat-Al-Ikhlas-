@@ -18,36 +18,14 @@ function drawWatermark(ctx, width, height) {
   };
 }
 
-if (!CanvasRenderingContext2D.prototype.roundRect) {
-  CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
-    this.beginPath();
-    this.moveTo(x + r, y);
-    this.lineTo(x + w - r, y);
-    this.quadraticCurveTo(x + w, y, x + w, y + r);
-    this.lineTo(x + w, y + h - r);
-    this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-    this.lineTo(x + r, y + h);
-    this.quadraticCurveTo(x, y + h, x, y + h - r);
-    this.lineTo(x, y + r);
-    this.quadraticCurveTo(x, y, x + r, y);
-    this.closePath();
-    return this;
-  };
-}
-
 function getExportFileName(ext) {
   const monthNames = [
     "Januari","Februari","Maret","April","Mei","Juni",
     "Juli","Agustus","September","Oktober","November","Desember"
   ];
 
-  if (!window.monthSelect || !window.yearSelect) {
-    alert("Select bulan / tahun tidak ditemukan di halaman");
-    throw new Error("monthSelect / yearSelect undefined");
-  }
-
-  const month = monthSelect && monthSelect.value;
-  const year  = yearSelect && yearSelect.value;
+  const month = monthSelect?.value;
+  const year = yearSelect?.value;
 
   if (!month || !year) {
     alert("Silakan pilih bulan dan tahun terlebih dahulu");
@@ -55,15 +33,15 @@ function getExportFileName(ext) {
   }
 
   const now = new Date();
-  const dd = String(now.getDate()).padStart(2, "0");
-  const mm = String(now.getMonth() + 1).padStart(2, "0");
-  const yyyy = now.getFullYear();
-  const hh = String(now.getHours()).padStart(2, "0");
-  const mi = String(now.getMinutes()).padStart(2, "0");
+  const date = String(now.getDate()).padStart(2, "0");
+  const m = String(now.getMonth() + 1).padStart(2, "0");
+  const y = now.getFullYear();
+  const h = String(now.getHours()).padStart(2, "0");
+  const min = String(now.getMinutes()).padStart(2, "0");
 
   const monthName = monthNames[month - 1];
 
-  return `Jadwal-Sholat-${monthName}-${year}-${dd}-${mm}-${yyyy}_${hh}.${mi}-WIB.${ext}`;
+  return `Jadwal-Sholat-${monthName}-${year}-${date}-${m}-${y}_${h}.${min}-WIB.${ext}`;
 }
 
 /* ===============================
@@ -103,7 +81,7 @@ function drawPDFHeader(pdf, pageWidth) {
 
   pdf.setFontSize(10);
   pdf.setFont("helvetica", "normal");
-  pdf.text("Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah\n© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra", 35, 21);
+  pdf.text("Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah", 35, 21);
 
   pdf.setDrawColor(15, 118, 110);
   pdf.line(10, 26, pageWidth - 10, 26);
@@ -222,7 +200,7 @@ function drawImageHeader(ctx, width) {
 
   ctx.font = "20px Arial";
   ctx.fillText(
-    "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah\n© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra",
+    "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah",
     170,
     115
   );
@@ -282,7 +260,7 @@ function drawCanvasHeader(ctx, width) {
 
   ctx.font = "20px Arial";
   ctx.fillText(
-    "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah\n© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra",
+    "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah",
     120,
     85
   );
