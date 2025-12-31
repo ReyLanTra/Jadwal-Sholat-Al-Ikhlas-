@@ -337,19 +337,57 @@ function exportJPG() {
 ================================ */
 function exportExcel() {
   const table = getExportTable();
+
+  // Ambil semua baris
   const rows = Array.from(table.querySelectorAll("tr"));
 
+  if (rows.length === 0) {
+    alert("Tabel kosong, tidak bisa export Excel");
+    return;
+  }
+
+  // Convert ke array data
   const data = rows.map(row =>
-    Array.from(row.querySelectorAll("th, td")).map(
-      cell => cell.innerText.trim()
+    Array.from(row.querySelectorAll("th, td")).map(cell =>
+      cell.innerText.replace(/\s+/g, " ").trim()
     )
   );
 
-  const ws = XLSX.utils.aoa_to_sheet(data);
+  // Tambahkan HEADER INFO
+  const infoHeader = [
+    ["Mushola Al-Ikhlas Pekunden"],
+    ["Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah"],
+    [""]
+  ];
+
+  const finalData = [...infoHeader, ...data];
+
+  // Buat worksheet
+  const ws = XLSX.utils.aoa_to_sheet(finalData);
+
+  // Atur lebar kolom
+  ws["!cols"] = [
+    { wch: 25 }, // Tanggal
+    { wch: 10 }, // Imsak
+    { wch: 10 }, // Subuh
+    { wch: 10 }, // Dzuhur
+    { wch: 10 }, // Ashar
+    { wch: 10 }, // Maghrib
+    { wch: 10 }  // Isya
+  ];
+
+  // Merge judul
+  ws["!merges"] = [
+    { s: { r: 0, c: 0 }, e: { r: 0, c: 6 } },
+    { s: { r: 1, c: 0 }, e: { r: 1, c: 6 } }
+  ];
+
+  // Buat workbook
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Jadwal Sholat");
 
-  XLSX.writeFile(wb, "jadwal-sholat-al-ikhlas_by-Reyy.xlsx");
+  // Export
+  XLSX.writeFile(wb, "jadwal-sholat-al-ikhlas.xlsx");
 }
 
 /* ===============================
