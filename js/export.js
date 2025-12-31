@@ -85,51 +85,76 @@ async function exportPDF() {
 
   const table = getExportTable();
 
-  const canvas = await html2canvas(table, {
+  // 1️⃣ render tabel
+  const tableCanvas = await html2canvas(table, {
     scale: 2,
-    backgroundColor: "#ffffff",
+    backgroundColor: null,
     useCORS: true
   });
 
-  const ctx = canvas.getContext("2d");
-  drawWatermark(ctx, canvas.width, canvas.height);
+  // 2️⃣ buat poster canvas (BERWARNA)
+  const poster = document.createElement("canvas");
+  poster.width = tableCanvas.width + 120;
+  poster.height = tableCanvas.height + 260;
 
-  const imgData = canvas.toDataURL("image/png");
+  const ctx = poster.getContext("2d");
 
+  // background
+  drawThemeBackground(ctx, poster.width, poster.height);
+
+  // header
+  drawImageHeader(ctx, poster.width);
+
+  // tabel
+  ctx.drawImage(tableCanvas, 60, 180);
+
+  // footer + watermark
+  drawImageFooter(ctx, poster.width, poster.height);
+  drawTextWatermark(ctx, poster.width, poster.height);
+
+  // 3️⃣ konversi ke PDF multi halaman
+  const imgData = poster.toDataURL("image/png");
   const { jsPDF } = window.jspdf;
+
   const pdf = new jsPDF("p", "mm", "a4");
 
   const pageWidth = 210;
   const pageHeight = 297;
 
   const imgWidth = pageWidth - 20;
-  const imgHeight = canvas.height * imgWidth / canvas.width;
+  const imgHeight = poster.height * imgWidth / poster.width;
 
   let heightLeft = imgHeight;
-  let position = 30;
-  let pageNum = 1;
+  let position = 10;
+  let page = 1;
 
-  const totalPages = Math.ceil(imgHeight / (pageHeight - 50));
-
-  drawPDFHeader(pdf, pageWidth);
-  pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
-  drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, totalPages);
-
-  heightLeft -= (pageHeight - 50);
+  const totalPages = Math.ceil(imgHeight / pageHeight);
 
   while (heightLeft > 0) {
-    pageNum++;
-    pdf.addPage();
-    drawPDFHeader(pdf, pageWidth);
+    if (page > 1) pdf.addPage();
 
-    position = heightLeft - imgHeight + 30;
-    pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+    pdf.addImage(
+      imgData,
+      "PNG",
+      10,
+      position,
+      imgWidth,
+      imgHeight
+    );
 
-    drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, totalPages);
-    heightLeft -= (pageHeight - 50);
+    pdf.setFontSize(9);
+    pdf.text(
+      `Halaman ${page} / ${totalPages}`,
+      pageWidth - 50,
+      pageHeight - 10
+    );
+
+    heightLeft -= pageHeight;
+    position -= pageHeight;
+    page++;
   }
 
-  pdf.save("jadwal-sholat-al-ikhlas_by-Reyy.pdf");
+  pdf.save("jadwal-sholat-al-ikhlas_premium.pdf");
 
   document.body.classList.remove("export-mode", "ramadhan");
 }
