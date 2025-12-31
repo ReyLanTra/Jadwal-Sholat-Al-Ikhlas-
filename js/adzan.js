@@ -1,27 +1,16 @@
+/* =====================================================
+   ADZAN + RAMADHAN NOTIFICATION SYSTEM
+   Mushola Al-Ikhlas Pekunden
+===================================================== */
+
 let played = {};
 
 /* =========================
-   UTILITIES
+   KONFIGURASI
 ========================= */
-function playAudio(src) {
-  const audio = new Audio(src);
-  audio.play().catch(() => {});
-}
+const ADZAN_TIMES = ["subuh", "dzuhur", "ashar", "maghrib", "isya"];
 
-function notify(title, body) {
-  if (!("Notification" in window)) return;
-  if (Notification.permission === "granted") {
-    new Notification(title, {
-      body,
-      icon: "assets/logo.png",
-      vibrate: [200, 100, 200]
-    });
-  }
-}
-
-/* =========================
-   MODE RAMADHAN
-========================= */
+// Mode Ramadhan (AUTO)
 function isRamadhan() {
   const now = new Date();
   const start = new Date("2026-02-18T00:00:00");
@@ -30,92 +19,101 @@ function isRamadhan() {
 }
 
 /* =========================
-   ADZAN SHOLAT WAJIB
+   NOTIFICATION HELPER
 ========================= */
-function checkAdzan() {
+function sendNotification(title, body) {
+  if (Notification.permission === "granted") {
+    navigator.serviceWorker.ready.then(reg => {
+      reg.showNotification(title, {
+        body,
+        icon: "assets/logo.png",
+        badge: "assets/logo.png",
+        vibrate: [200, 100, 200]
+      });
+    });
+  }
+}
+
+/* =========================
+   MAIN CHECKER
+========================= */
+function checkTimes() {
   const now = new Date();
-  const hhmm = now.toTimeString().slice(0, 5);
+  const hhmm = now.toTimeString().slice(0,5);
 
   document.querySelectorAll(".card").forEach(card => {
     const time = card.dataset.time;
     const name = card.querySelector("h3").textContent.toLowerCase();
+    const key = `${name}-${time}`;
 
-    if (time === hhmm && !played[time]) {
-      played[time] = true;
+    if (time !== hhmm || played[key]) return;
 
-      // --- MAGHRIB SAAT RAMADHAN ---
-      if (isRamadhan() && name === "maghrib") {
-        notify("Waktu Buka Puasa", "Saatnya berbuka puasa");
-        playAudio("assets/sirine-buka.mp3");
+    /* ===== SHOLAT WAJIB ===== */
+    if (ADZAN_TIMES.includes(name)) {
+      played[key] = true;
 
-        setTimeout(() => {
-          playAudio("assets/adzan.mp3");
-        }, 5000);
-
-        return;
+      let audio;
+      if (name === "subuh") {
+        audio = new Audio("assets/adzan-subuh.mp3");
+      } else {
+        audio = new Audio("assets/adzan.mp3");
       }
 
-      // --- ADZAN BIASA ---
-      if (name === "subuh") {
-        playAudio("assets/adzan-subuh.mp3");
-      } else {
-        playAudio("assets/adzan.mp3");
+      audio.play();
+      sendNotification(
+        `Waktu ${name.toUpperCase()}`,
+        `Telah masuk waktu sholat ${name}`
+      );
+
+      // Buka puasa khusus Ramadhan
+      if (name === "maghrib" && isRamadhan()) {
+        setTimeout(() => {
+          sendNotification(
+            "Buka Puasa",
+            "Selamat berbuka puasa"
+          );
+        }, 1000);
       }
     }
+
+    /* ===== IMSAK (RAMADHAN) ===== */
+    if (name === "imsak" && isRamadhan()) {
+      played[key] = true;
+
+      new Audio("assets/sirine-imsak.mp3").play();
+      sendNotification(
+        "Imsak",
+        "Telah masuk waktu imsak"
+      );
+    }
   });
-}
 
-/* =========================
-   EVENT KHUSUS RAMADHAN
-========================= */
-function checkRamadhanEvents(today) {
-  if (!isRamadhan()) return;
+  /* ===== SAHUR JAM 03:00 ===== */
+  if (isRamadhan() && hhmm === "03:00" && !played["sahur"]) {
+    played["sahur"] = true;
 
-  const now = new Date();
-  const hhmm = now.toTimeString().slice(0, 5);
-
-  // === SAHUR 03:00 ===
-  if (hhmm === "03:00" && !played.sahur) {
-    played.sahur = true;
-    notify("Waktu Sahur", "Saatnya sahur • Mushola Al-Ikhlas");
-    playAudio("assets/alarm-sahur.mp3");
-  }
-
-  // === IMSAK ===
-  if (today && hhmm === today.imsak && !played.imsak) {
-    played.imsak = true;
-    notify("Waktu Imsak", "Imsak telah tiba");
-    playAudio("assets/sirine-imsak.mp3");
+    new Audio("assets/alarm-sahur.mp3").play();
+    sendNotification(
+      "Waktu Sahur",
+      "Segera melaksanakan sahur"
+    );
   }
 }
 
 /* =========================
-   RESET HARIAN (00:01)
+   RESET HARIAN
 ========================= */
 function resetDaily() {
   const now = new Date();
-  const reset = new Date();
-  reset.setHours(0, 1, 0, 0);
-  if (reset < now) reset.setDate(reset.getDate() + 1);
-
-  setTimeout(() => {
+  if (now.getHours() === 0 && now.getMinutes() === 1) {
     played = {};
-    resetDaily();
-  }, reset - now);
+  }
 }
 
 /* =========================
-   INIT
+   INTERVAL
 ========================= */
-if ("Notification" in window && Notification.permission !== "granted") {
-  Notification.requestPermission();
-}
-
 setInterval(() => {
-  checkAdzan();
-  if (window.todayScheduleData) {
-    checkRamadhanEvents(window.todayScheduleData);
-  }
+  checkTimes();
+  resetDaily();
 }, 1000);
-
-resetDaily();
