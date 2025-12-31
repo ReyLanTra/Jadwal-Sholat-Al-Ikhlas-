@@ -134,6 +134,74 @@ async function exportPDF() {
   document.body.classList.remove("export-mode", "ramadhan");
 }
 
+function drawThemeBackground(ctx, width, height) {
+  const gradient = ctx.createLinearGradient(0, 0, 0, height);
+  gradient.addColorStop(0, "#064e3b");
+  gradient.addColorStop(1, "#0f766e");
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, width, height);
+}
+
+function drawImageHeader(ctx, width) {
+  const logo = new Image();
+  logo.src = "/assets/logo.png";
+
+  ctx.fillStyle = "rgba(255,255,255,0.08)";
+  ctx.fillRect(40, 30, width - 80, 130);
+
+  logo.onload = () => {
+    ctx.drawImage(logo, 60, 45, 90, 90);
+  };
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "bold 36px Arial";
+  ctx.fillText("Mushola Al-Ikhlas Pekunden", 170, 80);
+
+  ctx.font = "20px Arial";
+  ctx.fillText(
+    "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah",
+    170,
+    115
+  );
+
+  ctx.strokeStyle = "#d4af37";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(60, 155);
+  ctx.lineTo(width - 60, 155);
+  ctx.stroke();
+}
+
+function drawTextWatermark(ctx, width, height) {
+  ctx.save();
+  ctx.globalAlpha = 0.07;
+  ctx.translate(width / 2, height / 2);
+  ctx.rotate(-Math.PI / 4);
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "bold 48px Arial";
+  ctx.textAlign = "center";
+
+  ctx.fillText("© Mushola Al-Ikhlas Pekunden", 0, -20);
+  ctx.font = "32px Arial";
+  ctx.fillText("Created by Reyzar Alansyah Putra", 0, 40);
+
+  ctx.restore();
+}
+
+function drawImageFooter(ctx, width, height) {
+  const now = new Date().toLocaleString("id-ID", {
+    timeZone: "Asia/Jakarta"
+  });
+
+  ctx.fillStyle = "rgba(0,0,0,0.25)";
+  ctx.fillRect(0, height - 70, width, 70);
+
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "18px Arial";
+  ctx.fillText(`Dicetak pada ${now} WIB`, 40, height - 30);
+}
 
 function drawCanvasHeader(ctx, width) {
   const logo = new Image();
@@ -183,36 +251,35 @@ function drawCanvasFooter(ctx, width, height) {
 ================================ */
 function exportPNG() {
   document.body.classList.add("export-mode");
-  if (isRamadhan()) document.body.classList.add("ramadhan");
 
   const table = getExportTable();
 
   html2canvas(table, {
     scale: 2,
-    backgroundColor: "#ffffff",
+    backgroundColor: null,
     useCORS: true
-  }).then(canvas => {
+  }).then(tableCanvas => {
 
-    const finalCanvas = document.createElement("canvas");
-    finalCanvas.width = canvas.width;
-    finalCanvas.height = canvas.height + 190;
+    const canvas = document.createElement("canvas");
+    canvas.width = tableCanvas.width + 120;
+    canvas.height = tableCanvas.height + 260;
 
-    const ctx = finalCanvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
 
-    drawCanvasHeader(ctx, finalCanvas.width);
+    drawThemeBackground(ctx, canvas.width, canvas.height);
+    drawImageHeader(ctx, canvas.width);
 
-    ctx.drawImage(canvas, 0, 120);
+    ctx.drawImage(tableCanvas, 60, 180);
 
-    drawCanvasFooter(ctx, finalCanvas.width, finalCanvas.height);
+    drawImageFooter(ctx, canvas.width, canvas.height);
+    drawTextWatermark(ctx, canvas.width, canvas.height);
 
-    drawWatermark(ctx, finalCanvas.width, finalCanvas.height);
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = "jadwal-sholat-al-ikhlas_poster.png";
+    link.click();
 
-    const a = document.createElement("a");
-    a.href = finalCanvas.toDataURL("image/png");
-    a.download = "jadwal-sholat-al-ikhlas_by-Reyy.png";
-    a.click();
-
-    document.body.classList.remove("export-mode", "ramadhan");
+    document.body.classList.remove("export-mode");
   });
 }
 
@@ -221,33 +288,33 @@ function exportPNG() {
 ================================ */
 function exportJPG() {
   document.body.classList.add("export-mode");
-  if (isRamadhan()) document.body.classList.add("ramadhan");
 
   const table = getExportTable();
 
   html2canvas(table, {
     scale: 2,
-    backgroundColor: "#ffffff",
+    backgroundColor: null,
     useCORS: true
-  }).then(canvas => {
+  }).then(tableCanvas => {
 
-    const finalCanvas = document.createElement("canvas");
-    finalCanvas.width = canvas.width;
-    finalCanvas.height = canvas.height + 190;
+    const canvas = document.createElement("canvas");
+    canvas.width = tableCanvas.width + 120;
+    canvas.height = tableCanvas.height + 260;
 
-    const ctx = finalCanvas.getContext("2d");
+    const ctx = canvas.getContext("2d");
 
-    drawCanvasHeader(ctx, finalCanvas.width);
-    ctx.drawImage(canvas, 0, 120);
-    drawCanvasFooter(ctx, finalCanvas.width, finalCanvas.height);
-    drawWatermark(ctx, finalCanvas.width, finalCanvas.height);
+    drawThemeBackground(ctx, canvas.width, canvas.height);
+    drawImageHeader(ctx, canvas.width);
+    ctx.drawImage(tableCanvas, 60, 180);
+    drawImageFooter(ctx, canvas.width, canvas.height);
+    drawTextWatermark(ctx, canvas.width, canvas.height);
 
-    const a = document.createElement("a");
-    a.href = finalCanvas.toDataURL("image/jpeg", 0.95);
-    a.download = "jadwal-sholat-al-ikhlas_by-Reyy.jpg";
-    a.click();
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/jpeg", 0.95);
+    link.download = "jadwal-sholat-al-ikhlas_poster.jpg";
+    link.click();
 
-    document.body.classList.remove("export-mode", "ramadhan");
+    document.body.classList.remove("export-mode");
   });
 }
 
