@@ -64,7 +64,7 @@ function checkReady() {
 ========================= */
 function handleShow() {
   showLoading();
-  setTimeout(showMonthly, 1000);
+  setTimeout(showMonthly, 3000);
 }
 
 /* =========================
