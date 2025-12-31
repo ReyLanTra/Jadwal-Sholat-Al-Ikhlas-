@@ -79,7 +79,7 @@ function drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, total) {
 /* ===============================
    EXPORT PDF (A4 LANDSCAPE)
 ================================ */
-/*async function exportPDF() {
+async function exportPDF() {
   document.body.classList.add("export-mode");
   if (isRamadhan()) document.body.classList.add("ramadhan");
 
@@ -132,9 +132,9 @@ function drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, total) {
   pdf.save("jadwal-sholat-al-ikhlas-1-bulan.pdf");
 
   document.body.classList.remove("export-mode", "ramadhan");
-}*/
+}
 
-function exportPDF() {
+/*function exportPDF() {
   const table = getExportTable();
 
   html2canvas(table, {
@@ -234,7 +234,7 @@ function exportPDF() {
 
     pdf.save("jadwal-sholat-al-ikhlas.pdf");
   });
-}
+}*/
 
 
 function drawCanvasHeader(ctx, width) {
