@@ -41,8 +41,13 @@ function getExportFileName(ext) {
     "Juli","Agustus","September","Oktober","November","Desember"
   ];
 
-  const month = monthSelect?.value;
-  const year = yearSelect?.value;
+  if (!window.monthSelect || !window.yearSelect) {
+    alert("Select bulan / tahun tidak ditemukan di halaman");
+    throw new Error("monthSelect / yearSelect undefined");
+  }
+
+  const month = monthSelect && monthSelect.value;
+  const year  = yearSelect && yearSelect.value;
 
   if (!month || !year) {
     alert("Silakan pilih bulan dan tahun terlebih dahulu");
@@ -50,15 +55,15 @@ function getExportFileName(ext) {
   }
 
   const now = new Date();
-  const date = String(now.getDate()).padStart(2, "0");
-  const m = String(now.getMonth() + 1).padStart(2, "0");
-  const y = now.getFullYear();
-  const h = String(now.getHours()).padStart(2, "0");
-  const min = String(now.getMinutes()).padStart(2, "0");
+  const dd = String(now.getDate()).padStart(2, "0");
+  const mm = String(now.getMonth() + 1).padStart(2, "0");
+  const yyyy = now.getFullYear();
+  const hh = String(now.getHours()).padStart(2, "0");
+  const mi = String(now.getMinutes()).padStart(2, "0");
 
   const monthName = monthNames[month - 1];
 
-  return `Jadwal-Sholat-${monthName}-${year}-${date}-${m}-${y}_${h}.${min}-WIB.${ext}`;
+  return `Jadwal-Sholat-${monthName}-${year}-${dd}-${mm}-${yyyy}_${hh}.${mi}-WIB.${ext}`;
 }
 
 /* ===============================
