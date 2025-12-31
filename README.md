@@ -1,7 +1,27 @@
 # 🕌 Website Jadwal Sholat Digital  
+
+<div align="center">
+
+![Website Banner](https://img.shields.io/badge/Website-Jadwal_Sholat-0b2a1f?style=for-the-badge&logo=google-chrome&logoColor=white)
+![Version](https://img.shields.io/badge/Version-2.0.0-gold?style=for-the-badge&logo=github&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=open-source-initiative&logoColor=white)
+![Deployment](https://img.shields.io/badge/Deployed_on-Vercel-black?style=for-the-badge&logo=vercel&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Production_Ready-brightgreen?style=for-the-badge&logo=check-circle&logoColor=white)
+
+</div>
+
+---
+
+<div align="center">
+ 
 ## **Mushola Al-Ikhlas Pekunden** – Pusat Informasi Ibadah Modern
 
 Sebuah mahakarya digital yang mengabdi pada kemudahan ibadah. Website ini bukan sekadar penampil jadwal, melainkan **pusat komando waktu sholat** yang hidup, interaktif, dan penuh keajaiban teknologi — hadir untuk membimbing jamaah di setiap detik waktu menuju ketenangan.
+
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Kunjungi_Sekarang-d4af37?style=for-the-badge&logo=google-chrome&logoColor=white)](https://jadwal-sholat-alikhlas.reyzar.my.id/)
+[![GitHub Repo](https://img.shields.io/badge/💻_GitHub_Repository-View_Code-0b2a1f?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ReyLanTra/Jadwal-Sholat)
+
+</div>
 
 ---
 
@@ -35,6 +55,21 @@ Aktif secara otomatis dalam periode:
 - Countdown buka puasa yang menegangkan
 - Sirine buka puasa → transisi mulus ke adzan Maghrib
 - **Tema visual khusus** — nuansa Ramadhan yang menyentuh jiwa
+
+---
+
+### **🔧 Teknologi yang Digunakan**
+<div align="center">
+
+| Layer | Technology Stack | Purpose |
+|-------|-----------------|---------|
+| **Frontend** | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) | Core Web Technologies |
+| **Animations** | ![CSS Animations](https://img.shields.io/badge/CSS_Animations-FF6B6B?style=flat-square&logo=css3&logoColor=white) ![Web Animations API](https://img.shields.io/badge/Web_Animations-8A2BE2?style=flat-square&logo=javascript&logoColor=white) | Visual Experience |
+| **Audio** | ![Web Audio API](https://img.shields.io/badge/Web_Audio_API-FF8C00?style=flat-square&logo=html5&logoColor=white) ![HTML5 Audio](https://img.shields.io/badge/HTML5_Audio-FF4500?style=flat-square&logo=html5&logoColor=white) | Sound System |
+| **PWA** | ![Service Worker](https://img.shields.io/badge/Service_Worker-4285F4?style=flat-square&logo=google-chrome&logoColor=white) ![Web Notifications](https://img.shields.io/badge/Web_Notifications-34A853?style=flat-square&logo=google-chrome&logoColor=white) | Offline Capabilities |
+| **Deployment** | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white) | Hosting & CI/CD |
+
+</div>
 
 ---
 
