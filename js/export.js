@@ -18,32 +18,6 @@ function drawWatermark(ctx, width, height) {
   };
 }
 
-function getExportFileName(ext) {
-  const monthNames = [
-    "Januari","Februari","Maret","April","Mei","Juni",
-    "Juli","Agustus","September","Oktober","November","Desember"
-  ];
-
-  const month = monthSelect?.value;
-  const year = yearSelect?.value;
-
-  if (!month || !year) {
-    alert("Silakan pilih bulan dan tahun terlebih dahulu");
-    throw new Error("Bulan / Tahun belum dipilih");
-  }
-
-  const now = new Date();
-  const date = String(now.getDate()).padStart(2, "0");
-  const m = String(now.getMonth() + 1).padStart(2, "0");
-  const y = now.getFullYear();
-  const h = String(now.getHours()).padStart(2, "0");
-  const min = String(now.getMinutes()).padStart(2, "0");
-
-  const monthName = monthNames[month - 1];
-
-  return `Jadwal-Sholat-${monthName}-${year}-${date}-${m}-${y}_${h}.${min}-WIB.${ext}`;
-}
-
 /* ===============================
    TABLE GETTER (WAJIB)
 ================================ */
@@ -94,26 +68,12 @@ function drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, total) {
   });
 
   pdf.setFontSize(9);
-  pdf.text(`Dicetak pada ${time} WIB by Reyzar`, 10, pageHeight - 10);
+  pdf.text(`Dicetak pada ${time} WIB`, 10, pageHeight - 10);
   pdf.text(
     `Halaman ${pageNum} / ${total}`,
     pageWidth - 50,
     pageHeight - 10
   );
-}
-
-function drawTablePanel(ctx, x, y, width, height) {
-  ctx.save();
-  ctx.fillStyle = "rgba(255,255,255,0.92)";
-  ctx.shadowColor = "rgba(0,0,0,0.2)";
-  ctx.shadowBlur = 20;
-  ctx.shadowOffsetY = 6;
-
-  ctx.beginPath();
-  ctx.roundRect(x, y, width, height, 20);
-  ctx.fill();
-
-  ctx.restore();
 }
 
 /* ===============================
@@ -169,7 +129,7 @@ async function exportPDF() {
     heightLeft -= (pageHeight - 50);
   }
 
-  pdf.save(getExportFileName("pdf"));
+  pdf.save("jadwal-sholat-al-ikhlas_by-Reyy.pdf");
 
   document.body.classList.remove("export-mode", "ramadhan");
 }
@@ -185,7 +145,7 @@ function drawThemeBackground(ctx, width, height) {
 
 function drawImageHeader(ctx, width) {
   const logo = new Image();
-  logo.src = "https://i.ibb.co/HDmsXRW5/Al-Ikhlas-Pekunden.jpg";
+  logo.src = "/assets/logo.png";
 
   ctx.fillStyle = "rgba(255,255,255,0.08)";
   ctx.fillRect(40, 30, width - 80, 130);
@@ -240,12 +200,12 @@ function drawImageFooter(ctx, width, height) {
 
   ctx.fillStyle = "#ffffff";
   ctx.font = "18px Arial";
-  ctx.fillText(`Dicetak pada ${now} WIB by Reyzar`, 40, height - 30);
+  ctx.fillText(`Dicetak pada ${now} WIB`, 40, height - 30);
 }
 
 function drawCanvasHeader(ctx, width) {
   const logo = new Image();
-  logo.src = "https://i.ibb.co/HDmsXRW5/Al-Ikhlas-Pekunden.jpg";
+  logo.src = "/assets/logo.png";
 
   ctx.fillStyle = "#ffffff";
   ctx.fillRect(0, 0, width, 110);
@@ -283,7 +243,7 @@ function drawCanvasFooter(ctx, width, height) {
 
   ctx.fillStyle = "#000000";
   ctx.font = "18px Arial";
-  ctx.fillText(`Dicetak pada ${now} WIB by Reyzar`, 30, height - 30);
+  ctx.fillText(`Dicetak pada ${now} WIB`, 30, height - 30);
 }
 
 /* ===============================
@@ -316,7 +276,7 @@ function exportPNG() {
 
     const link = document.createElement("a");
     link.href = canvas.toDataURL("image/png");
-    link.download = getExportFileName("png");
+    link.download = "jadwal-sholat-al-ikhlas_poster.png";
     link.click();
 
     document.body.classList.remove("export-mode");
@@ -351,7 +311,7 @@ function exportJPG() {
 
     const link = document.createElement("a");
     link.href = canvas.toDataURL("image/jpeg", 0.95);
-    link.download = getExportFileName("jpg");
+    link.download = "jadwal-sholat-al-ikhlas_poster.jpg";
     link.click();
 
     document.body.classList.remove("export-mode");
@@ -383,7 +343,7 @@ function exportExcel() {
   const infoHeader = [
     ["Mushola Al-Ikhlas Pekunden"],
     ["Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah"],
-    ["© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra"]
+    [""]
   ];
 
   const finalData = [...infoHeader, ...data];
@@ -413,7 +373,7 @@ function exportExcel() {
   XLSX.utils.book_append_sheet(wb, ws, "Jadwal Sholat");
 
   // Export
-  XLSX.writeFile(wb, getExportFileName("xlsx"));
+  XLSX.writeFile(wb, "jadwal-sholat-al-ikhlas.xlsx");
 }
 
 /* ===============================
@@ -439,8 +399,6 @@ function exportWord() {
 
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = getExportFileName("docx");
+  link.download = "jadwal-sholat-al-ikhlas_by-Reyy.docx";
   link.click();
 }
-
-// © 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra
