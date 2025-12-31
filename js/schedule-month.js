@@ -64,19 +64,47 @@ function checkReady() {
 ========================= */
 function handleShow() {
   showLoading();
-
-  // simulasi loading UX (realistis)
-  setTimeout(showMonthly, 700);
+  setTimeout(showMonthly, 600);
 }
 
 /* =========================
    LOADING UI
 ========================= */
 function showLoading() {
+  let rows = "";
+
+  // 10 baris skeleton (estetis)
+  for (let i = 0; i < 10; i++) {
+    rows += `
+      <tr>
+        <td><div class="skeleton"></div></td>
+        <td><div class="skeleton"></div></td>
+        <td><div class="skeleton"></div></td>
+        <td><div class="skeleton"></div></td>
+        <td><div class="skeleton"></div></td>
+        <td><div class="skeleton"></div></td>
+        <td><div class="skeleton"></div></td>
+      </tr>
+    `;
+  }
+
   document.getElementById("monthlyTable").innerHTML = `
-    <div class="loading-box">
-      Memuat jadwal sholat…
-    </div>
+    <table class="skeleton-table">
+      <thead>
+        <tr>
+          <th>Tanggal</th>
+          <th>Imsak</th>
+          <th>Subuh</th>
+          <th>Dzuhur</th>
+          <th>Ashar</th>
+          <th>Maghrib</th>
+          <th>Isya</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
   `;
 }
 
