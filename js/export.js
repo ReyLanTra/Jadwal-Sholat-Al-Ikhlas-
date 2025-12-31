@@ -1,4 +1,4 @@
-/* ===============================
+assets==========================
    WATERMARK
 ================================ */
 function drawWatermark(ctx, width, height) {
@@ -137,7 +137,7 @@ async function exportPDF() {
 
 function drawCanvasHeader(ctx, width) {
   const logo = new Image();
-  logo.src = "assets/logo.png";
+  logo.src = "/assets/logo.png";
 
   ctx.fillStyle = "#ffffff";
   ctx.fillRect(0, 0, width, 110);
