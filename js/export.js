@@ -76,6 +76,20 @@ function drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, total) {
   );
 }
 
+function drawTablePanel(ctx, x, y, width, height) {
+  ctx.save();
+  ctx.fillStyle = "rgba(255,255,255,0.92)";
+  ctx.shadowColor = "rgba(0,0,0,0.2)";
+  ctx.shadowBlur = 20;
+  ctx.shadowOffsetY = 6;
+
+  ctx.beginPath();
+  ctx.roundRect(x, y, width, height, 20);
+  ctx.fill();
+
+  ctx.restore();
+}
+
 /* ===============================
    EXPORT PDF (A4 LANDSCAPE)
 ================================ */
@@ -106,7 +120,16 @@ async function exportPDF() {
   drawImageHeader(ctx, poster.width);
 
   // tabel
-  ctx.drawImage(tableCanvas, 60, 180);
+  const tableX = 60;
+  const tableY = 180;
+  const tableW = tableCanvas.width;
+  const tableH = tableCanvas.height;
+
+// panel putih
+  drawTablePanel(ctx, tableX - 20, tableY - 20, tableW + 40, tableH + 40);
+
+// tabel
+  ctx.drawImage(tableCanvas, tableX, tableY);
 
   // footer + watermark
   drawImageFooter(ctx, poster.width, poster.height);
@@ -118,7 +141,7 @@ async function exportPDF() {
 
   const pdf = new jsPDF("p", "mm", "a4");
 
-  const pageWidth = 210;
+  constabeleWidth = 210;
   const pageHeight = 297;
 
   const imgWidth = pageWidth - 20;
