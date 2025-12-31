@@ -94,92 +94,154 @@ function drawTablePanel(ctx, x, y, width, height) {
    EXPORT PDF (A4 LANDSCAPE)
 ================================ */
 async function exportPDF() {
-  document.body.classList.add("export-mode");
-  if (isRamadhan()) document.body.classList.add("ramadhan");
+  const table = document.getElementById("exportTable");
+  if (!table) {
+    alert("Tabel belum tersedia");
+    return;
+  }
 
-  const table = getExportTable();
+  // =========================
+  // PDF CONFIG
+  // =========================
+  const PAGE_WIDTH = 210;   // A4 portrait (mm)
+  const PAGE_HEIGHT = 297;
+  const MARGIN = 10;
+  const HEADER_HEIGHT = 28;
+  const FOOTER_HEIGHT = 15;
 
-  // 1️⃣ render tabel
-  const tableCanvas = await html2canvas(table, {
-    scale: 2,
-    backgroundColor: null,
-    useCORS: true
-  });
-
-  // 2️⃣ buat poster canvas (BERWARNA)
-  const poster = document.createElement("canvas");
-  poster.width = tableCanvas.width + 120;
-  poster.height = tableCanvas.height + 260;
-
-  const ctx = poster.getContext("2d");
-
-  // background
-  drawThemeBackground(ctx, poster.width, poster.height);
-
-  // header
-  drawImageHeader(ctx, poster.width);
-
-  // tabel
-  const tableX = 60;
-  const tableY = 180;
-  const tableW = tableCanvas.width;
-  const tableH = tableCanvas.height;
-
-// panel putih
-  drawTablePanel(ctx, tableX - 20, tableY - 20, tableW + 40, tableH + 40);
-
-// tabel
-  ctx.drawImage(tableCanvas, tableX, tableY);
-
-  // footer + watermark
-  drawImageFooter(ctx, poster.width, poster.height);
-  drawTextWatermark(ctx, poster.width, poster.height);
-
-  // 3️⃣ konversi ke PDF multi halaman
-  const imgData = poster.toDataURL("image/png");
   const { jsPDF } = window.jspdf;
-
   const pdf = new jsPDF("p", "mm", "a4");
 
-  constabeleWidth = 210;
-  const pageHeight = 297;
+  // =========================
+  // RENDER TABLE TO CANVAS
+  // =========================
+  const canvas = await html2canvas(table, {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: "#f3f8f6"
+  });
 
-  const imgWidth = pageWidth - 20;
-  const imgHeight = poster.height * imgWidth / poster.width;
+  const imgWidth = PAGE_WIDTH - MARGIN * 2;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+  const pageContentHeight =
+    PAGE_HEIGHT - HEADER_HEIGHT - FOOTER_HEIGHT - MARGIN * 2;
 
   let heightLeft = imgHeight;
-  let position = 10;
+  let position = HEADER_HEIGHT + MARGIN;
   let page = 1;
 
-  const totalPages = Math.ceil(imgHeight / pageHeight);
+  // =========================
+  // HELPER: HEADER
+  // =========================
+  const drawHeader = () => {
+    pdf.setFillColor(22, 125, 102);
+    pdf.rect(0, 0, PAGE_WIDTH, HEADER_HEIGHT, "F");
 
+    pdf.setTextColor(255);
+    pdf.setFontSize(14);
+    pdf.text("Mushola Al-Ikhlas Pekunden", MARGIN, 12);
+
+    pdf.setFontSize(9);
+    pdf.text(
+      "Pakulaur, Kec. Margasari, Kab. Tegal, Jawa Tengah",
+      MARGIN,
+      18
+    );
+  };
+
+  // =========================
+  // HELPER: FOOTER
+  // =========================
+  const drawFooter = () => {
+    const now = new Date().toLocaleString("id-ID", {
+      timeZone: "Asia/Jakarta"
+    });
+
+    pdf.setTextColor(80);
+    pdf.setFontSize(8);
+    pdf.text(
+      `Dicetak pada ${now} WIB`,
+      MARGIN,
+      PAGE_HEIGHT - 8
+    );
+
+    pdf.text(
+      `Halaman ${page}`,
+      PAGE_WIDTH - MARGIN - 20,
+      PAGE_HEIGHT - 8
+    );
+  };
+
+  // =========================
+  // HELPER: WATERMARK
+  // =========================
+  const drawWatermark = () => {
+    pdf.setTextColor(180);
+    pdf.setFontSize(26);
+    pdf.text(
+      "Mushola Al-Ikhlas Pekunden",
+      PAGE_WIDTH / 2,
+      PAGE_HEIGHT / 2,
+      { align: "center", angle: 45 }
+    );
+
+    pdf.setFontSize(10);
+    pdf.text(
+      "© Mushola Al-Ikhlas • Created by Reyzar Alansyah Putra",
+      PAGE_WIDTH / 2,
+      PAGE_HEIGHT / 2 + 20,
+      { align: "center", angle: 45 }
+    );
+  };
+
+  // =========================
+  // FIRST PAGE
+  // =========================
+  drawHeader();
+  drawWatermark();
+
+  pdf.addImage(
+    canvas,
+    "PNG",
+    MARGIN,
+    position,
+    imgWidth,
+    imgHeight
+  );
+
+  drawFooter();
+  heightLeft -= pageContentHeight;
+
+  // =========================
+  // MULTI PAGE
+  // =========================
   while (heightLeft > 0) {
-    if (page > 1) pdf.addPage();
+    page++;
+    pdf.addPage();
+    drawHeader();
+    drawWatermark();
+
+    position =
+      HEADER_HEIGHT + MARGIN - (imgHeight - heightLeft);
 
     pdf.addImage(
-      imgData,
+      canvas,
       "PNG",
-      10,
+      MARGIN,
       position,
       imgWidth,
       imgHeight
     );
 
-    pdf.setFontSize(9);
-    pdf.text(
-      `Halaman ${page} / ${totalPages}`,
-      pageWidth - 50,
-      pageHeight - 10
-    );
-
-    heightLeft -= pageHeight;
-    position -= pageHeight;
-    page++;
+    drawFooter();
+    heightLeft -= pageContentHeight;
   }
 
-  pdf.save("jadwal-sholat-al-ikhlas_premium.pdf");
-
-  document.body.classList.remove("export-mode", "ramadhan");
+  // =========================
+  // SAVE
+  // =========================
+  pdf.save("jadwal-sholat-al-ikhlas-premium.pdf");
 }
 
 function drawThemeBackground(ctx, width, height) {
