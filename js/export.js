@@ -94,101 +94,58 @@ function drawTablePanel(ctx, x, y, width, height) {
    EXPORT PDF (A4 LANDSCAPE)
 ================================ */
 async function exportPDF() {
-  const table = document.getElementById("exportTable");
-  if (!table) {
-    alert("Tabel belum tersedia");
-    return;
-  }
+  document.body.classList.add("export-mode");
+  if (isRamadhan()) document.body.classList.add("ramadhan");
 
-  const PAGE_WIDTH = 210; 
-  const PAGE_HEIGHT = 297;
-  const MARGIN = 10;
-  const HEADER_HEIGHT = 28;
-  const FOOTER_HEIGHT = 15;
+  const table = getExportTable();
+
+  const canvas = await html2canvas(table, {
+    scale: 2,
+    backgroundColor: "#ffffff",
+    useCORS: true
+  });
+
+  const ctx = canvas.getContext("2d");
+  drawWatermark(ctx, canvas.width, canvas.height);
+
+  const imgData = canvas.toDataURL("image/png");
 
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF("p", "mm", "a4");
 
-  // RENDER TABLE: Gunakan scale lebih tinggi (3) untuk ketajaman teks
-  const canvas = await html2canvas(table, {
-    scale: 3, 
-    useCORS: true,
-    backgroundColor: "#ffffff" // Putih bersih agar teks terlihat jelas
-  });
+  const pageWidth = 210;
+  const pageHeight = 297;
 
-  const imgWidth = PAGE_WIDTH - MARGIN * 2;
-  const imgHeight = (canvas.height * imgWidth) / canvas.width;
-  const pageContentHeight = PAGE_HEIGHT - HEADER_HEIGHT - FOOTER_HEIGHT - (MARGIN * 2);
+  const imgWidth = pageWidth - 20;
+  const imgHeight = canvas.height * imgWidth / canvas.width;
 
   let heightLeft = imgHeight;
-  let position = HEADER_HEIGHT + MARGIN;
-  let page = 1;
+  let position = 30;
+  let pageNum = 1;
 
-  const drawHeader = () => {
-    pdf.setFillColor(22, 125, 102);
-    pdf.rect(0, 0, PAGE_WIDTH, HEADER_HEIGHT, "F");
-    pdf.setTextColor(255);
-    pdf.setFontSize(14);
-    pdf.setFont("helvetica", "bold");
-    pdf.text("Mushola Al-Ikhlas Pekunden", MARGIN, 12);
-    pdf.setFontSize(9);
-    pdf.setFont("helvetica", "normal");
-    pdf.text("Pakulaur, Kec. Margasari, Kab. Tegal, Jawa Tengah", MARGIN, 18);
-  };
+  const totalPages = Math.ceil(imgHeight / (pageHeight - 50));
 
-  const drawFooter = (pageNum) => {
-    const now = new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta" });
-    pdf.setTextColor(100);
-    pdf.setFontSize(8);
-    pdf.text(`Dicetak pada ${now} WIB`, MARGIN, PAGE_HEIGHT - 8);
-    pdf.text(`Halaman ${pageNum}`, PAGE_WIDTH - MARGIN - 20, PAGE_HEIGHT - 8);
-  };
+  drawPDFHeader(pdf, pageWidth);
+  pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+  drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, totalPages);
 
-  // WATERMARK DIPERBAIKI: Menggunakan Opacity agar tidak menutupi teks
-  const drawWatermark = () => {
-    pdf.saveGraphicsState();
-    pdf.setGState(new pdf.GState({ opacity: 0.1 })); // Transparansi 10%
-    pdf.setTextColor(150);
-    pdf.setFontSize(40);
-    pdf.text("Mushola Al-Ikhlas", PAGE_WIDTH / 2, PAGE_HEIGHT / 2, { align: "center", angle: 45 });
-    pdf.restoreGraphicsState();
-  };
+  heightLeft -= (pageHeight - 50);
 
-  // HALAMAN PERTAMA
-  drawHeader();
-  drawWatermark();
-  
-  // Menambahkan gambar tabel dengan penyesuaian posisi
-  pdf.addImage(canvas, "PNG", MARGIN, position, imgWidth, imgHeight, undefined, 'FAST');
-  
-  drawFooter(page);
-  heightLeft -= pageContentHeight;
-
-  // HALAMAN SELANJUTNYA (Jika tabel sangat panjang)
   while (heightLeft > 0) {
-    page++;
+    pageNum++;
     pdf.addPage();
-    drawHeader();
-    drawWatermark();
+    drawPDFHeader(pdf, pageWidth);
 
-    // Logika pemotongan gambar agar tidak overlap dengan header
-    const sourceY = (imgHeight - heightLeft);
-    pdf.addImage(
-        canvas, 
-        "PNG", 
-        MARGIN, 
-        HEADER_HEIGHT + MARGIN - sourceY, 
-        imgWidth, 
-        imgHeight, 
-        undefined, 
-        'FAST'
-    );
+    position = heightLeft - imgHeight + 30;
+    pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
 
-    drawFooter(page);
-    heightLeft -= pageContentHeight;
+    drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, totalPages);
+    heightLeft -= (pageHeight - 50);
   }
 
-  pdf.save("jadwal-sholat-al-ikhlas-Pekunden.pdf");
+  pdf.save("jadwal-sholat-al-ikhlas_by-Reyy.pdf");
+
+  document.body.classList.remove("export-mode", "ramadhan");
 }
 
 function drawThemeBackground(ctx, width, height) {
