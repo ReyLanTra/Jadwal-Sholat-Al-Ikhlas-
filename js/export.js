@@ -129,7 +129,7 @@ async function exportPDF() {
     heightLeft -= (pageHeight - 50);
   }
 
-  pdf.save("jadwal-sholat-al-ikhlas-1-bulan.pdf");
+  pdf.save("jadwal-sholat-al-ikhlas_by-Reyy.pdf");
 
   document.body.classList.remove("export-mode", "ramadhan");
 }
@@ -209,7 +209,7 @@ function exportPNG() {
 
     const a = document.createElement("a");
     a.href = finalCanvas.toDataURL("image/png");
-    a.download = "jadwal-sholat-al-ikhlas.png";
+    a.download = "jadwal-sholat-al-ikhlas_by-Reyy.png";
     a.click();
 
     document.body.classList.remove("export-mode", "ramadhan");
@@ -244,7 +244,7 @@ function exportJPG() {
 
     const a = document.createElement("a");
     a.href = finalCanvas.toDataURL("image/jpeg", 0.95);
-    a.download = "jadwal-sholat-al-ikhlas.jpg";
+    a.download = "jadwal-sholat-al-ikhlas_by-Reyy.jpg";
     a.click();
 
     document.body.classList.remove("export-mode", "ramadhan");
@@ -268,7 +268,7 @@ function exportExcel() {
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Jadwal Sholat");
 
-  XLSX.writeFile(wb, "jadwal-sholat-al-ikhlas.xlsx");
+  XLSX.writeFile(wb, "jadwal-sholat-al-ikhlas_by-Reyy.xlsx");
 }
 
 /* ===============================
@@ -294,6 +294,6 @@ function exportWord() {
 
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = "jadwal-sholat-al-ikhlas.doc";
+  link.download = "jadwal-sholat-al-ikhlas_by-Reyy.docx";
   link.click();
 }
