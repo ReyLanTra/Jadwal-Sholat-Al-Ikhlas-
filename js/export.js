@@ -81,7 +81,8 @@ function drawPDFHeader(pdf, pageWidth) {
 
   pdf.setFontSize(10);
   pdf.setFont("helvetica", "normal");
-  pdf.text("Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah\n© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra", 35, 21);
+  pdf.text("Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah", 35, 21);
+  pdf.text("© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra", 35, 21);
 
   pdf.setDrawColor(15, 118, 110);
   pdf.line(10, 26, pageWidth - 10, 26);
@@ -94,7 +95,7 @@ function drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, total) {
   });
 
   pdf.setFontSize(9);
-  pdf.text(`Dicetak pada ${time} WIB by Reyzar`, 10, pageHeight - 10);
+  pdf.text(`Dicetak pada ${time} WIB | Website Builder by Reyzar`, 10, pageHeight - 10);
   pdf.text(
     `Halaman ${pageNum} / ${total}`,
     pageWidth - 50,
@@ -200,7 +201,12 @@ function drawImageHeader(ctx, width) {
 
   ctx.font = "20px Arial";
   ctx.fillText(
-    "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah\n© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra",
+    "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah",
+    170,
+    115
+  );
+  ctx.fillText(
+    "© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra",
     170,
     115
   );
@@ -240,7 +246,7 @@ function drawImageFooter(ctx, width, height) {
 
   ctx.fillStyle = "#ffffff";
   ctx.font = "18px Arial";
-  ctx.fillText(`Dicetak pada ${now} WIB by Reyzar`, 40, height - 30);
+  ctx.fillText(`Dicetak pada ${now} WIB | Website Builder by Reyzar Alansyah Putra`, 40, height - 30);
 }
 
 function drawCanvasHeader(ctx, width) {
@@ -260,9 +266,14 @@ function drawCanvasHeader(ctx, width) {
 
   ctx.font = "20px Arial";
   ctx.fillText(
-    "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah\n© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra",
-    120,
-    85
+    "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah",
+    170,
+    115
+  );
+  ctx.fillText(
+    "© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra",
+    170,
+    115
   );
 
   ctx.strokeStyle = "#0f766e";
@@ -283,7 +294,7 @@ function drawCanvasFooter(ctx, width, height) {
 
   ctx.fillStyle = "#000000";
   ctx.font = "18px Arial";
-  ctx.fillText(`Dicetak pada ${now} WIB by Reyzar`, 30, height - 30);
+  ctx.fillText(`Dicetak pada ${now} WIB | Website Builder by Reyzar Alansyah Putra`, 30, height - 30);
 }
 
 /* ===============================
