@@ -1,4 +1,4 @@
-assets==========================
+/* ==========================
    WATERMARK
 ================================ */
 function drawWatermark(ctx, width, height) {
