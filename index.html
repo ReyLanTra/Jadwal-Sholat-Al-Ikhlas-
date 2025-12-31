@@ -31,7 +31,12 @@
   <select id="monthSelect"></select>
   <select id="yearSelect"></select>
 
-  <button onclick="showMonthly()">Lihat Jadwal Lengkap</button>
+  <button id="btnShow" disabled onclick="handleShow()">
+  Tampilkan Jadwal
+  </button>
+
+  <div id="monthlyTable"></div>
+
   <button onclick="exportPDF()">Expor PDF</button>
   <button onclick="exportPNG()">Expor PNG</button>
   <button onclick="exportJPG()">Expor JPG</button>
