@@ -61,66 +61,107 @@
   }
 }*/
 
-const monthSelect = document.getElementById("monthSelect");
-const yearSelect = document.getElementById("yearSelect");
+/* ======================================================
+   SCHEDULE MONTH - Mushola Al-Ikhlas Pekunden
+   ====================================================== */
 
-const MONTHS = [
-  "01","02","03","04","05","06",
-  "07","08","09","10","11","12"
-];
+let monthSelect;
+let yearSelect;
 
+/* =========================
+   DOM READY
+========================= */
+document.addEventListener("DOMContentLoaded", () => {
+  monthSelect = document.getElementById("monthSelect");
+  yearSelect = document.getElementById("yearSelect");
+
+  if (!monthSelect || !yearSelect) {
+    console.error("monthSelect / yearSelect tidak ditemukan di HTML");
+    return;
+  }
+
+  initSelect();
+
+  monthSelect.addEventListener("change", showMonthly);
+  yearSelect.addEventListener("change", showMonthly);
+});
+
+/* =========================
+   INIT MONTH & YEAR SELECT
+========================= */
 function initSelect() {
+  const MONTHS = [
+    "01","02","03","04","05","06",
+    "07","08","09","10","11","12"
+  ];
+
+  // Clear dulu (antisipasi double render)
+  monthSelect.innerHTML = "";
+  yearSelect.innerHTML = "";
+
   // Month
   MONTHS.forEach((m, i) => {
     const opt = document.createElement("option");
     opt.value = m;
-    opt.textContent = new Date(2025, i)
-      .toLocaleString("id-ID", { month: "long" });
+    opt.textContent = new Date(2025, i).toLocaleString("id-ID", {
+      month: "long"
+    });
     monthSelect.appendChild(opt);
   });
 
-  // Year
-  for (let y = 2024; y <= 2027; y++) {
+  // Year (sesuaikan file JSON kamu)
+  for (let y = 2025; y <= 2030; y++) {
     const opt = document.createElement("option");
     opt.value = y;
     opt.textContent = y;
     yearSelect.appendChild(opt);
   }
 
-  // default ke sekarang
+  // Default ke hari ini
   const now = new Date();
-  monthSelect.value = String(now.getMonth()+1).padStart(2,"0");
+  monthSelect.value = String(now.getMonth() + 1).padStart(2, "0");
   yearSelect.value = now.getFullYear();
+
+  // Auto load pertama kali
+  showMonthly();
 }
 
-initSelect();
-
-monthSelect.addEventListener("change", showMonthly);
-yearSelect.addEventListener("change", showMonthly);
-
+/* =========================
+   LOAD MONTHLY SCHEDULE
+========================= */
 async function showMonthly() {
+  if (!monthSelect || !yearSelect) return;
+
   const month = monthSelect.value;
   const year = yearSelect.value;
 
-  if (!month || !year) return;
+  try {
+    const res = await fetch(`json/${year}.json`);
+    if (!res.ok) throw new Error("File JSON tidak ditemukan");
 
-  const res = await fetch(`json/${year}.json`);
-  if (!res.ok) {
-    alert("File jadwal tahun tidak ditemukan");
-    return;
-  }
+    const data = await res.json();
+    const days = data.time?.[month];
 
-  const data = await res.json();
-  const days = data.time?.[month];
+    if (!days) {
+      document.getElementById("monthlyTable").innerHTML =
+        "<p>Data jadwal tidak tersedia.</p>";
+      return;
+    }
 
-  if (!days) {
+    renderTable(days);
+  } catch (err) {
+    console.error(err);
     document.getElementById("monthlyTable").innerHTML =
-      "<p>Data bulan tidak tersedia</p>";
-    return;
+      "<p>Gagal memuat jadwal.</p>";
   }
+}
 
+/* =========================
+   RENDER TABLE
+========================= */
+function renderTable(days) {
   let html = `
-  <table id="exportTable">
+  <table id="exportTable" class="jadwal-table">
     <thead>
       <tr>
         <th>Tanggal</th>
@@ -137,19 +178,22 @@ async function showMonthly() {
 
   days.forEach(d => {
     html += `
-    <tr>
-      <td>${d.tanggal}</td>
-      <td>${d.imsak}</td>
-      <td>${d.subuh}</td>
-      <td>${d.dzuhur}</td>
-      <td>${d.ashar}</td>
-      <td>${d.maghrib}</td>
-      <td>${d.isya}</td>
-    </tr>
+      <tr>
+        <td>${d.tanggal}</td>
+        <td>${d.imsak}</td>
+        <td>${d.subuh}</td>
+        <td>${d.dzuhur}</td>
+        <td>${d.ashar}</td>
+        <td>${d.maghrib}</td>
+        <td>${d.isya}</td>
+      </tr>
     `;
   });
 
-  html += "</tbody></table>";
+  html += `
+    </tbody>
+  </table>
+  `;
 
   document.getElementById("monthlyTable").innerHTML = html;
 }
