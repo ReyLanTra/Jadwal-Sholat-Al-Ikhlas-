@@ -498,8 +498,8 @@ Terima kasih kepada seluruh pihak yang telah mendukung pengembangan proyek ini:
 
 ### **📞 Support & Contact**
 Untuk pertanyaan, bug reports, atau kolaborasi:
-1. **GitHub Issues**: [Create New Issue](https://github.com/ReyLanTra/Jadwal-Sholat/issues)
-2. **Email**: reyzar.alansyah@example.com
+1. **GitHub Issues**: [Create New Issue](https://github.com/ReyLanTra/Jadwal-Sholat-Al-Ikhlas-/issues)
+2. **Email**: orangpolos860@gmail.com
 3. **Feedback Form**: Tersedia di website live version
 
 ---
@@ -510,7 +510,7 @@ Untuk pertanyaan, bug reports, atau kolaborasi:
 
 **"Dari Pekunden untuk Indonesia, dari Indonesia untuk Dunia"**
 
-[![Star History Chart](https://api.star-history.com/svg?repos=ReyLanTra/Jadwal-Sholat-Al-Ikhlas-&type=date&legend=top-left)](https://www.star-history.com/#ReyLanTra/Jadwal-Sholat-Al-Ikhlas-&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=ReyLanTra/Jadwal-Sholat-Al-Ikhlas-&type=date&legend=top-left)
 
 ---
  
