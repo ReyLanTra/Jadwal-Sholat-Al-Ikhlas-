@@ -135,8 +135,8 @@ Website ini merupakan **open-source dengan jiwa**:
 ---
 
 ### 🚀 **Live Demo & GitHub**
-- 🌐 **Demo Aktif:** [https://mushola-al-ikhlas.example.com](https://jadwal-sholat-al-ikhlas.vercel.app/)
-- 💾 **Source Code:** [GitHub Repository](https://github.com/reyzar/mushola-jadwal)
+- 🌐 **Demo Aktif:** [https://jadwal-sholat-al-ikhlas.reyzar.my.id](https://jadwal-sholat-al-ikhlas.reyzar.my.id)
+- 💾 **Source Code:** [GitHub Repository](https://github.com/ReyLanTra/Jadwal-Sholat-Al-Ikhlas-)
 
 ---
 **🕌 Mushola Al-Ikhlas Pekunden — Where Technology Meets Spirituality 🕌**
