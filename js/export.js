@@ -58,14 +58,7 @@ function getExportFileName(ext) {
 
   const monthName = monthNames[month - 1];
 
-  return "Jadwal-Sholat-" +
-  monthName + "-" +
-  year + "-" +
-  date + "-" +
-  m + "-" +
-  y + "_" +
-  h + "." +
-  min + "-WIB." + ext;
+  return `Jadwal-Sholat-${monthName}-${year}-${date}-${m}-${y}_${h}.${min}-WIB.${ext}`;
 }
 
 /* ===============================
