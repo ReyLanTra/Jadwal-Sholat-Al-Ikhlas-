@@ -1,20 +1,27 @@
 /* ======================================================
-   SCHEDULE MONTH - Mushola Al-Ikhlas Pekunden
-   ====================================================== */
+   SCHEDULE MONTH - UX FINAL
+   Mushola Al-Ikhlas Pekunden
+====================================================== */
 
 let monthSelect;
 let yearSelect;
+let btnShow;
 
 document.addEventListener("DOMContentLoaded", () => {
   monthSelect = document.getElementById("monthSelect");
   yearSelect = document.getElementById("yearSelect");
+  btnShow = document.getElementById("btnShow");
 
-  if (!monthSelect || !yearSelect) {
-    console.error("monthSelect / yearSelect tidak ditemukan");
+  if (!monthSelect || !yearSelect || !btnShow) {
+    console.error("Element tidak lengkap");
     return;
   }
 
   initSelect();
+
+  // enable tombol hanya jika dua-duanya terisi
+  monthSelect.addEventListener("change", checkReady);
+  yearSelect.addEventListener("change", checkReady);
 });
 
 /* =========================
@@ -26,15 +33,14 @@ function initSelect() {
     "07","08","09","10","11","12"
   ];
 
-  monthSelect.innerHTML = "";
-  yearSelect.innerHTML = "";
+  monthSelect.innerHTML = `<option value="">Pilih Bulan</option>`;
+  yearSelect.innerHTML = `<option value="">Pilih Tahun</option>`;
 
   MONTHS.forEach((m, i) => {
     const opt = document.createElement("option");
     opt.value = m;
-    opt.textContent = new Date(2025, i).toLocaleString("id-ID", {
-      month: "long"
-    });
+    opt.textContent = new Date(2025, i)
+      .toLocaleString("id-ID", { month: "long" });
     monthSelect.appendChild(opt);
   });
 
@@ -44,25 +50,45 @@ function initSelect() {
     opt.textContent = y;
     yearSelect.appendChild(opt);
   }
-
-  const now = new Date();
-  monthSelect.value = String(now.getMonth() + 1).padStart(2, "0");
-  yearSelect.value = now.getFullYear();
 }
 
 /* =========================
-   LOAD DATA (ONLY BUTTON)
+   ENABLE BUTTON
+========================= */
+function checkReady() {
+  btnShow.disabled = !(monthSelect.value && yearSelect.value);
+}
+
+/* =========================
+   BUTTON HANDLER
+========================= */
+function handleShow() {
+  showLoading();
+
+  // simulasi loading UX (realistis)
+  setTimeout(showMonthly, 700);
+}
+
+/* =========================
+   LOADING UI
+========================= */
+function showLoading() {
+  document.getElementById("monthlyTable").innerHTML = `
+    <div class="loading-box">
+      Memuat jadwal sholat…
+    </div>
+  `;
+}
+
+/* =========================
+   LOAD DATA
 ========================= */
 async function showMonthly() {
-  const month = monthSelect.value;     // "01"
+  const monthKey = String(parseInt(monthSelect.value));
   const year = yearSelect.value;
-
-  const monthKey = String(parseInt(month)); // "1"
 
   try {
     const res = await fetch(`json/${year}.json`);
-    if (!res.ok) throw new Error("JSON tidak ditemukan");
-
     const data = await res.json();
     const days = data.time?.[monthKey];
 
@@ -85,7 +111,7 @@ async function showMonthly() {
 ========================= */
 function renderTable(days) {
   let html = `
-  <table id="exportTable" class="jadwal-table">
+  <table id="exportTable" class="jadwal-table fade-in">
     <thead>
       <tr>
         <th>Tanggal</th>
@@ -114,10 +140,7 @@ function renderTable(days) {
     `;
   });
 
-  html += `
-    </tbody>
-  </table>
-  `;
+  html += "</tbody></table>";
 
   document.getElementById("monthlyTable").innerHTML = html;
 }
