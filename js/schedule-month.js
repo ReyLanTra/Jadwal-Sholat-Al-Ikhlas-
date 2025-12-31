@@ -1,3 +1,7 @@
+/* ======================================================
+   SCHEDULE MONTH - Mushola Al-Ikhlas Pekunden
+   ====================================================== */
+
 let monthSelect;
 let yearSelect;
 
@@ -6,16 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
   yearSelect = document.getElementById("yearSelect");
 
   if (!monthSelect || !yearSelect) {
-    console.error("monthSelect / yearSelect tidak ditemukan di HTML");
+    console.error("monthSelect / yearSelect tidak ditemukan");
     return;
   }
 
   initSelect();
-
-  monthSelect.addEventListener("change", showMonthly);
-  yearSelect.addEventListener("change", showMonthly);
 });
 
+/* =========================
+   INIT SELECT
+========================= */
 function initSelect() {
   const MONTHS = [
     "01","02","03","04","05","06",
@@ -44,26 +48,23 @@ function initSelect() {
   const now = new Date();
   monthSelect.value = String(now.getMonth() + 1).padStart(2, "0");
   yearSelect.value = now.getFullYear();
-
-  // Auto load pertama kali
-  //showMonthly();
 }
 
 /* =========================
-   LOAD MONTHLY SCHEDULE
+   LOAD DATA (ONLY BUTTON)
 ========================= */
 async function showMonthly() {
-  if (!monthSelect || !yearSelect) return;
-
-  const month = monthSelect.value;
+  const month = monthSelect.value;     // "01"
   const year = yearSelect.value;
+
+  const monthKey = String(parseInt(month)); // "1"
 
   try {
     const res = await fetch(`json/${year}.json`);
-    if (!res.ok) throw new Error("File JSON tidak ditemukan");
+    if (!res.ok) throw new Error("JSON tidak ditemukan");
 
     const data = await res.json();
-    const days = data.time?.[month];
+    const days = data.time?.[monthKey];
 
     if (!days) {
       document.getElementById("monthlyTable").innerHTML =
