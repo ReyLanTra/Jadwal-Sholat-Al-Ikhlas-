@@ -510,7 +510,7 @@ Untuk pertanyaan, bug reports, atau kolaborasi:
 
 **"Dari Pekunden untuk Indonesia, dari Indonesia untuk Dunia"**
 
-![Star History Chart](https://api.star-history.com/svg?repos=ReyLanTra/Jadwal-Sholat&type=Date&theme=dark)
+[![Star History Chart](https://api.star-history.com/svg?repos=ReyLanTra/Jadwal-Sholat-Al-Ikhlas-&type=date&legend=top-left)](https://www.star-history.com/#ReyLanTra/Jadwal-Sholat-Al-Ikhlas-&type=date&legend=top-left)
 
 ---
  
