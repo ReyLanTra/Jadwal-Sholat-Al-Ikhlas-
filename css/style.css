@@ -629,6 +629,34 @@ button:active {
   transition: transform 0.1s;
 }
 
+.loading-box {
+  padding: 40px;
+  text-align: center;
+  font-weight: 600;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: .4 }
+  50% { opacity: 1 }
+  100% { opacity: .4 }
+}
+
+.fade-in {
+  animation: fadeIn .6s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ============================================
    MONTHLY TABLE
 ============================================ */
