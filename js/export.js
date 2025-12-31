@@ -1,6 +1,26 @@
-/* =====================================================
-   UTIL
-===================================================== */
+/* ===============================
+   WATERMARK
+================================ */
+function drawWatermark(ctx, width, height) {
+  const img = new Image();
+  img.src = "assets/watermark.png";
+
+  img.onload = () => {
+    ctx.save();
+    ctx.globalAlpha = 0.08;
+    ctx.translate(width / 2, height / 2);
+    ctx.rotate(-Math.PI / 6);
+
+    const size = Math.min(width, height) * 0.7;
+    ctx.drawImage(img, -size / 2, -size / 2, size, size);
+
+    ctx.restore();
+  };
+}
+
+/* ===============================
+   TABLE GETTER (WAJIB)
+================================ */
 function getExportTable() {
   const table = document.getElementById("exportTable");
   if (!table) {
@@ -10,130 +30,108 @@ function getExportTable() {
   return table;
 }
 
-/* =====================================================
-   FORCE STYLE SAAT EXPORT
-===================================================== */
-function forceExportStyle() {
-  document.body.classList.add("export-force");
+function withExportMode(fn) {
+  document.body.classList.add("export-mode");
+
+  setTimeout(async () => {
+    await fn();
+    document.body.classList.remove("export-mode");
+  }, 100);
 }
 
-function restoreExportStyle() {
-  document.body.classList.remove("export-force");
+function drawPDFHeader(pdf, pageWidth) {
+  pdf.addImage(
+    "assets/logo.png",
+    "PNG",
+    10,
+    8,
+    18,
+    18
+  );
+
+  pdf.setFontSize(14);
+  pdf.setFont("helvetica", "bold");
+  pdf.text("Mushola Al-Ikhlas Pekunden", 35, 15);
+
+  pdf.setFontSize(10);
+  pdf.setFont("helvetica", "normal");
+  pdf.text("Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah", 35, 21);
+
+  pdf.setDrawColor(15, 118, 110);
+  pdf.line(10, 26, pageWidth - 10, 26);
 }
 
-/* =====================================================
-   EXPORT PDF (MULTI PAGE – AMAN)
-===================================================== */
-function exportPDF() {
-  forceExportStyle();
+function drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, total) {
+  const now = new Date();
+  const time = now.toLocaleString("id-ID", {
+    timeZone: "Asia/Jakarta"
+  });
+
+  pdf.setFontSize(9);
+  pdf.text(`Dicetak pada ${time} WIB`, 10, pageHeight - 10);
+  pdf.text(
+    `Halaman ${pageNum} / ${total}`,
+    pageWidth - 50,
+    pageHeight - 10
+  );
+}
+
+/* ===============================
+   EXPORT PDF (A4 LANDSCAPE)
+================================ */
+async function exportPDF() {
+  document.body.classList.add("export-mode");
+  if (isRamadhan()) document.body.classList.add("ramadhan");
 
   const table = getExportTable();
 
-  html2canvas(table, {
+  const canvas = await html2canvas(table, {
     scale: 2,
     backgroundColor: "#ffffff",
     useCORS: true
-  }).then(canvas => {
-    restoreExportStyle();
-
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF("p", "mm", "a4");
-
-    const pageWidth = 210;
-    const pageHeight = 297;
-
-    const margin = 10;
-    const headerHeight = 40;
-    const footerHeight = 20;
-
-    const usableHeight =
-      pageHeight - headerHeight - footerHeight - margin * 2;
-
-    const imgWidth = pageWidth - margin * 2;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-    let renderedHeight = 0;
-    let page = 1;
-    const totalPages = Math.ceil(imgHeight / usableHeight);
-
-    const logo = new Image();
-    logo.src = "assets/logo.png";
-    logo.crossOrigin = "anonymous";
-
-    logo.onload = () => {
-      while (renderedHeight < imgHeight) {
-        if (page > 1) pdf.addPage();
-
-        /* HEADER */
-        pdf.addImage(logo, "PNG", margin, 10, 18, 18);
-        pdf.setFont("helvetica", "bold");
-        pdf.setFontSize(14);
-        pdf.text("Mushola Al-Ikhlas Pekunden", margin + 25, 18);
-
-        pdf.setFont("helvetica", "normal");
-        pdf.setFontSize(10);
-        pdf.text(
-          "Pekunden, Kec. Dukuhturi, Kab. Tegal, Jawa Tengah",
-          margin + 25,
-          25
-        );
-
-        /* SLICE CANVAS */
-        const sliceHeight = Math.min(
-          usableHeight,
-          imgHeight - renderedHeight
-        );
-
-        const pageCanvas = document.createElement("canvas");
-        pageCanvas.width = canvas.width;
-        pageCanvas.height =
-          (sliceHeight * canvas.width) / imgWidth;
-
-        const ctx = pageCanvas.getContext("2d");
-        ctx.drawImage(
-          canvas,
-          0,
-          (renderedHeight * canvas.width) / imgWidth,
-          canvas.width,
-          pageCanvas.height,
-          0,
-          0,
-          canvas.width,
-          pageCanvas.height
-        );
-
-        pdf.addImage(
-          pageCanvas,
-          "PNG",
-          margin,
-          headerHeight,
-          imgWidth,
-          sliceHeight
-        );
-
-        /* FOOTER */
-        pdf.setFontSize(9);
-        pdf.text(
-          `Dicetak pada ${new Date().toLocaleString("id-ID", {
-            timeZone: "Asia/Jakarta"
-          })} WIB`,
-          margin,
-          pageHeight - 10
-        );
-
-        pdf.text(
-          `Halaman ${page} / ${totalPages}`,
-          pageWidth - margin - 35,
-          pageHeight - 10
-        );
-
-        renderedHeight += sliceHeight;
-        page++;
-      }
-
-      pdf.save("jadwal-sholat-al-ikhlas.pdf");
-    };
   });
+
+  const ctx = canvas.getContext("2d");
+  drawWatermark(ctx, canvas.width, canvas.height);
+
+  const imgData = canvas.toDataURL("image/png");
+
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF("p", "mm", "a4");
+
+  const pageWidth = 210;
+  const pageHeight = 297;
+
+  const imgWidth = pageWidth - 20;
+  const imgHeight = canvas.height * imgWidth / canvas.width;
+
+  let heightLeft = imgHeight;
+  let position = 30;
+  let pageNum = 1;
+
+  const totalPages = Math.ceil(imgHeight / (pageHeight - 50));
+
+  drawPDFHeader(pdf, pageWidth);
+  pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+  drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, totalPages);
+
+  heightLeft -= (pageHeight - 50);
+
+  while (heightLeft > 0) {
+    pageNum++;
+    pdf.addPage();
+    drawPDFHeader(pdf, pageWidth);
+
+    position = heightLeft - imgHeight + 30;
+    pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+
+    drawPDFFooter(pdf, pageWidth, pageHeight, pageNum, totalPages);
+    heightLeft -= (pageHeight - 50);
+  }
+
+  pdf.save("jadwal-sholat-al-ikhlas-1-bulan.pdf");
+
+  document.body.classList.remove("export-mode", "ramadhan");
 }
 
 function drawCanvasHeader(ctx, width) {
@@ -153,7 +151,7 @@ function drawCanvasHeader(ctx, width) {
 
   ctx.font = "20px Arial";
   ctx.fillText(
-    "Pekunden, Kec. Dukuhturi, Kab. Tegal, Jawa Tengah",
+    "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah",
     120,
     85
   );
@@ -179,9 +177,9 @@ function drawCanvasFooter(ctx, width, height) {
   ctx.fillText(`Dicetak pada ${now} WIB`, 30, height - 30);
 }
 
-/* =====================================================
+/* ===============================
    EXPORT PNG
-===================================================== */
+================================ */
 function exportPNG() {
   document.body.classList.add("export-mode");
   if (isRamadhan()) document.body.classList.add("ramadhan");
@@ -217,9 +215,9 @@ function exportPNG() {
   });
 }
 
-/* =====================================================
+/* ===============================
    EXPORT JPG
-===================================================== */
+================================ */
 function exportJPG() {
   document.body.classList.add("export-mode");
   if (isRamadhan()) document.body.classList.add("ramadhan");
@@ -252,9 +250,9 @@ function exportJPG() {
   });
 }
 
-/* =====================================================
-   EXPORT EXCEL (ANTI KOSONG)
-===================================================== */
+/* ===============================
+   EXPORT EXCEL
+================================ */
 function exportExcel() {
   const table = getExportTable();
   const rows = Array.from(table.querySelectorAll("tr"));
@@ -272,17 +270,29 @@ function exportExcel() {
   XLSX.writeFile(wb, "jadwal-sholat-al-ikhlas.xlsx");
 }
 
-/* =====================================================
+/* ===============================
    EXPORT WORD
-===================================================== */
+================================ */
 function exportWord() {
   const table = getExportTable();
-  const blob = new Blob([table.outerHTML], {
+
+  const html = `
+    <html>
+      <head>
+        <meta charset="utf-8">
+      </head>
+      <body>
+        ${table.outerHTML}
+      </body>
+    </html>
+  `;
+
+  const blob = new Blob(["\ufeff", html], {
     type: "application/msword"
   });
 
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "jadwal-sholat-al-ikhlas.doc";
-  a.click();
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "jadwal-sholat-al-ikhlas.doc";
+  link.click();
 }
