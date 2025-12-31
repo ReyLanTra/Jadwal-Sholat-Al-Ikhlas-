@@ -100,10 +100,7 @@ async function exportPDF() {
     return;
   }
 
-  // =========================
-  // PDF CONFIG
-  // =========================
-  const PAGE_WIDTH = 210;   // A4 portrait (mm)
+  const PAGE_WIDTH = 210; 
   const PAGE_HEIGHT = 297;
   const MARGIN = 10;
   const HEADER_HEIGHT = 28;
@@ -112,136 +109,86 @@ async function exportPDF() {
   const { jsPDF } = window.jspdf;
   const pdf = new jsPDF("p", "mm", "a4");
 
-  // =========================
-  // RENDER TABLE TO CANVAS
-  // =========================
+  // RENDER TABLE: Gunakan scale lebih tinggi (3) untuk ketajaman teks
   const canvas = await html2canvas(table, {
-    scale: 2,
+    scale: 3, 
     useCORS: true,
-    backgroundColor: "#f3f8f6"
+    backgroundColor: "#ffffff" // Putih bersih agar teks terlihat jelas
   });
 
   const imgWidth = PAGE_WIDTH - MARGIN * 2;
   const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-  const pageContentHeight =
-    PAGE_HEIGHT - HEADER_HEIGHT - FOOTER_HEIGHT - MARGIN * 2;
+  const pageContentHeight = PAGE_HEIGHT - HEADER_HEIGHT - FOOTER_HEIGHT - (MARGIN * 2);
 
   let heightLeft = imgHeight;
   let position = HEADER_HEIGHT + MARGIN;
   let page = 1;
 
-  // =========================
-  // HELPER: HEADER
-  // =========================
   const drawHeader = () => {
     pdf.setFillColor(22, 125, 102);
     pdf.rect(0, 0, PAGE_WIDTH, HEADER_HEIGHT, "F");
-
     pdf.setTextColor(255);
     pdf.setFontSize(14);
+    pdf.setFont("helvetica", "bold");
     pdf.text("Mushola Al-Ikhlas Pekunden", MARGIN, 12);
-
     pdf.setFontSize(9);
-    pdf.text(
-      "Pakulaur, Kec. Margasari, Kab. Tegal, Jawa Tengah",
-      MARGIN,
-      18
-    );
+    pdf.setFont("helvetica", "normal");
+    pdf.text("Pakulaur, Kec. Margasari, Kab. Tegal, Jawa Tengah", MARGIN, 18);
   };
 
-  // =========================
-  // HELPER: FOOTER
-  // =========================
-  const drawFooter = () => {
-    const now = new Date().toLocaleString("id-ID", {
-      timeZone: "Asia/Jakarta"
-    });
-
-    pdf.setTextColor(80);
+  const drawFooter = (pageNum) => {
+    const now = new Date().toLocaleString("id-ID", { timeZone: "Asia/Jakarta" });
+    pdf.setTextColor(100);
     pdf.setFontSize(8);
-    pdf.text(
-      `Dicetak pada ${now} WIB`,
-      MARGIN,
-      PAGE_HEIGHT - 8
-    );
-
-    pdf.text(
-      `Halaman ${page}`,
-      PAGE_WIDTH - MARGIN - 20,
-      PAGE_HEIGHT - 8
-    );
+    pdf.text(`Dicetak pada ${now} WIB`, MARGIN, PAGE_HEIGHT - 8);
+    pdf.text(`Halaman ${pageNum}`, PAGE_WIDTH - MARGIN - 20, PAGE_HEIGHT - 8);
   };
 
-  // =========================
-  // HELPER: WATERMARK
-  // =========================
+  // WATERMARK DIPERBAIKI: Menggunakan Opacity agar tidak menutupi teks
   const drawWatermark = () => {
-    pdf.setTextColor(180);
-    pdf.setFontSize(26);
-    pdf.text(
-      "Mushola Al-Ikhlas Pekunden",
-      PAGE_WIDTH / 2,
-      PAGE_HEIGHT / 2,
-      { align: "center", angle: 45 }
-    );
-
-    pdf.setFontSize(10);
-    pdf.text(
-      "© Mushola Al-Ikhlas • Created by Reyzar Alansyah Putra",
-      PAGE_WIDTH / 2,
-      PAGE_HEIGHT / 2 + 20,
-      { align: "center", angle: 45 }
-    );
+    pdf.saveGraphicsState();
+    pdf.setGState(new pdf.GState({ opacity: 0.1 })); // Transparansi 10%
+    pdf.setTextColor(150);
+    pdf.setFontSize(40);
+    pdf.text("Mushola Al-Ikhlas", PAGE_WIDTH / 2, PAGE_HEIGHT / 2, { align: "center", angle: 45 });
+    pdf.restoreGraphicsState();
   };
 
-  // =========================
-  // FIRST PAGE
-  // =========================
+  // HALAMAN PERTAMA
   drawHeader();
   drawWatermark();
-
-  pdf.addImage(
-    canvas,
-    "PNG",
-    MARGIN,
-    position,
-    imgWidth,
-    imgHeight
-  );
-
-  drawFooter();
+  
+  // Menambahkan gambar tabel dengan penyesuaian posisi
+  pdf.addImage(canvas, "PNG", MARGIN, position, imgWidth, imgHeight, undefined, 'FAST');
+  
+  drawFooter(page);
   heightLeft -= pageContentHeight;
 
-  // =========================
-  // MULTI PAGE
-  // =========================
+  // HALAMAN SELANJUTNYA (Jika tabel sangat panjang)
   while (heightLeft > 0) {
     page++;
     pdf.addPage();
     drawHeader();
     drawWatermark();
 
-    position =
-      HEADER_HEIGHT + MARGIN - (imgHeight - heightLeft);
-
+    // Logika pemotongan gambar agar tidak overlap dengan header
+    const sourceY = (imgHeight - heightLeft);
     pdf.addImage(
-      canvas,
-      "PNG",
-      MARGIN,
-      position,
-      imgWidth,
-      imgHeight
+        canvas, 
+        "PNG", 
+        MARGIN, 
+        HEADER_HEIGHT + MARGIN - sourceY, 
+        imgWidth, 
+        imgHeight, 
+        undefined, 
+        'FAST'
     );
 
-    drawFooter();
+    drawFooter(page);
     heightLeft -= pageContentHeight;
   }
 
-  // =========================
-  // SAVE
-  // =========================
-  pdf.save("jadwal-sholat-al-ikhlas-premium.pdf");
+  pdf.save("jadwal-sholat-al-ikhlas-Pekunden.pdf");
 }
 
 function drawThemeBackground(ctx, width, height) {
