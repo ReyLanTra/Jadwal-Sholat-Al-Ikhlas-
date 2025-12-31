@@ -8,6 +8,7 @@
 ![Deployment](https://img.shields.io/badge/Deployed_on-Vercel-black?style=for-the-badge&logo=vercel&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Production_Ready-brightgreen?style=for-the-badge&logo=check-circle&logoColor=white)
 
+**© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra**
 </div>
 
 ---
@@ -18,8 +19,8 @@
 
 Sebuah mahakarya digital yang mengabdi pada kemudahan ibadah. Website ini bukan sekadar penampil jadwal, melainkan **pusat komando waktu sholat** yang hidup, interaktif, dan penuh keajaiban teknologi — hadir untuk membimbing jamaah di setiap detik waktu menuju ketenangan.
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Kunjungi_Sekarang-d4af37?style=for-the-badge&logo=google-chrome&logoColor=white)](https://jadwal-sholat-alikhlas.reyzar.my.id/)
-[![GitHub Repo](https://img.shields.io/badge/💻_GitHub_Repository-View_Code-0b2a1f?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ReyLanTra/Jadwal-Sholat)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Kunjungi_Sekarang-d4af37?style=for-the-badge&logo=google-chrome&logoColor=white)](https://jadwal-sholat-al-ikhlas.reyzar.my.id/)
+[![GitHub Repo](https://img.shields.io/badge/💻_GitHub_Repository-View_Code-0b2a1f?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ReyLanTra/Jadwal-Sholat-Al-Ikhlas-)
 
 </div>
 
@@ -98,7 +99,7 @@ Aktif secara otomatis dalam periode:
 <details>
 <summary><strong>🕋 Jadwal Sholat Real-time</strong></summary>
 
-- **Multi-Zona Waktu**: WIB, WITA, WIT dengan sinkronisasi atomik
+- **Zona Waktu**: WIB, dengan sinkronisasi real-time
 - **Data Akurat**: Berdasarkan Kemenag RI Kabupaten Tegal
 - **Periode Luas**: 2025-2030 dengan update otomatis
 - **Parsing Cerdas**: Sistem deteksi dan koreksi data otomatis
@@ -219,7 +220,7 @@ Philosophy: "No bloat, just pure performance"
 ### **📦 Instalasi Lokal (Development)**
 ```bash
 # 1. Clone Repository
-git clone https://github.com/ReyLanTra/Jadwal-Sholat.git
+git clone https://github.com/ReyLanTra/Jadwal-Sholat-Al-Ikhlas-.git
 cd Jadwal-Sholat
 
 # 2. Siapkan Struktur Folder
@@ -358,7 +359,7 @@ git push origin main
 
 # 3. Vercel auto-deploy
 # 4. Verify deployment
-curl -I https://jadwal-sholat-alikhlas.reyzar.my.id/
+curl -I https://jadwal-sholat-al-ikhlas.reyzar.my.id/
 ```
 
 ---
@@ -384,7 +385,7 @@ curl -I https://jadwal-sholat-alikhlas.reyzar.my.id/
 
 ---
 
-## 👨‍💻 **TIM PENGEMBANG & KONTRIBUTOR**
+## 👨‍💻 **PEMBUAT & KONTRIBUTOR**
 
 <div align="center">
 
@@ -392,13 +393,19 @@ curl -I https://jadwal-sholat-alikhlas.reyzar.my.id/
 
 ## **REYZAR ALANSYAH PUTRA**
 ### *Full Stack Developer & UI/UX Specialist*
+**Web Artisan • Digital Craftsman • SMK Scholar**
 
 [![GitHub](https://img.shields.io/badge/GitHub-@ReyLanTra-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ReyLanTra)
-[![Portfolio](https://img.shields.io/badge/🌐_Portfolio-Visit_Now-FF7139?style=for-the-badge&logo=google-chrome&logoColor=white)](https://reyzaralansyah.vercel.app)
+[![Portfolio](https://img.shields.io/badge/🌐_Portfolio-Visit_Now-FF7139?style=for-the-badge&logo=google-chrome&logoColor=white)](https://medsos.reyzar.my.id)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect_Professionally-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/reyzaralansyah)
-[![Email](https://img.shields.io/badge/📧_Email-Contact_Me-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:reyzar.alansyah@example.com)
+[![Email](https://img.shields.io/badge/📧_Email-Contact_Me-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto: orangpolos860@gmail.com)
 
 </div>
+
+> Sebuah persembahan digital untuk Mushola Al-Ikhlas Pekunden — bukti bahwa teknologi dapat menjadi wasilah yang memperindah dan mempermudah ibadah. Dibangun dengan setiap baris kode yang penuh dedikasi, struktur yang rapi seperti shaf sholat, dan fungsi yang presisi seperti waktu-waktu mustajab.
+
+**Motto Pembuat:**  
+*"Kode yang baik adalah ibadah, UI yang indah adalah sedekah mata, fungsi yang bermanfaat adalah wakaf digital."*
 
 ### **🤝 Kontributor & Support**
 - **Kemenag RI** - Data jadwal sholat resmi
@@ -406,17 +413,7 @@ curl -I https://jadwal-sholat-alikhlas.reyzar.my.id/
 - **Google Fonts** - Typography system
 - **Open Source Community** - Inspirasi dan support
 
----
-
-## 👑 **Diciptakan oleh Visioner**
-
-### **Reyzar Alansyah Putra**
-**Web Artisan • Digital Craftsman • SMK Scholar**
-
-> Sebuah persembahan digital untuk Mushola Al-Ikhlas Pekunden — bukti bahwa teknologi dapat menjadi wasilah yang memperindah dan mempermudah ibadah. Dibangun dengan setiap baris kode yang penuh dedikasi, struktur yang rapi seperti shaf sholat, dan fungsi yang presisi seperti waktu-waktu mustajab.
-
-**Motto Pembuat:**  
-*"Kode yang baik adalah ibadah, UI yang indah adalah sedekah mata, fungsi yang bermanfaat adalah wakaf digital."*
+**© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra**
 
 ---
 
@@ -518,7 +515,6 @@ Untuk pertanyaan, bug reports, atau kolaborasi:
 ---
  
 **Jika project ini bermanfaat, jangan lupa ⭐ star repository ini!**
-
 **© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra**
 
 </div>
@@ -557,11 +553,11 @@ Deployment:
 
 ## 🔗 **QUICK LINKS**
 
-- 🌐 **Live Website**: [jadwal-sholat-alikhlas.reyzar.my.id](https://jadwal-sholat-alikhlas.reyzar.my.id)
-- 💻 **Source Code**: [github.com/ReyLanTra/Jadwal-Sholat](https://github.com/ReyLanTra/Jadwal-Sholat)
-- 📖 **Documentation**: [README.md](https://github.com/ReyLanTra/Jadwal-Sholat/blob/main/README.md)
-- 🐛 **Report Bug**: [GitHub Issues](https://github.com/ReyLanTra/Jadwal-Sholat/issues)
-- 💡 **Request Feature**: [GitHub Discussions](https://github.com/ReyLanTra/Jadwal-Sholat/discussions)
+- 🌐 **Live Website**: [jadwal-sholat-al-ikhlas.reyzar.my.id](https://jadwal-sholat-al-ikhlas.reyzar.my.id)
+- 💻 **Source Code**: [github.com/ReyLanTra/Jadwal-Sholat-Al-Ikhlas-](github.com/ReyLanTra/Jadwal-Sholat-Al-Ikhlas-)
+- 📖 **Documentation**: [README.md](https://github.com/ReyLanTra/Jadwal-Sholat-Al-Ikhlas-/blob/main/README.md)
+- 🐛 **Report Bug**: [GitHub Issues](https://github.com/ReyLanTra/Jadwal-Sholat-Al-Ikhlas-/issues)
+- 💡 **Request Feature**: [GitHub Discussions](https://github.com/ReyLanTra/Jadwal-Sholat-Al-Ikhlas-/discussions)
 
 ---
 
@@ -580,5 +576,6 @@ Deployment:
 
 **SEMOGA MENJADI AMAL JARIYAH YANG BERMANFAAT**  
 **🕌 SALAM DIGITAL DARI PEKUNDEN UNTUK DUNIA 🕌**
+**© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra**
 
 </div>
