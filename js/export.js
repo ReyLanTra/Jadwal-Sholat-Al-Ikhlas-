@@ -18,6 +18,32 @@ function drawWatermark(ctx, width, height) {
   };
 }
 
+function getExportFileName(ext) {
+  const monthNames = [
+    "Januari","Februari","Maret","April","Mei","Juni",
+    "Juli","Agustus","September","Oktober","November","Desember"
+  ];
+
+  const month = monthSelect?.value;
+  const year = yearSelect?.value;
+
+  if (!month || !year) {
+    alert("Silakan pilih bulan dan tahun terlebih dahulu");
+    throw new Error("Bulan / Tahun belum dipilih");
+  }
+
+  const now = new Date();
+  const date = String(now.getDate()).padStart(2, "0");
+  const m = String(now.getMonth() + 1).padStart(2, "0");
+  const y = now.getFullYear();
+  const h = String(now.getHours()).padStart(2, "0");
+  const min = String(now.getMinutes()).padStart(2, "0");
+
+  const monthName = monthNames[month - 1];
+
+  return `Jadwal-Sholat-${monthName}-${year}-${date}-${m}-${y}_${h}.${min}-WIB.${ext}`;
+}
+
 /* ===============================
    TABLE GETTER (WAJIB)
 ================================ */
@@ -143,7 +169,7 @@ async function exportPDF() {
     heightLeft -= (pageHeight - 50);
   }
 
-  pdf.save("jadwal-sholat-al-ikhlas_by-Reyy.pdf");
+  pdf.save(getExportFileName("pdf"));
 
   document.body.classList.remove("export-mode", "ramadhan");
 }
@@ -290,7 +316,7 @@ function exportPNG() {
 
     const link = document.createElement("a");
     link.href = canvas.toDataURL("image/png");
-    link.download = "jadwal-sholat-al-ikhlas_poster.png";
+    link.download = getExportFileName("png");
     link.click();
 
     document.body.classList.remove("export-mode");
@@ -325,7 +351,7 @@ function exportJPG() {
 
     const link = document.createElement("a");
     link.href = canvas.toDataURL("image/jpeg", 0.95);
-    link.download = "jadwal-sholat-al-ikhlas_poster.jpg";
+    link.download = getExportFileNaExportg");
     link.click();
 
     document.body.classList.remove("export-mode");
@@ -387,7 +413,7 @@ function exportExcel() {
   XLSX.utils.book_append_sheet(wb, ws, "Jadwal Sholat");
 
   // Export
-  XLSX.writeFile(wb, "jadwal-sholat-al-ikhlas.xlsx");
+  XLSX.writeFile(wb, getExportFileName("xlsx"));
 }
 
 /* ===============================
@@ -413,6 +439,6 @@ function exportWord() {
 
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = "jadwal-sholat-al-ikhlas_by-Reyy.docx";
+  link.download = getExportFileName("docx");
   link.click();
 }
