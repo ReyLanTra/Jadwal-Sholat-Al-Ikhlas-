@@ -134,8 +134,8 @@ Website ini merupakan **open-source dengan jiwa**:
 
 ---
 
-### 🚀 **Live Demo & Repository**
-- 🌐 **Demo Aktif:** [https://mushola-al-ikhlas.example.com](https://mushola-al-ikhlas.example.com)
+### 🚀 **Live Demo & GitHub**
+- 🌐 **Demo Aktif:** [https://mushola-al-ikhlas.example.com](https://jadwal-sholat-al-ikhlas.vercel.app/)
 - 💾 **Source Code:** [GitHub Repository](https://github.com/reyzar/mushola-jadwal)
 
 ---
