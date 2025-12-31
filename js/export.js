@@ -139,8 +139,8 @@ function exportPDF() {
 
   html2canvas(table, {
     scale: 2,
-    backgroundColor: "#ffffff",
-    useCORS: true
+    useCORS: true,
+    backgroundColor: "#ffffff"
   }).then(canvas => {
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF("p", "mm", "a4");
@@ -158,41 +158,77 @@ function exportPDF() {
     const imgWidth = pageWidth - margin * 2;
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    let y = 0;
+    let renderedHeight = 0;
     let page = 1;
-    const totalPage = Math.ceil(imgHeight / usableHeight);
+    const totalPages = Math.ceil(imgHeight / usableHeight);
 
-    while (y < imgHeight) {
+    while (renderedHeight < imgHeight) {
       if (page > 1) pdf.addPage();
 
+      // HEADER
+      pdf.setFont("helvetica", "bold");
       pdf.setFontSize(14);
       pdf.text("Mushola Al-Ikhlas Pekunden", margin, 18);
+
+      pdf.setFont("helvetica", "normal");
       pdf.setFontSize(10);
-      pdf.text("Pakulaut, Kec. Margasari, Tegalal. Tegal", margin, 25);
+      pdf.text(
+        "Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah",
+        margin,
+        25
+      );
+
+      // HITUNG TINGGI POTONGAN
+      const sliceHeight = Math.min(
+        usableHeight,
+        imgHeight - renderedHeight
+      );
+
+      // BUAT CANVAS POTONGAN
+      const pageCanvas = document.createElement("canvas");
+      pageCanvas.width = canvas.width;
+      pageCanvas.height =
+        (sliceHeight * canvas.width) / imgWidth;
+
+      const pageCtx = pageCanvas.getContext("2d");
+      pageCtx.drawImage(
+        canvas,
+        0,
+        (renderedHeight * canvas.width) / imgWidth,
+        canvas.width,
+        pageCanvas.height,
+        0,
+        0,
+        canvas.width,
+        pageCanvas.height
+      );
 
       pdf.addImage(
-        canvas,
+        pageCanvas,
         "PNG",
         margin,
         headerHeight,
         imgWidth,
-        imgHeight,
-        undefined,
-        "FAST",
-        0,
-        y,
-        canvas.width,
-        (usableHeight * canvas.width) / imgWidth
+        sliceHeight
       );
 
+      // FOOTER
       pdf.setFontSize(9);
       pdf.text(
-        `Halaman ${page} / ${totalPage}`,
-        pageWidth - margin - 30,
+        `Dicetak pada ${new Date().toLocaleString("id-ID", {
+          timeZone: "Asia/Jakarta"
+        })} WIB`,
+        margin,
         pageHeight - 10
       );
 
-      y += usableHeight;
+      pdf.text(
+        `Halaman ${page} / ${totalPages}`,
+        pageWidth - margin - 35,
+        pageHeight - 10
+      );
+
+      renderedHeight += sliceHeight;
       page++;
     }
 
