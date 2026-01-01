@@ -22,3 +22,11 @@ function loadMonthlyFromStorage(year, month) {
     return null;
   }
 }
+
+window.addEventListener("offline", () => {
+  document.getElementById("offlineBadge").classList.remove("hidden");
+});
+
+window.addEventListener("online", () => {
+  document.getElementById("offlineBadge").classList.add("hidden");
+});
