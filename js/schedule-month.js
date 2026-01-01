@@ -112,26 +112,85 @@ function showLoading() {
    LOAD DATA
 ========================= */
 async function showMonthly() {
-  const monthKey = String(parseInt(monthSelect.value));
+  const month = monthSelect.value;
   const year = yearSelect.value;
 
-  try {
-    const res = await fetch(`json/${year}.json`);
-    const data = await res.json();
-    const days = data.time?.[monthKey];
-
-    if (!days) {
-      document.getElementById("monthlyTable").innerHTML =
-        "<p>Data jadwal tidak tersedia.</p>";
-      return;
-    }
-
-    renderTable(days);
-  } catch (err) {
-    console.error(err);
-    document.getElementById("monthlyTable").innerHTML =
-      "<p>Gagal memuat jadwal.</p>";
+  if (!month || !year) {
+    alert("Pilih bulan dan tahun terlebih dahulu");
+    return;
   }
+
+  const tableWrap = document.getElementById("monthlyTable");
+  tableWrap.innerHTML = `<div class="skeleton-table"></div>`;
+
+  let days = null;
+
+  // =====================
+  // 1. COBA ONLINE
+  // =====================
+  if (navigator.onLine) {
+    try {
+      const res = await fetch(`json/${year}.json`);
+      const json = await res.json();
+
+      days = json.time[month];
+      if (days) {
+        saveMonthlyToStorage(year, month, days);
+      }
+    } catch (err) {
+      console.warn("Gagal fetch online, fallback offline");
+    }
+  }
+
+  // =====================
+  // 2. FALLBACK OFFLINE
+  // =====================
+  if (!days) {
+    days = loadMonthlyFromStorage(year, month);
+  }
+
+  // =====================
+  // 3. VALIDASI
+  // =====================
+  if (!days || !days.length) {
+    tableWrap.innerHTML =
+      "<p class='error'>Data jadwal tidak tersedia (offline & online kosong)</p>";
+    return;
+  }
+
+  // =====================
+  // 4. RENDER TABLE
+  // =====================
+  let html = `
+  <table id="exportTable">
+    <thead>
+      <tr>
+        <th>Tanggal</th>
+        <th>Imsak</th>
+        <th>Subuh</th>
+        <th>Dzuhur</th>
+        <th>Ashar</th>
+        <th>Maghrib</th>
+        <th>Isya</th>
+      </tr>
+    </thead>
+    <tbody>`;
+
+  days.forEach(d => {
+    html += `
+      <tr>
+        <td>${d.tanggal}</td>
+        <td>${d.imsak}</td>
+        <td>${d.subuh}</td>
+        <td>${d.dzuhur}</td>
+        <td>${d.ashar}</td>
+        <td>${d.maghrib}</td>
+        <td>${d.isya}</td>
+      </tr>`;
+  });
+
+  html += "</tbody></table>";
+  tableWrap.innerHTML = html;
 }
 
 /* =========================
