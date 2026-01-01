@@ -364,55 +364,50 @@ function exportJPG() {
 function exportExcel() {
   const table = getExportTable();
 
-  // Ambil semua baris
   const rows = Array.from(table.querySelectorAll("tr"));
-
-  if (rows.length === 0) {
-    alert("Tabel kosong, tidak bisa export Excel");
+  if (!rows.length) {
+    alert("Tabel jadwal kosong");
     return;
   }
 
-  // Convert ke array data
+  // Ambil data bersih
   const data = rows.map(row =>
-    Array.from(row.querySelectorAll("th, td")).map(cell =>
-      cell.innerText.replace(/\s+/g, " ").trim()
+    Array.from(row.querySelectorAll("th, td")).map(td =>
+      td.innerText.trim()
     )
   );
 
-  // Tambahkan HEADER INFO
-  const infoHeader = [
+  // Header mushola
+  const header = [
     ["Mushola Al-Ikhlas Pekunden"],
     ["Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah"],
-    ["© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra"]
+    [""]
   ];
 
-  const finalData = [...infoHeader, ...data];
+  const finalData = [...header, ...data];
 
-  // Buat worksheet
   const ws = XLSX.utils.aoa_to_sheet(finalData);
-
-  // Atur lebar kolom
-  ws["!cols"] = [
-    { wch: 25 }, // Tanggal
-    { wch: 10 }, // Imsak
-    { wch: 10 }, // Subuh
-    { wch: 10 }, // Dzuhur
-    { wch: 10 }, // Ashar
-    { wch: 10 }, // Maghrib
-    { wch: 10 }  // Isya
-  ];
 
   // Merge judul
   ws["!merges"] = [
-    { s: { r: 0, c: 0 }, e: { r: 0, c: 6 } },
-    { s: { r: 1, c: 0 }, e: { r: 1, c: 6 } }
+    { s: { r: 0, c: 0 }, e: { r: 0, c: data[0].length - 1 } },
+    { s: { r: 1, c: 0 }, e: { r: 1, c: data[0].length - 1 } }
   ];
 
-  // Buat workbook
+  // Lebar kolom
+  ws["!cols"] = [
+    { wch: 25 },
+    { wch: 10 },
+    { wch: 10 },
+    { wch: 10 },
+    { wch: 10 },
+    { wch: 10 },
+    { wch: 10 }
+  ];
+
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "Jadwal Sholat");
 
-  // Export
   XLSX.writeFile(wb, getExportFileName("xlsx"));
 }
 
@@ -422,25 +417,68 @@ function exportExcel() {
 function exportWord() {
   const table = getExportTable();
 
-  const html = `
-    <html>
-      <head>
-        <meta charset="utf-8">
-      </head>
-      <body>
-        ${table.outerHTML}
-      </body>
-    </html>
-  `;
-
-  const blob = new Blob(["\ufeff", html], {
-    type: "application/msword"
+  const now = new Date().toLocaleString("id-ID", {
+    timeZone: "Asia/Jakarta"
   });
+
+  const html = `
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Jadwal Sholat</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  h1 {
+    text-align: center;
+  }
+  p {
+    text-align: center;
+    margin-top: -10px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th, td {
+    border: 1px solid #333;
+    padding: 6px;
+    text-align: center;
+  }
+  th {
+    background: #0f766e;
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+
+<h1>Mushola Al-Ikhlas Pekunden</h1>
+<p>Pakulaut, Kec. Margasari, Kab. Tegal, Jawa Tengah</p>
+
+${table.outerHTML}
+
+<p style="margin-top:30px;font-size:12px">
+Dicetak pada ${now} WIB
+</p>
+
+</body>
+</html>
+`;
+
+  const blob = new Blob(
+    ["\ufeff", html],
+    { type: "application/msword" }
+  );
 
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = getExportFileName("docx");
+  link.download = getExportFileName("doc");
   link.click();
 }
+
 
 // © 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra
