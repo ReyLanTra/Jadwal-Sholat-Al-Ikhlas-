@@ -178,21 +178,6 @@ body::before {
   }
 }
 
-.offline {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #dc2626;
-  color: #fff;
-  padding: 10px 16px;
-  border-radius: 8px;
-  font-weight: bold;
-  z-index: 9999;
-}
-.hidden {
-  display: none;
-}
-
 /* ============================================
    TYPOGRAPHY
 ============================================ */
