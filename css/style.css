@@ -1,75 +1,145 @@
 /* ============================================
-   VARIABLES & RESET - TEMA RAMADHAN PREMIUM
-   Elegan • Futuristik • Glass • Mewah
+   VARIABLES & RESET - RAMADHAN SPECIAL
 ============================================ */
 :root {
-  /* Color Palette - Ramadhan Premium & Futuristik */
-  --ramadhan-gold: linear-gradient(135deg, #FFD700 0%, #FFAA00 50%, #FFD700 100%);
-  --ramadhan-green: linear-gradient(135deg, #0A8F3E 0%, #0D554F 100%);
-  --ramadhan-purple: linear-gradient(135deg, #8A2BE2 0%, #4B0082 100%);
-  --ramadhan-blue: linear-gradient(135deg, #00B4D8 0%, #0077B6 100%);
+  /* Color Palette - Ramadhan Premium */
+  --ramadhan-green: #0b8e61;
+  --ramadhan-gold: #ffd700;
+  --ramadhan-moon: #e6e6fa;
+  --ramadhan-night: #1a237e;
+  --ramadhan-dawn: #4a148c;
+  --ramadhan-glow: #00ffaa;
+  --white: #ffffff;
+  --off-white: #f5f5f7;
+  --dark-bg: #0a192f;
+  --card-bg: rgba(255, 255, 255, 0.1);
+  --shadow: rgba(0, 0, 0, 0.4);
+  --shadow-light: rgba(255, 255, 255, 0.1);
   
-  --primary-color: linear-gradient(135deg, #0A8F3E 0%, #0D554F 100%);
-  --vip-gold: linear-gradient(135deg, #FFD700 0%, #FFAA00 100%);
-  --svip-diamond: linear-gradient(135deg, #00FFFF 0%, #0077FF 100%);
-  --glass-bg: rgba(255, 255, 255, 0.12);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --shadow-glow: 0 0 40px rgba(10, 143, 62, 0.4);
-  --shadow-vip: 0 0 60px rgba(255, 215, 0, 0.5);
-  --futuristic-glow: 0 0 30px rgba(0, 183, 255, 0.7);
+  /* Gradients Ramadhan */
+  --gradient-ramadhan: linear-gradient(135deg, #1a237e 0%, #0b8e61 50%, #4a148c 100%);
+  --gradient-moon: linear-gradient(135deg, #e6e6fa 0%, #ffd700 50%, #aee1ff 100%);
+  --gradient-night: linear-gradient(135deg, #1a237e 0%, #0d1b2a 100%);
+  --gradient-dawn: linear-gradient(135deg, #4a148c 0%, #ff9800 100%);
+  --gradient-card: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 100%);
   
-  /* Typography Premium */
+  /* Typography */
   --font-primary: 'Poppins', 'Segoe UI', sans-serif;
-  --font-arabic: 'Amiri', 'Scheherazade', 'Noto Naskh Arabic', serif;
-  --font-futuristic: 'Orbitron', 'Montserrat', sans-serif;
+  --font-arabic: 'Amiri', 'Scheherazade', 'Lateef', serif;
+  --font-quran: 'PDMS_Saleem', 'Uthmanic', serif;
   
-  /* Border Radius Glass */
+  /* Border Radius */
   --radius-sm: 12px;
   --radius-md: 20px;
   --radius-lg: 28px;
   --radius-xl: 40px;
-  --radius-round: 50%;
-  --radius-glass: 24px;
+  --radius-pill: 999px;
   
-  /* Spacing Mewah */
-  --space-xs: 6px;
-  --space-sm: 12px;
-  --space-md: 20px;
+  /* Spacing */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
   --space-lg: 32px;
   --space-xl: 48px;
   --space-2xl: 64px;
   
-  /* Transitions Premium */
-  --transition-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  /* Transitions */
+  --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.25s var(--transition-smooth);
+  --transition-normal: 0.4s var(--transition-smooth);
+  --transition-slow: 0.8s var(--transition-smooth);
   
-  /* Gradients Premium */
-  --gradient-premium: linear-gradient(135deg, 
-    rgba(10, 143, 62, 0.15) 0%, 
-    rgba(255, 215, 0, 0.1) 25%, 
-    rgba(0, 180, 216, 0.1) 50%, 
-    rgba(138, 43, 226, 0.15) 100%);
-  --gradient-glass: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.18) 0%, 
-    rgba(255, 255, 255, 0.08) 100%);
-  --gradient-vip: linear-gradient(135deg, 
-    rgba(255, 215, 0, 0.2) 0%, 
-    rgba(255, 170, 0, 0.15) 100%);
-  --gradient-svip: linear-gradient(135deg, 
-    rgba(0, 255, 255, 0.15) 0%, 
-    rgba(0, 119, 255, 0.1) 100%);
-  --gradient-hologram: linear-gradient(45deg,
-    #0A8F3E 0%,
-    #00B4D8 25%,
-    #8A2BE2 50%,
-    #FFD700 75%,
-    #0A8F3E 100%);
+  /* Shadows */
+  --shadow-glow: 0 0 30px rgba(0, 255, 170, 0.4);
+  --shadow-glow-gold: 0 0 40px rgba(255, 215, 0, 0.5);
+  --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-float: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 /* ============================================
-   BASE STYLES & RESET - FUTURISTIK
+   ANIMATIONS DEFINITIONS - RAMADHAN MAGIC
+============================================ */
+@keyframes floatRamadhan {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-20px) rotate(3deg); }
+  66% { transform: translateY(10px) rotate(-3deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(0, 255, 170, 0.3);
+    opacity: 0.8;
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(0, 255, 170, 0.8), 0 0 60px rgba(0, 255, 170, 0.4);
+    opacity: 1;
+  }
+}
+
+@keyframes moonGlow {
+  0%, 100% { 
+    filter: drop-shadow(0 0 10px rgba(230, 230, 250, 0.5));
+    transform: scale(1);
+  }
+  50% { 
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.8));
+    transform: scale(1.05);
+  }
+}
+
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes ramadhanShine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes prayerGlow {
+  0%, 100% { 
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    transform: translateY(0);
+  }
+  50% { 
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes crescentSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes lanternSwing {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+
+/* ============================================
+   BASE STYLES & RESET
 ============================================ */
 * {
   margin: 0;
@@ -79,414 +149,209 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
+  scroll-padding-top: 100px;
 }
 
 body {
   font-family: var(--font-primary);
-  background: 
-    radial-gradient(ellipse at 20% 20%, rgba(10, 143, 62, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(0, 180, 216, 0.08) 0%, transparent 70%),
-    linear-gradient(135deg, #020617 0%, #0a1929 100%);
-  color: #ffffff;
+  background: var(--gradient-ramadhan);
+  color: var(--white);
   min-height: 100vh;
-  line-height: 1.7;
+  line-height: 1.8;
   overflow-x: hidden;
   position: relative;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-attachment: fixed;
 }
 
-/* Holographic Grid Overlay - Futuristik */
-body::before {
-  content: "";
+/* Ramadhan Background Effects */
+.ramadhan-bg-effect {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
-    linear-gradient(rgba(0, 180, 216, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 180, 216, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: gridMove 40s linear infinite;
-  pointer-events: none;
-  z-index: -2;
-}
-
-/* Floating Particles Animation */
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 8%),
-    radial-gradient(circle at 80% 70%, rgba(10, 143, 62, 0.1) 0%, transparent 8%),
-    radial-gradient(circle at 40% 60%, rgba(0, 180, 216, 0.1) 0%, transparent 8%),
-    radial-gradient(circle at 60% 40%, rgba(138, 43, 226, 0.1) 0%, transparent 8%);
-  animation: floatParticles 20s ease-in-out infinite;
   pointer-events: none;
   z-index: -1;
-}
-
-/* ==============================
-   ANIMATIONS PREMIUM & FUTURISTIK
-============================== */
-@keyframes shimmer {
-  0% { background-position: -500px 0 }
-  100% { background-position: 500px 0 }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(2deg); }
-}
-
-@keyframes glow {
-  0%, 100% { box-shadow: var(--shadow-glow); }
-  50% { box-shadow: 0 0 60px rgba(10, 143, 62, 0.8); }
-}
-
-@keyframes pulse-gold {
-  0%, 100% { 
-    box-shadow: 
-      0 0 40px rgba(255, 215, 0, 0.6),
-      inset 0 0 25px rgba(255, 215, 0, 0.15);
-  }
-  50% { 
-    box-shadow: 
-      0 0 60px rgba(255, 215, 0, 0.9),
-      inset 0 0 40px rgba(255, 215, 0, 0.25);
-  }
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes sparkle {
-  0%, 100% { opacity: 0; transform: scale(0.5); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 40px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0) scale(1);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes cardAppear {
-  from {
-    opacity: 0;
-    transform: translateY(30px) rotateX(20deg);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) rotateX(0);
-  }
-}
-
-@keyframes rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes shine {
-  0% { background-position: -100% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes hologramFlow {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
-}
-
-@keyframes gridMove {
-  0% { transform: translateY(0) translateX(0); }
-  100% { transform: translateY(50px) translateX(50px); }
-}
-
-@keyframes floatParticles {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(20px, -20px) scale(1.1); }
-  50% { transform: translate(-15px, 15px) scale(0.9); }
-  75% { transform: translate(-20px, -15px) scale(1.05); }
-}
-
-@keyframes neonPulse {
-  0%, 100% { 
-    text-shadow: 
-      0 0 10px rgba(0, 183, 255, 0.8),
-      0 0 20px rgba(0, 183, 255, 0.6),
-      0 0 30px rgba(0, 183, 255, 0.4);
-  }
-  50% { 
-    text-shadow: 
-      0 0 15px rgba(0, 183, 255, 1),
-      0 0 30px rgba(0, 183, 255, 0.8),
-      0 0 45px rgba(0, 183, 255, 0.6);
-  }
-}
-
-@keyframes glassShine {
-  0% { transform: translateX(-100%) skewX(-15deg); }
-  100% { transform: translateX(200%) skewX(-15deg); }
-}
-
-/* ==============================
-   PREMIUM SKELETON LOADER - GLASS
-============================== */
-.skeleton-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  border-radius: var(--radius-glass);
   overflow: hidden;
-  border: 1px solid var(--glass-border);
 }
 
-.skeleton-table th,
-.skeleton-table td {
-  padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: starTwinkle 3s infinite var(--transition-bounce);
 }
 
-.skeleton {
-  height: 20px;
+.crescent-moon {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle at 70% 50%, var(--ramadhan-moon) 0%, transparent 50%);
+  border-radius: 50%;
+  animation: moonGlow 8s infinite var(--transition-smooth);
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+}
+
+.lantern {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  width: 60px;
+  height: 90px;
+  background: linear-gradient(to bottom, #ff4444, #ff9900);
   border-radius: 10px;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.08) 0%,
-    rgba(255, 255, 255, 0.18) 50%,
-    rgba(255, 255, 255, 0.08) 100%
-  );
-  background-size: 400% 100%;
-  animation: shimmer 1.6s ease-in-out infinite;
+  animation: lanternSwing 4s infinite var(--transition-bounce);
+}
+
+.lantern::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 25%;
+  width: 10px;
+  height: 20px;
+  background: #ff9900;
+  border-radius: 5px;
+}
+
+.lantern::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 40%;
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle, #ffd700 0%, transparent 70%);
+  border-radius: 50%;
+  animation: glowPulse 2s infinite;
+}
+
+/* Floating Arabic Calligraphy */
+.arabic-ornament {
+  position: fixed;
+  font-family: var(--font-arabic);
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.05);
+  user-select: none;
+  pointer-events: none;
+  z-index: -1;
+  animation: floatRamadhan 20s infinite linear;
+}
+
+.ornament-1 { top: 15%; left: 5%; transform: rotate(15deg); }
+.ornament-2 { top: 40%; right: 8%; transform: rotate(-10deg); }
+.ornament-3 { bottom: 20%; left: 10%; transform: rotate(5deg); }
+
+/* ============================================
+   PREMIUM SKELETON LOADER - RAMADHAN STYLE
+============================================ */
+.skeleton-loader {
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0.05) 25%, 
+    rgba(255,255,255,0.15) 50%, 
+    rgba(255,255,255,0.05) 75%);
+  background-size: 200% 100%;
+  border-radius: var(--radius-md);
+  animation: ramadhanShine 1.5s infinite linear;
   position: relative;
   overflow: hidden;
 }
 
-.skeleton::before {
-  content: "";
+.skeleton-loader::after {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 215, 0, 0.1), 
     transparent);
-  animation: glassShine 1.5s ease-in-out infinite;
-}
-
-.fade-in {
-  animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.notif-prompt {
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--gradient-glass);
-  color: #fff;
-  padding: 24px 32px;
-  border-radius: var(--radius-xl);
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  z-index: 9999;
-  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
-  min-width: 320px;
-}
-
-.notif-prompt::before {
-  content: "🌟";
-  font-size: 24px;
-  animation: bounce 2s ease-in-out infinite;
-}
-
-.notif-prompt button {
-  background: var(--vip-gold);
-  border: none;
-  padding: 14px 28px;
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #000;
-  transition: var(--transition-normal);
-  position: relative;
-  overflow: hidden;
-}
-
-.notif-prompt button:hover {
-  transform: translateY(-3px);
-  box-shadow: 
-    0 15px 30px rgba(255, 215, 0, 0.4),
-    0 0 20px rgba(255, 215, 0, 0.3);
-}
-
-.hidden {
-  display: none;
-  opacity: 0;
-  transform: scale(0.95);
-  transition: var(--transition-normal);
+  animation: ramadhanShine 2s infinite linear;
 }
 
 /* ============================================
-   TYPOGRAPHY PREMIUM & FUTURISTIK
-============================================ */
-h1, h2, h3, h4 {
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.5px;
-  background: var(--ramadhan-gold);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  position: relative;
-}
-
-.arabic-text {
-  font-family: var(--font-arabic);
-  font-size: 1.6em;
-  font-weight: 600;
-  letter-spacing: 0;
-  line-height: 2;
-  text-shadow: 
-    0 2px 10px rgba(255, 215, 0, 0.3),
-    0 0 20px rgba(10, 143, 62, 0.2);
-}
-
-.futuristic-text {
-  font-family: var(--font-futuristic);
-  font-weight: 700;
-  letter-spacing: 2px;
-  animation: neonPulse 3s ease-in-out infinite;
-}
-
-/* ============================================
-   HEADER STYLES - VIP & SVIP
+   HEADER STYLES - RAMADHAN PREMIUM
 ============================================ */
 header {
   text-align: center;
-  padding: var(--space-2xl) var(--space-md);
+  padding: var(--space-xl) var(--space-md);
   position: relative;
-  background: var(--gradient-glass);
+  background: rgba(26, 35, 126, 0.7);
   border-bottom: 2px solid rgba(255, 215, 0, 0.3);
-  box-shadow: 
-    0 10px 40px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   overflow: hidden;
-  margin-bottom: var(--space-2xl);
+  box-shadow: var(--shadow-elevated);
+  z-index: 100;
 }
 
-/* VIP Crown Effect */
 header::before {
-  content: "👑";
-  position: absolute;
-  top: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 32px;
-  opacity: 0.8;
-  animation: bounce 3s ease-in-out infinite;
-  z-index: 2;
-}
-
-/* Holographic Background */
-header::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--gradient-premium);
-  opacity: 0.3;
-  z-index: -1;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--ramadhan-glow), 
+    var(--ramadhan-gold), 
+    var(--ramadhan-glow), 
+    transparent);
+  animation: ramadhanShine 3s infinite linear;
 }
 
 .logo-container {
   position: relative;
   display: inline-block;
-  margin-bottom: var(--space-2xl);
-  filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5));
+  margin-bottom: var(--space-xl);
+  animation: fadeInUp 1s var(--transition-bounce);
 }
 
-/* Diamond Logo Frame - SVIP */
 .logo-frame {
-  width: 180px;
-  height: 180px;
-  margin: 0 auto var(--space-xl);
+  width: 160px;
+  height: 160px;
+  margin: 0 auto var(--space-lg);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: float 8s ease-in-out infinite;
-  perspective: 1000px;
+  animation: floatRamadhan 8s infinite var(--transition-smooth);
 }
 
 .logo-frame::before {
-  content: "";
+  content: '';
   position: absolute;
-  inset: 0;
-  border-radius: var(--radius-round);
-  padding: 3px;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
+  inset: -4px;
+  border-radius: 50%;
+  padding: 4px;
+  background: conic-gradient(
+    from 0deg,
+    var(--ramadhan-gold),
+    var(--ramadhan-glow),
+    var(--ramadhan-moon),
+    var(--ramadhan-gold)
+  );
   -webkit-mask: 
     linear-gradient(#fff 0 0) content-box, 
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
-  animation: 
-    rotate 15s linear infinite,
-    hologramFlow 6s linear infinite;
-  z-index: 1;
+  animation: crescentSpin 20s infinite linear;
 }
 
 .logo-frame::after {
-  content: "⭐";
-  font-family: "Segoe UI Emoji";
+  content: '';
+  font-family: "Font Awesome 6 Free";
   position: absolute;
   bottom: -15px;
   right: -15px;
-  background: var(--vip-gold);
-  color: #000;
+  background: var(--gradient-moon);
+  color: var(--ramadhan-night);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -494,357 +359,189 @@ header::after {
   align-items: center;
   justify-content: center;
   font-weight: 900;
-  font-size: 24px;
-  box-shadow: 
-    0 8px 25px rgba(0, 0, 0, 0.4),
-    0 0 0 2px rgba(255, 215, 0, 0.5);
-  z-index: 3;
-  animation: bounce 2s ease-in-out infinite;
+  font-size: 22px;
+  box-shadow: var(--shadow-glow-gold);
+  z-index: 10;
+  animation: bounce 2s infinite var(--transition-bounce);
 }
 
-/* 3D Logo Effect */
 .logo {
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   object-fit: contain;
-  border-radius: var(--radius-round);
+  border-radius: 50%;
   filter: 
-    drop-shadow(0 0 25px rgba(255, 215, 0, 0.7))
-    drop-shadow(0 0 50px rgba(255, 215, 0, 0.3))
-    drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+    drop-shadow(0 0 20px rgba(255, 215, 0, 0.7))
+    drop-shadow(0 0 40px rgba(0, 255, 170, 0.4));
   position: relative;
-  z-index: 2;
-  transition: 
-    transform var(--transition-normal),
-    filter var(--transition-normal);
-  transform-style: preserve-3d;
+  z-index: 1;
+  transition: all var(--transition-normal);
 }
 
 .logo:hover {
-  transform: 
-    scale(1.1)
-    rotateY(15deg)
-    rotateX(5deg);
+  transform: scale(1.1) rotate(10deg);
   filter: 
-    drop-shadow(0 0 35px rgba(255, 215, 0, 0.9))
-    drop-shadow(0 0 70px rgba(255, 215, 0, 0.4))
-    drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
+    drop-shadow(0 0 25px rgba(255, 215, 0, 0.9))
+    drop-shadow(0 0 50px rgba(0, 255, 170, 0.6));
 }
 
-header h1 {
+/* Header Title with Ramadan Kareem Text */
+.ramadan-kareem {
+  font-family: var(--font-arabic);
   font-size: 3rem;
-  margin-bottom: var(--space-xl);
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
+  background: linear-gradient(45deg, 
+    var(--ramadhan-gold) 0%, 
+    var(--white) 50%, 
+    var(--ramadhan-glow) 100%);
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   background-clip: text;
+  margin: var(--space-lg) 0;
   position: relative;
   display: inline-block;
-  padding: var(--space-md) var(--space-2xl);
-  animation: hologramFlow 4s linear infinite;
-  font-family: var(--font-futuristic);
-  letter-spacing: 3px;
+  animation: prayerGlow 3s infinite;
 }
 
-header h1::before {
-  content: "";
+.ramadan-kareem::after {
+  content: 'رمضان كريم';
   position: absolute;
-  inset: 0;
-  border-radius: var(--radius-xl);
-  padding: 2px;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: hologramFlow 4s linear infinite;
+  top: 0;
+  left: 0;
+  color: transparent;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
   z-index: -1;
 }
 
-/* Clock & Date Container - Futuristic */
+/* Clock & Date Container - Ramadhan Edition */
 .time-container {
   display: inline-block;
   position: relative;
   margin: var(--space-xl) auto;
-  padding: var(--space-xl) var(--space-2xl);
-  background: var(--gradient-glass);
+  padding: var(--space-xl);
+  background: var(--gradient-night);
   border-radius: var(--radius-xl);
-  border: 2px solid var(--glass-border);
+  border: 2px solid rgba(255, 215, 0, 0.4);
   box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 0 0 1px rgba(0, 183, 255, 0.1),
-    var(--futuristic-glow);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  min-width: 400px;
-  animation: 
-    glow 4s ease-in-out infinite,
-    float 6s ease-in-out infinite;
+    var(--shadow-elevated),
+    inset 0 0 50px rgba(0, 255, 170, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  min-width: 350px;
+  animation: glowPulse 4s infinite;
   transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 .time-container::before {
-  content: "";
+  content: '';
   position: absolute;
-  inset: -3px;
-  border-radius: calc(var(--radius-xl) + 3px);
-  padding: 2px;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: 
-    rotate 10s linear infinite,
-    hologramFlow 5s linear infinite;
+  inset: -2px;
+  border-radius: calc(var(--radius-xl) + 4px);
+  background: linear-gradient(45deg, 
+    var(--ramadhan-gold), 
+    var(--ramadhan-glow), 
+    var(--ramadhan-moon),
+    var(--ramadhan-gold);
+  background-size: 400% 400%;
   z-index: -1;
+  animation: ramadhanShine 8s infinite linear;
+  opacity: 0.6;
 }
 
 #clock {
-  font-size: 4rem;
-  font-weight: 900;
-  letter-spacing: 4px;
-  color: transparent;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  background: linear-gradient(45deg, 
+    var(--ramadhan-gold) 0%, 
+    var(--white) 50%, 
+    var(--ramadhan-glow) 100%);
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 
-    0 4px 20px rgba(0, 0, 0, 0.8),
-    0 0 30px rgba(0, 183, 255, 0.5);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
   font-feature-settings: "tnum";
-  font-family: var(--font-futuristic);
-  animation: hologramFlow 3s linear infinite;
   position: relative;
   display: inline-block;
+  animation: prayerGlow 4s infinite;
 }
 
-#clock::after {
-  content: "";
-  position: absolute;
-  bottom: -8px;
-  left: 10%;
-  width: 80%;
-  height: 3px;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  border-radius: 2px;
-  opacity: 0.8;
-  animation: hologramFlow 3s linear infinite;
-  filter: blur(1px);
-}
-
+/* Date Styles with Islamic Calendar */
 .date-container {
   margin-top: var(--space-lg);
-  padding-top: var(--space-lg);
-  border-top: 2px solid rgba(255, 255, 255, 0.15);
-  position: relative;
+  padding: var(--space-md);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 #date {
-  font-size: 1.5rem;
-  color: #fff;
+  font-size: 1.3rem;
+  color: var(--ramadhan-gold);
   font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-md);
-  margin-bottom: var(--space-md);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-#date::before {
-  content: "📅";
-  font-size: 1.8rem;
-  animation: bounce 2s ease-in-out infinite;
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.3));
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
 }
 
 .hijri-date {
+  font-family: var(--font-arabic);
   font-size: 1.3rem;
-  color: transparent;
-  background: var(--vip-gold);
-  -webkit-background-clip: text;
-  background-clip: text;
-  font-style: italic;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-md);
-  background: var(--gradient-vip);
-  padding: var(--space-sm) var(--space-xl);
-  border-radius: var(--radius-xl);
-  margin-top: var(--space-md);
+  color: var(--ramadhan-glow);
+  padding: var(--space-sm) var(--space-lg);
+  background: rgba(26, 35, 126, 0.5);
+  border-radius: var(--radius-pill);
   border: 1px solid rgba(255, 215, 0, 0.3);
-  backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
-}
-
-.hijri-date::before {
-  content: "🌙";
-  font-size: 1.5rem;
-  animation: float 4s ease-in-out infinite;
-}
-
-.hijri-date::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(255, 255, 255, 0.3), 
-    transparent);
-  animation: glassShine 3s ease-in-out infinite;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  animation: glowPulse 5s infinite;
 }
 
 /* ============================================
-   COUNTDOWN SECTION - PREMIUM
+   COUNTDOWN SECTION - RAMADHAN SPECIAL
 ============================================ */
 #countdown {
-  background: var(--gradient-glass);
+  background: var(--gradient-card);
   margin: var(--space-2xl) auto;
-  padding: var(--space-2xl);
+  padding: var(--space-xl);
   border-radius: var(--radius-xl);
   text-align: center;
   max-width: 90%;
-  border: 2px solid var(--glass-border);
+  border: 2px solid rgba(255, 215, 0, 0.3);
   box-shadow: 
-    0 30px 80px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    var(--shadow-vip);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
+    var(--shadow-elevated),
+    inset 0 0 60px rgba(0, 255, 170, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   position: relative;
   overflow: hidden;
-  animation: 
-    slideUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards,
-    float 8s ease-in-out infinite 1s;
-  transform-style: preserve-3d;
+  animation: fadeInUp 1s var(--transition-bounce);
 }
 
 #countdown::before {
-  content: "";
+  content: '⏳';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 6px;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  animation: hologramFlow 3s linear infinite;
-  filter: blur(1px);
-}
-
-#countdown span {
-  display: block;
-  font-size: 3.5rem;
-  font-weight: 900;
-  color: transparent;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  margin-top: var(--space-lg);
-  direction: ltr;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-  position: relative;
-  display: inline-block;
-  padding: var(--space-lg) var(--space-2xl);
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: var(--radius-xl);
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  font-family: var(--font-futuristic);
-  letter-spacing: 3px;
-  animation: hologramFlow 4s linear infinite;
-  transform-style: preserve-3d;
-  perspective: 500px;
-}
-
-#countdown span::before {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  border-radius: calc(var(--radius-xl) + 3px);
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  animation: hologramFlow 4s linear infinite;
-  z-index: -1;
-  opacity: 0.5;
-  filter: blur(10px);
-}
-
-/* ============================================
-   TODAY SCHEDULE GRID - PREMIUM GLASS
-============================================ */
-#todaySchedule {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--space-xl);
-  padding: var(--space-2xl);
-  max-width: 1600px;
-  margin: 0 auto;
-  animation: fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-  perspective: 1000px;
-}
-
-.card {
-  background: var(--gradient-glass);
-  border-radius: var(--radius-xl);
-  padding: var(--space-xl);
-  text-align: center;
-  border: 2px solid var(--glass-border);
-  transition: all var(--transition-normal);
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  animation: cardAppear 0.8s cubic-bezier(0.4, 0, 0.2, 1) backwards;
-  transform-style: preserve-3d;
-  min-height: 300px;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  background: var(--gradient-moon);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  z-index: 2;
+  animation: bounce 2s infinite;
 }
 
-/* Stagger animation untuk card - Premium */
-.card:nth-child(1) { 
-  animation-delay: 0.1s; 
-  border-top: 4px solid #0A8F3E;
-}
-.card:nth-child(2) { 
-  animation-delay: 0.2s; 
-  border-top: 4px solid #00B4D8;
-}
-.card:nth-child(3) { 
-  animation-delay: 0.3s; 
-  border-top: 4px solid #FFD700;
-}
-.card:nth-child(4) { 
-  animation-delay: 0.4s; 
-  border-top: 4px solid #8A2BE2;
-}
-.card:nth-child(5) { 
-  animation-delay: 0.5s; 
-  border-top: 4px solid #FF6B6B;
-}
-.card:nth-child(6) { 
-  animation-delay: 0.6s; 
-  border-top: 4px solid #4ECDC4;
-}
-
-.card::before {
-  content: "";
+#countdown::after {
+  content: '';
   position: absolute;
   top: 0;
   left: -100%;
@@ -852,223 +549,247 @@ header h1::before {
   height: 100%;
   background: linear-gradient(90deg, 
     transparent, 
-    rgba(255, 255, 255, 0.2), 
+    rgba(255, 215, 0, 0.1), 
     transparent);
-  transition: left 0.8s ease;
+  animation: ramadhanShine 3s infinite linear;
 }
 
-.card:hover::before {
+.countdown-timer {
+  font-size: 2.8rem;
+  font-weight: 900;
+  background: linear-gradient(45deg, 
+    var(--ramadhan-gold), 
+    var(--ramadhan-glow), 
+    var(--ramadhan-moon));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+  animation: prayerGlow 2s infinite;
+  padding: var(--space-md);
+  display: inline-block;
+  position: relative;
+}
+
+.countdown-timer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--ramadhan-glow), 
+    var(--ramadhan-gold), 
+    transparent);
+  border-radius: 2px;
+}
+
+/* ============================================
+   PRAYER CARDS - PREMIUM RAMADHAN
+============================================ */
+.prayer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.prayer-card {
+  background: var(--gradient-card);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  animation: fadeInUp 0.6s var(--transition-bounce) backwards;
+  transform-style: preserve-3d;
+}
+
+/* Stagger animations for cards */
+.prayer-card:nth-child(1) { animation-delay: 0.1s; }
+.prayer-card:nth-child(2) { animation-delay: 0.2s; }
+.prayer-card:nth-child(3) { animation-delay: 0.3s; }
+.prayer-card:nth-child(4) { animation-delay: 0.4s; }
+.prayer-card:nth-child(5) { animation-delay: 0.5s; }
+.prayer-card:nth-child(6) { animation-delay: 0.6s; }
+
+.prayer-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 215, 0, 0.2), 
+    transparent);
+  transition: left 0.8s var(--transition-smooth);
+}
+
+.prayer-card:hover::before {
   left: 100%;
 }
 
-.card:hover {
+.prayer-card:hover {
   transform: 
-    translateY(-20px) 
-    scale(1.05)
-    rotateX(5deg);
+    translateY(-15px) 
+    scale(1.05) 
+    rotateX(5deg) 
+    rotateY(5deg);
   border-color: rgba(255, 215, 0, 0.6);
   box-shadow: 
-    0 40px 80px rgba(0, 0, 0, 0.5),
-    0 0 50px rgba(255, 215, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    var(--shadow-glow-gold),
+    var(--shadow-elevated);
 }
 
-.card.active {
-  border: 3px solid;
-  border-image: var(--gradient-hologram) 1;
-  box-shadow: 
-    0 0 60px rgba(255, 215, 0, 0.8),
-    inset 0 0 40px rgba(255, 215, 0, 0.25),
-    var(--futuristic-glow);
-  background: var(--gradient-vip);
-  animation: 
-    pulse-gold 2.5s ease-in-out infinite,
-    float 6s ease-in-out infinite;
+.prayer-card.active {
+  background: linear-gradient(135deg, 
+    rgba(255, 215, 0, 0.25) 0%, 
+    rgba(0, 255, 170, 0.2) 100%);
+  border: 3px solid var(--ramadhan-gold);
+  animation: glowPulse 3s infinite;
   position: relative;
-  z-index: 10;
+  z-index: 2;
 }
 
-.card.active::after {
-  content: "🕌✨";
+.prayer-card.active::after {
+  content: '🕌';
   position: absolute;
   top: 15px;
   right: 15px;
-  font-size: 2rem;
-  animation: 
-    bounce 2s ease-in-out infinite,
-    sparkle 1.5s ease-in-out infinite;
-  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+  font-size: 1.5rem;
+  animation: bounce 1.5s infinite;
 }
 
 .prayer-name {
-  font-size: 1.8rem;
-  font-weight: 800;
-  margin-bottom: var(--space-lg);
-  color: transparent;
-  background: var(--vip-gold);
-  -webkit-background-clip: text;
-  background-clip: text;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+  color: var(--ramadhan-gold);
   position: relative;
   display: inline-block;
   padding-bottom: var(--space-sm);
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  font-family: var(--font-arabic);
 }
 
 .prayer-name::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 60px;
   height: 4px;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
+  background: var(--gradient-moon);
   border-radius: 2px;
-  animation: hologramFlow 3s linear infinite;
+  animation: ramadhanShine 2s infinite linear;
 }
 
 .prayer-time {
-  font-size: 2.8rem;
+  font-size: 2.4rem;
   font-weight: 900;
-  color: #fff;
+  color: var(--white);
   margin: var(--space-lg) 0;
-  text-shadow: 
-    0 4px 20px rgba(0, 0, 0, 0.8),
-    0 0 30px rgba(0, 183, 255, 0.6);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
   font-feature-settings: "tnum";
   position: relative;
-  font-family: var(--font-futuristic);
-  letter-spacing: 2px;
-}
-
-.prayer-time::after {
-  content: "🕋✨";
-  position: absolute;
-  right: -40px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  animation: float 4s ease-in-out infinite;
-  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+  display: inline-block;
+  animation: prayerGlow 3s infinite;
 }
 
 .prayer-icon {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: var(--space-lg);
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  filter: 
-    drop-shadow(0 0 10px rgba(255, 255, 255, 0.5))
-    drop-shadow(0 0 20px rgba(0, 183, 255, 0.3));
-  animation: hologramFlow 4s linear infinite;
+  color: var(--ramadhan-glow);
+  filter: drop-shadow(0 0 15px rgba(0, 255, 170, 0.7));
+  animation: floatRamadhan 6s infinite var(--transition-smooth);
 }
 
 /* ============================================
-   ACTIONS SECTION - VIP CONTROLS
+   ACTIONS SECTION - RAMADHAN STYLE
 ============================================ */
 .actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-lg);
   justify-content: center;
-  align-items: center;
-  padding: var(--space-2xl);
-  background: var(--gradient-glass);
-  margin: var(--space-2xl) auto;
+  padding: var(--space-xl);
+  background: rgba(26, 35, 126, 0.4);
+  margin: var(--space-xl) auto;
   border-radius: var(--radius-xl);
   max-width: 95%;
-  border: 2px solid var(--glass-border);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  animation: 
-    slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s backwards,
-    float 10s ease-in-out infinite 1s;
-  position: relative;
-  overflow: hidden;
-}
-
-.actions::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  animation: hologramFlow 4s linear infinite;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: fadeInUp 0.8s var(--transition-bounce) 0.3s backwards;
+  box-shadow: var(--shadow-float);
 }
 
 select {
-  background: var(--gradient-glass);
-  color: #fff;
-  border: 2px solid rgba(255, 215, 0, 0.4);
-  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  border: 2px solid rgba(255, 215, 0, 0.5);
+  border-radius: var(--radius-pill);
   padding: var(--space-md) var(--space-xl);
   font-size: 1.1rem;
-  min-width: 200px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  min-width: 180px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   transition: all var(--transition-normal);
   cursor: pointer;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='%23FFD700' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right var(--space-xl) center;
+  background-position: right var(--space-lg) center;
   background-size: 20px;
-  padding-right: 60px;
+  padding-right: var(--space-2xl);
   font-weight: 600;
-  letter-spacing: 0.5px;
 }
 
 select:focus {
   outline: none;
-  border-color: #FFD700;
+  border-color: var(--ramadhan-glow);
   box-shadow: 
-    0 0 30px rgba(255, 215, 0, 0.6),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
-    var(--futuristic-glow);
-  transform: translateY(-5px);
-}
-
-select option {
-  background: #020617;
-  color: #fff;
-  padding: var(--space-md);
-  font-weight: 600;
+    var(--shadow-glow),
+    inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
 }
 
 button {
-  background: var(--vip-gold);
-  color: #000;
+  background: var(--gradient-moon);
+  color: var(--ramadhan-night);
   border: none;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-pill);
   padding: var(--space-lg) var(--space-2xl);
   font-size: 1.1rem;
-  font-weight: 900;
+  font-weight: 800;
   min-height: 60px;
   cursor: pointer;
   transition: all var(--transition-normal);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-md);
+  gap: var(--space-sm);
   position: relative;
   overflow: hidden;
   letter-spacing: 1px;
   text-transform: uppercase;
-  font-family: var(--font-futuristic);
-  box-shadow: 
-    0 10px 30px rgba(255, 215, 0, 0.3),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-float);
+  transform-style: preserve-3d;
 }
 
 button::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: -100%;
@@ -1078,7 +799,7 @@ button::before {
     transparent, 
     rgba(255, 255, 255, 0.6), 
     transparent);
-  transition: left 0.8s ease;
+  transition: left 0.8s var(--transition-smooth);
 }
 
 button:hover::before {
@@ -1088,545 +809,386 @@ button:hover::before {
 button:hover {
   transform: 
     translateY(-8px) 
-    scale(1.05);
+    scale(1.05) 
+    rotateX(5deg);
   box-shadow: 
-    0 25px 50px rgba(255, 215, 0, 0.5),
-    0 10px 25px rgba(0, 0, 0, 0.3),
-    0 0 0 2px rgba(255, 255, 255, 0.2),
-    var(--shadow-vip);
+    var(--shadow-glow-gold),
+    var(--shadow-elevated);
+  background: linear-gradient(45deg, 
+    var(--ramadhan-gold) 0%, 
+    var(--ramadhan-glow) 50%, 
+    var(--ramadhan-gold) 100%);
 }
 
 button:active {
   transform: 
-    translateY(-4px) 
-    scale(1.02);
+    translateY(-2px) 
+    scale(0.98);
   transition: transform 0.1s;
 }
 
-button::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-lg);
-  padding: 2px;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: hologramFlow 3s linear infinite;
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-}
-
-button:hover::after {
-  opacity: 1;
-}
-
-.loading-box {
-  padding: 60px;
-  text-align: center;
-  font-weight: 800;
-  font-size: 1.5rem;
-  background: var(--gradient-glass);
-  border-radius: var(--radius-xl);
-  border: 2px solid var(--glass-border);
-  animation: 
-    pulse 1.5s infinite,
-    float 8s ease-in-out infinite;
-  backdrop-filter: blur(30px);
-  max-width: 400px;
-  margin: 40px auto;
-  position: relative;
-  overflow: hidden;
-}
-
-.loading-box::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  animation: hologramFlow 3s linear infinite;
-}
-
 /* ============================================
-   MONTHLY TABLE - PREMIUM GLASS
+   MONTHLY TABLE - RAMADHAN ELEGANCE
 ============================================ */
-#monthlyTable {
-  padding: var(--space-2xl);
+.monthly-table-container {
+  padding: var(--space-xl);
   max-width: 95%;
   margin: 0 auto;
-  animation: 
-    fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.5s backwards,
-    float 12s ease-in-out infinite 1.5s;
-  perspective: 1000px;
+  animation: fadeInUp 1s var(--transition-bounce) 0.5s backwards;
 }
 
-table {
+.prayer-table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0;
-  background: var(--gradient-glass);
+  border-spacing: 0 8px;
+  background: rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: 
-    0 40px 80px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    var(--futuristic-glow);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  border: 2px solid var(--glass-border);
+    var(--shadow-elevated),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 215, 0, 0.2);
   position: relative;
-  transform-style: preserve-3d;
 }
 
-table::before {
-  content: "";
+.prayer-table::before {
+  content: '';
   position: absolute;
   top: -2px;
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
+  background: linear-gradient(45deg, 
+    var(--ramadhan-gold), 
+    var(--ramadhan-glow), 
+    var(--ramadhan-moon),
+    var(--ramadhan-gold);
+  background-size: 400% 400%;
   border-radius: calc(var(--radius-xl) + 2px);
   z-index: -1;
-  animation: 
-    hologramFlow 6s linear infinite,
-    rotate 20s linear infinite;
+  animation: ramadhanShine 10s infinite linear;
   opacity: 0.3;
-  filter: blur(15px);
 }
 
-th {
-  background: var(--gradient-premium);
-  color: #fff;
-  font-weight: 900;
-  padding: var(--space-xl);
-  text-align: center;
-  border-bottom: 4px solid;
-  border-image: var(--vip-gold) 1;
-  position: sticky;
-  top: 0;
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 1.1rem;
-  font-family: var(--font-futuristic);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-  z-index: 100;
-}
-
-td {
+.prayer-table th {
+  background: linear-gradient(to bottom, 
+    rgba(26, 35, 126, 0.95), 
+    rgba(11, 142, 97, 0.95));
+  color: var(--ramadhan-gold);
+  font-weight: 800;
   padding: var(--space-lg);
   text-align: center;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 4px solid var(--ramadhan-gold);
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.prayer-table td {
+  padding: var(--space-lg);
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: all var(--transition-normal);
   position: relative;
   font-weight: 600;
-  font-size: 1.1rem;
 }
 
-td:hover {
-  background: var(--gradient-vip);
-  transform: 
-    scale(1.1) 
-    translateZ(20px);
-  z-index: 10;
+.prayer-table tr:hover td {
+  background: rgba(255, 215, 0, 0.15);
+  transform: scale(1.02);
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    0 0 30px rgba(255, 215, 0, 0.4);
-  border-radius: var(--radius-lg);
-}
-
-tr:last-child td {
-  border-bottom: none;
+    inset 0 0 0 1px rgba(255, 215, 0, 0.3),
+    0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .current-day {
-  background: var(--gradient-vip) !important;
+  background: linear-gradient(135deg, 
+    rgba(255, 215, 0, 0.3), 
+    rgba(0, 255, 170, 0.2)) !important;
   font-weight: 900;
-  color: #000;
+  color: var(--ramadhan-gold);
   position: relative;
-  animation: pulse-gold 3s ease-in-out infinite;
+  z-index: 1;
 }
 
 .current-day::before {
-  content: "";
+  content: '';
   position: absolute;
-  top: 4px;
-  left: 4px;
-  right: 4px;
-  bottom: 4px;
-  border: 3px solid;
-  border-image: var(--gradient-hologram) 1;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border: 3px solid var(--ramadhan-glow);
   border-radius: var(--radius-md);
   pointer-events: none;
-  animation: hologramFlow 3s linear infinite;
+  animation: glowPulse 3s infinite;
 }
 
 .current-day::after {
-  content: "✨🌟✨";
+  content: '✨';
   position: absolute;
-  top: -15px;
-  right: -15px;
+  top: -10px;
+  right: -10px;
   font-size: 16px;
-  animation: 
-    sparkle 1.5s ease-in-out infinite,
-    float 4s ease-in-out infinite;
-  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
-  z-index: 2;
+  animation: starTwinkle 2s infinite;
 }
 
 /* ============================================
-   MODAL STYLES - PREMIUM GLASS
+   MODAL STYLES - RAMADHAN MODAL
 ============================================ */
-.modal {
+.modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(10, 25, 47, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 2000;
   opacity: 0;
   visibility: hidden;
-  transition: all var(--transition-normal);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  perspective: 1000px;
+  transition: all var(--transition-slow);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
 }
 
-.modal.active {
+.modal-overlay.active {
   opacity: 1;
   visibility: visible;
 }
 
+.modal-overlay::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, 
+    rgba(255, 215, 0, 0.1) 0%, 
+    transparent 70%);
+  animation: floatRamadhan 20s infinite linear;
+}
+
 .modal-content {
-  background: var(--gradient-glass);
+  background: linear-gradient(135deg, 
+    rgba(26, 35, 126, 0.95), 
+    rgba(11, 142, 97, 0.95));
   border-radius: var(--radius-xl);
   padding: var(--space-2xl);
   max-width: 90vw;
   max-height: 90vh;
   overflow: auto;
-  border: 3px solid var(--glass-border);
+  border: 3px solid rgba(255, 215, 0, 0.5);
   box-shadow: 
-    0 50px 120px rgba(0, 0, 0, 0.7),
-    0 0 0 2px rgba(255, 215, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    var(--shadow-vip);
-  transform: scale(0.9) translateY(40px) rotateX(20deg);
-  transition: transform var(--transition-normal);
-  backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
-  position: relative;
-  animation: hologramFlow 5s linear infinite;
+    var(--shadow-glow-gold),
+    var(--shadow-elevated);
+  animation: modalAppear 0.6s var(--transition-bounce);
+  transform-style: preserve-3d;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
 }
 
-.modal.active .modal-content {
-  transform: scale(1) translateY(0) rotateX(0);
-}
-
-.modal-content::before {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  border-radius: calc(var(--radius-xl) + 3px);
-  padding: 2px;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: hologramFlow 4s linear infinite;
-  z-index: -1;
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: 
+      translateY(50px) 
+      scale(0.8) 
+      rotateX(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: 
+      translateY(0) 
+      scale(1) 
+      rotateX(0);
+  }
 }
 
 /* ============================================
-   RESPONSIVE DESIGN - PREMIUM
+   RESPONSIVE DESIGN
 ============================================ */
-@media (max-width: 1200px) {
-  :root {
-    --space-xl: 40px;
-    --space-2xl: 56px;
-  }
-  
-  #todaySchedule {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
-  
-  .logo-frame {
-    width: 160px;
-    height: 160px;
-  }
-  
-  .logo {
-    width: 120px;
-    height: 120px;
-  }
-}
-
 @media (max-width: 768px) {
   :root {
     --space-xl: 32px;
-    --space-2xl: 48px;
-    --radius-xl: 32px;
+    --space-lg: 24px;
   }
   
-  html {
-    font-size: 14px;
-  }
-  
-  header h1 {
-    font-size: 2.5rem;
-    padding: var(--space-sm) var(--space-xl);
-  }
-  
-  #clock {
-    font-size: 3rem;
-    letter-spacing: 2px;
+  .ramadan-kareem {
+    font-size: 2rem;
   }
   
   .time-container {
-    min-width: 320px;
-    padding: var(--space-lg) var(--space-xl);
+    min-width: 280px;
   }
   
-  #countdown span {
-    font-size: 2.8rem;
-    padding: var(--space-md) var(--space-xl);
+  #clock {
+    font-size: 2.5rem;
   }
   
-  .card {
-    min-height: 280px;
-  }
-  
-  .prayer-time {
-    font-size: 2.2rem;
+  .prayer-grid {
+    grid-template-columns: 1fr;
+    padding: var(--space-md);
   }
   
   .actions {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
   }
   
   select, button {
     width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  :root {
-    --space-xl: 24px;
-    --space-2xl: 40px;
-    --radius-xl: 28px;
+    max-width: 300px;
   }
   
-  header {
-    padding: var(--space-xl) var(--space-sm);
-  }
-  
-  .logo-frame {
-    width: 140px;
-    height: 140px;
-  }
-  
-  .logo {
-    width: 100px;
-    height: 100px;
-  }
-  
-  header h1 {
-    font-size: 2rem;
-    letter-spacing: 1px;
-  }
-  
-  #clock {
-    font-size: 2.5rem;
-  }
-  
-  .time-container {
-    min-width: 280px;
-    padding: var(--space-md) var(--space-lg);
-  }
-  
-  #todaySchedule {
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
+  .modal-content {
     padding: var(--space-lg);
-  }
-  
-  .notif-prompt {
-    min-width: 280px;
-    padding: 20px;
-    flex-direction: column;
-    text-align: center;
   }
 }
 
 /* ============================================
-   SPECIAL EFFECTS - RAMADHAN KHUSUS
+   UTILITY CLASSES
 ============================================ */
-.ramadhan-sparkle {
-  position: fixed;
-  pointer-events: none;
-  z-index: 9998;
-  animation: sparkle 1.5s ease-out forwards;
+.text-gradient {
+  background: linear-gradient(45deg, 
+    var(--ramadhan-gold), 
+    var(--ramadhan-glow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.holographic-border {
-  position: relative;
+.glow-effect {
+  animation: glowPulse 3s infinite;
 }
 
-.holographic-border::after {
-  content: "";
+.float-effect {
+  animation: floatRamadhan 6s infinite var(--transition-smooth);
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s var(--transition-bounce);
+}
+
+.ramadhan-particle {
   position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  padding: 2px;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: hologramFlow 4s linear infinite;
+  width: 4px;
+  height: 4px;
+  background: var(--ramadhan-glow);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  animation: particleFloat 8s infinite linear;
+}
+
+/* Generate random particles */
+.particle-1 { left: 10%; animation-delay: 0s; }
+.particle-2 { left: 20%; animation-delay: 1s; }
+.particle-3 { left: 30%; animation-delay: 2s; }
+.particle-4 { left: 40%; animation-delay: 3s; }
+.particle-5 { left: 50%; animation-delay: 4s; }
+.particle-6 { left: 60%; animation-delay: 5s; }
+.particle-7 { left: 70%; animation-delay: 6s; }
+.particle-8 { left: 80%; animation-delay: 7s; }
+
+/* ============================================
+   FOOTER STYLES
+============================================ */
+.ramadhan-footer {
+  text-align: center;
+  padding: var(--space-xl);
+  margin-top: var(--space-2xl);
+  background: rgba(26, 35, 126, 0.5);
+  border-top: 2px solid rgba(255, 215, 0, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.footer-text {
+  font-family: var(--font-arabic);
+  font-size: 1.2rem;
+  color: var(--ramadhan-gold);
+  margin-bottom: var(--space-md);
+  animation: prayerGlow 4s infinite;
+}
+
+.dua-text {
+  font-family: var(--font-quran);
+  font-size: 1.5rem;
+  color: var(--ramadhan-glow);
+  line-height: 2;
+  margin: var(--space-lg) 0;
+}
+
+/* Loading States */
+.loading-ramadhan {
+  position: relative;
+  padding: var(--space-2xl);
+  text-align: center;
+}
+
+.loading-moon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--space-lg);
+  background: var(--gradient-moon);
+  border-radius: 50%;
+  animation: 
+    crescentSpin 3s infinite linear,
+    moonGlow 2s infinite;
+}
+
+/* Prayer Time Change Animation */
+.prayer-change-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-dawn);
+  opacity: 0;
+  animation: dawnTransition 10s infinite;
+  pointer-events: none;
   z-index: -1;
 }
 
-.vip-badge {
-  position: relative;
-  display: inline-block;
-  padding: 8px 20px;
-  background: var(--vip-gold);
-  color: #000;
-  border-radius: 50px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  animation: bounce 2s ease-in-out infinite;
-  box-shadow: 
-    0 10px 30px rgba(255, 215, 0, 0.4),
-    0 0 0 2px rgba(255, 255, 255, 0.2);
+@keyframes dawnTransition {
+  0%, 100% { opacity: 0; }
+  10%, 30% { opacity: 0.3; }
+  20% { opacity: 0.5; }
 }
 
-.svip-badge {
-  position: relative;
-  display: inline-block;
-  padding: 8px 20px;
-  background: var(--svip-diamond);
-  color: #fff;
-  border-radius: 50px;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  animation: 
-    float 3s ease-in-out infinite,
-    neonPulse 2s ease-in-out infinite;
-  box-shadow: 
-    0 10px 30px rgba(0, 183, 255, 0.4),
-    0 0 0 2px rgba(255, 255, 255, 0.2);
+/* Quran Ayah Display */
+.quran-ayah {
+  font-family: var(--font-quran);
+  font-size: 1.8rem;
+  text-align: center;
+  padding: var(--space-xl);
+  margin: var(--space-xl) auto;
+  max-width: 800px;
+  color: var(--ramadhan-gold);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-lg);
+  border-right: 4px solid var(--ramadhan-gold);
+  animation: slideInRight 1s var(--transition-smooth);
+  line-height: 2.5;
 }
 
-/* Moon Phase Animation */
-.moon-phase {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  width: 80px;
-  height: 80px;
-  background: var(--gradient-glass);
-  border-radius: 50%;
-  backdrop-filter: blur(20px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 
-    0 10px 40px rgba(0, 0, 0, 0.3),
-    inset 0 0 40px rgba(255, 255, 255, 0.1);
-  animation: 
-    float 8s ease-in-out infinite,
-    rotate 40s linear infinite;
-  z-index: 9997;
-}
-
-.moon-phase::before {
-  content: "";
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 60px;
-  height: 60px;
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  border-radius: 50%;
-  animation: hologramFlow 6s linear infinite;
-  opacity: 0.8;
-  filter: blur(5px);
-}
-
-/* Loading Spinner Premium */
-.loading-spinner {
-  width: 80px;
-  height: 80px;
-  border: 4px solid transparent;
-  border-top: 4px solid #FFD700;
-  border-right: 4px solid #0A8F3E;
-  border-bottom: 4px solid #00B4D8;
-  border-left: 4px solid #8A2BE2;
-  border-radius: 50%;
-  animation: 
-    rotate 1.5s linear infinite,
-    hologramFlow 3s linear infinite;
-  position: relative;
-}
-
-.loading-spinner::before {
-  content: "";
-  position: absolute;
-  top: -8px;
-  left: -8px;
-  right: -8px;
-  bottom: -8px;
-  border: 2px solid transparent;
-  border-top: 2px solid rgba(255, 215, 0, 0.5);
-  border-right: 2px solid rgba(10, 143, 62, 0.5);
-  border-bottom: 2px solid rgba(0, 180, 216, 0.5);
-  border-left: 2px solid rgba(138, 43, 226, 0.5);
-  border-radius: 50%;
-  animation: 
-    rotate 2s linear infinite reverse,
-    hologramFlow 4s linear infinite;
-}
-
-/* Scrollbar Premium */
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--gradient-glass);
-  border-radius: 10px;
-  backdrop-filter: blur(20px);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--gradient-hologram);
-  background-size: 200% 100%;
-  border-radius: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  animation: hologramFlow 3s linear infinite;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--vip-gold);
-  animation: none;
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
