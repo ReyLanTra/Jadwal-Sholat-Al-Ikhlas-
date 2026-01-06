@@ -24,10 +24,10 @@ Kami memprioritaskan keamanan dan privasi pengguna dalam setiap aspek pengembang
 ```plaintext
 Data Flow:
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│   Browser      │ → │ Cache Cache    │ → │   Display      │
+│     Browser    │ → │   Cache Cache  │ → │     Display    │
 └─────────────┘    └─────────────┘    └─────────────┘
-        ↓                  ↓                  ↓
-   Zero Data       Privacy by Design   User Device Only
+        ↓                     ↓                     ↓
+   Zero Data          Privacy by Design     User Device Only
    Transmission
 ```
 
