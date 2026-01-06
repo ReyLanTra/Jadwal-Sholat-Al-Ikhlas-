@@ -4,8 +4,9 @@
 
 ![Developer](https://img.shields.io/badge/Developer-Reyzar_Alansyah-red?style=for-the-badge&logo=check-circle&logoColor=white)
 
-</al-sholal-sholat-digital-sholat-digital-sholat-digital
-al-sholat-digital-sholat-digital-sholat-digitalat-digital-sholat-digital-sholat-digitals Pekunden
+</div>
+
+### Website Jadwal Sholat Mushola Al-Ikhlas Pekunden by Reyzar
 
 *"Bersama membangun teknologi untuk kemudahan ibadah"*
 
