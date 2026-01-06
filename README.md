@@ -7,6 +7,7 @@
 ![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&logo=open-source-initiative&logoColor=white)
 ![Deployment](https://img.shields.io/badge/Deployed_on-Vercel-black?style=for-the-badge&logo=vercel&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Production_Ready-brightgreen?style=for-the-badge&logo=check-circle&logoColor=white)
+![Developer](https://img.shields.io/badge/Developer-Reyzar_Alansyah-red?style=for-the-badge&logo=check-circle&logoColor=white)
 
 **© 2025-2030 | Mushola Al-Ikhlas Pekunden | Reyzar Alansyah Putra**
 </div>
@@ -21,6 +22,7 @@ Sebuah mahakarya digital yang mengabdi pada kemudahan ibadah. Website ini bukan 
 
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Kunjungi_Sekarang-d4af37?style=for-the-badge&logo=google-chrome&logoColor=white)](https://jadwal-sholat-al-ikhlas.reyzar.my.id/)
 [![GitHub Repo](https://img.shields.io/badge/💻_GitHub_Repository-View_Code-0b2a1f?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ReyLanTra/Jadwal-Sholat-Al-Ikhlas-)
+![Developer](https://img.shields.io/badge/Developer-Reyzar_Alansyah-red?style=for-the-badge&logo=check-circle&logoColor=white)
 
 </div>
 
