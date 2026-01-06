@@ -1,4 +1,11 @@
 # 🔐 Keamanan & Privasi
+
+<div align="center">
+
+![Developer](https://img.shields.io/badge/Developer-Reyzar_Alansyah-red?style=for-the-badge&logo=check-circle&logoColor=white)
+
+</div>
+
 ## Website Jadwal Sholat Digital Mushola Al-Ikhlas Pekunden
 
 ---
