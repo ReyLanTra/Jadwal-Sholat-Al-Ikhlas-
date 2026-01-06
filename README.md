@@ -26,6 +26,21 @@ Sebuah mahakarya digital yang mengabdi pada kemudahan ibadah. Website ini bukan 
 
 ---
 
+## 🖼️ **DEMONSTRASI VISUAL**
+
+### **🖥️ Tampilan Desktop Premium**
+![Desktop View](https://i.postimg.cc/s2vwqzBJ/screencapture-jadwal-sholat-alikhlas-reyzar-my-id-2026-01-06-13-54-49.png)
+
+### **📱 Tampilan Mobile Elegan**
+![Mobile View](https://i.postimg.cc/MGvdNwcs/Oneplus-Nord-2-jadwal-sholat-alikhlas-reyzar-my-id.png)
+![Mobile View](https://i.postimg.cc/W4hXCVD0/i-Phone-13-PRO-jadwal-sholat-alikhlas-reyzar-my-id.png)
+![Mobile View](https://i.postimg.cc/MGvdNwcs/Oneplus-Nord-2-jadwal-sholat-alikhlas-reyzar-my-id.png)
+![Mobile View](https://i.postimg.cc/wB70ZztJ/i-Phone-13-PRO-jadwal-sholat-alikhlas-reyzar-my-id-(1).png)
+![Mobile View](https://i.postimg.cc/MGvdNwcs/Oneplus-Nord-2-jadwal-sholat-alikhlas-reyzar-my-id.png)
+![Mobile View](https://i.postimg.cc/zfV06NLf/i-Phone-13-PRO-jadwal-sholat-alikhlas-reyzar-my-id-(2).png)
+
+---
+
 ## 🎖️ **PROFIL PROYEK**
 
 ### **🏆 Spesifikasi Teknis**
@@ -153,14 +168,6 @@ Ekspor jadwal 1 bulan dengan kualitas profesional:
 | **📝 Word (.doc)** | Tabel siap cetak, kompatibel universal, editing mudah | Dokumentasi fleksibel |
 
 ---
-
-## 🎭 **DEMONSTRASI VISUAL**
-
-### **🖥️ Tampilan Desktop Premium**
-![Desktop View](https://via.placeholder.com/1200x675/0b2a1f/ffffff?text=Desktop+View+Coming+Soon&style=for-the-badge)
-
-### **📱 Tampilan Mobile Elegan**
-![Mobile View](https://via.placeholder.com/400x800/0f5132/ffffff?text=Mobile+View+Coming+Soon&style=for-the-badge)
 
 ### **✨ Animasi Spesial**
 1. **Floating Logo**: Logo mengambang dengan efek halo emas
