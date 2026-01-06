@@ -26,7 +26,7 @@ Sebuah mahakarya digital yang mengabdi pada kemudahan ibadah. Website ini bukan 
 
 ---
 
-## 🖼️ **DEMONSTRASI VISUAL**
+## 🖼️ **DOKUMENTASI VISUAL**
 
 ### **🖥️ Tampilan Desktop Premium**
 ![Desktop View](https://i.postimg.cc/s2vwqzBJ/screencapture-jadwal-sholat-alikhlas-reyzar-my-id-2026-01-06-13-54-49.png)
