@@ -4,7 +4,8 @@
 
 ![Developer](https://img.shields.io/badge/Developer-Reyzar_Alansyah-red?style=for-the-badge&logo=check-circle&logoColor=white)
 
-</divjadwal-sholat-digital-sholat-digital-sholat-digitalWebsite Jadwal Sholat Digital Mushola Al-Ikhlas Pekunden
+</al-sholal-sholat-digital-sholat-digital-sholat-digital
+al-sholat-digital-sholat-digital-sholat-digitalat-digital-sholat-digital-sholat-digitals Pekunden
 
 *"Bersama membangun teknologi untuk kemudahan ibadah"*
 
@@ -67,8 +68,8 @@ Setiap kontribusi, sekecil apapun, adalah **amal jariyah** yang pahalanya terus 
 1. **Fork repository** ke akun GitHub Anda
 2. **Clone lokal:**
    ```bash
-   git clone https://github.com/Proyek/Jadwal-Sholat-Al-Ikhlas-.git
-   cd jadwal-sholat-digital
+   git clone https://github.com/ReyLanTra/Jadwal-Sholat-Al-Ikhlas-.git
+   cd Jadwal-Sholat-Al-Ikhlas-
    ```
 
 ### **Step 2: Setup Lingkungan**
@@ -327,13 +328,12 @@ Langkah-langkah penggunaan
 ```
 
 ## Screenshots
-![Deskripsi gambar](url-gambar)
-
-## Catatan
-Informasi tambahan
+![Deskripsi](https://i.postimg.cc/s2vwqzBJ/screencapture-jadwal-sholat-alikhlas-reyzar-my-id-2026-01-06-13-54-49.png)
 
 ## Author
-Nama Kontributor
+Reyzar Alansyah Putra 
+
+![Developer](https://img.shields.io/badge/Developer-Reyzar_Alansyah-red?style=for-the-badge&logo=check-circle&logoColor=white)
 ```
 
 ---
@@ -372,8 +372,7 @@ Nama Kontributor
 ## 🤝 **Etika Kolaborasi**
 
 ### **Do's:**
-- ✅ Sapa dengan salam islami
-- ✅ Gunakan bahasa yang santun
+- ✅ Sapa dengan salam islaCatatanGunakan bahasa yang santun
 - ✅ Hargai pendapat berbeda
 - ✅ Berikan kritik konstruktif
 - ✅ Akui kontribusi orang lain
