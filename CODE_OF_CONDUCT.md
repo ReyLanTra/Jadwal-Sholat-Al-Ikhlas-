@@ -1,4 +1,11 @@
 # 📜 Kode Etik Kontributor
+
+<div align="center">
+  
+![Developer](https://img.shields.io/badge/Developer-Reyzar_Alansyah-red?style=for-the-badge&logo=check-circle&logoColor=white)
+
+</div>
+  
 ## Website Jadwal Sholat Digital Mushola Al-Ikhlas Pekunden
 
 *"Bermuamalah dengan baik sebagaimana Allah memerintahkan"*
@@ -198,7 +205,7 @@ Moderator Utama
 
 **Saluran Resmi:**
 ```markdown
-Email: ethics@reyzar.dev
+Email: orangpolos860@gmail.com
 Subject: [COC VIOLATION] - Nama Pelaku
 ```
 
