@@ -1,5 +1,10 @@
 # 🌟 Panduan Berkontribusi
-## Website Jadwal Sholat Digital Mushola Al-Ikhlas Pekunden
+
+<div align="center">
+
+![Developer](https://img.shields.io/badge/Developer-Reyzar_Alansyah-red?style=for-the-badge&logo=check-circle&logoColor=white)
+
+</divjadwal-sholat-digital-sholat-digital-sholat-digitalWebsite Jadwal Sholat Digital Mushola Al-Ikhlas Pekunden
 
 *"Bersama membangun teknologi untuk kemudahan ibadah"*
 
@@ -62,7 +67,7 @@ Setiap kontribusi, sekecil apapun, adalah **amal jariyah** yang pahalanya terus 
 1. **Fork repository** ke akun GitHub Anda
 2. **Clone lokal:**
    ```bash
-   git clone https://github.com/username/jadwal-sholat-digital.git
+   git clone https://github.com/Proyek/Jadwal-Sholat-Al-Ikhlas-.git
    cd jadwal-sholat-digital
    ```
 
