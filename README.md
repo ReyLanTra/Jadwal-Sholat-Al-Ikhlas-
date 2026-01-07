@@ -32,8 +32,8 @@ Sebuah mahakarya digital yang mengabdi pada kemudahan ibadah. Website ini bukan 
 
 ### **🖥️ Tampilan Desktop Premium**
 ![Desktop View](https://i.postimg.cc/s2vwqzBJ/screencapture-jadwal-sholat-alikhlas-reyzar-my-id-2026-01-06-13-54-49.png)
-![Desktop View](https://i.postimg.cc/HxTWQYj0/Desktop-Monitor-20260107-082336-0000.png)
-![Desktop View](https://i.postimg.cc/8Px1ZBjP/Desktop-Laptop-20260107-083214-0000.png)
+![Desktop View](https://i.postimg.cc/L8FcqyJZ/Desktop-Monitor.png)
+![Desktop View](https://i.postimg.cc/pTr4N46q/Desktop-Laptop.png)
 
 ### **📱 Tampilan Mobile Elegan**
 ![Mobile View](https://i.postimg.cc/MGvdNwcs/Oneplus-Nord-2-jadwal-sholat-alikhlas-reyzar-my-id.png)
