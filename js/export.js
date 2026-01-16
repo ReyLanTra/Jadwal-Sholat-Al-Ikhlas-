@@ -67,7 +67,7 @@ function withExportMode(fn) {
 
 function drawPDFHeader(pdf, pageWidth) {
   pdf.addImage(
-    "assets/logo.png",
+    "assets/logo.svg",
     "PNG",
     10,
     8,
@@ -185,7 +185,7 @@ function drawThemeBackground(ctx, width, height) {
 
 function drawImageHeader(ctx, width) {
   const logo = new Image();
-  logo.src = "assets/logo.png";
+  logo.src = "assets/logo.svg";
 
   ctx.fillStyle = "rgba(255,255,255,0.08)";
   ctx.fillRect(40, 30, width - 80, 130);
@@ -245,7 +245,7 @@ function drawImageFooter(ctx, width, height) {
 
 function drawCanvasHeader(ctx, width) {
   const logo = new Image();
-  logo.src = "assets/logo.png";
+  logo.src = "assets/logo.svg";
 
   ctx.fillStyle = "#ffffff";
   ctx.fillRect(0, 0, width, 110);
