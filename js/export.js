@@ -68,7 +68,7 @@ function withExportMode(fn) {
 function drawPDFHeader(pdf, pageWidth) {
   pdf.addImage(
     "assets/logo.svg",
-    "PNG",
+    "SVG",
     10,
     8,
     18,
