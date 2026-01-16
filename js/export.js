@@ -67,8 +67,8 @@ function withExportMode(fn) {
 
 function drawPDFHeader(pdf, pageWidth) {
   pdf.addImage(
-    "assets/logo.svg",
-    "SVG",
+    "https://image.alikhlas.icu/capk/M.A.P_New.png",
+    "PNG",
     10,
     8,
     18,
@@ -185,7 +185,7 @@ function drawThemeBackground(ctx, width, height) {
 
 function drawImageHeader(ctx, width) {
   const logo = new Image();
-  logo.src = "assets/logo.svg";
+  logo.src = "https://image.alikhlas.icu/capk/M.A.P_New.png";
 
   ctx.fillStyle = "rgba(255,255,255,0.08)";
   ctx.fillRect(40, 30, width - 80, 130);
